@@ -15,6 +15,10 @@ public class Interfaz extends javax.swing.JFrame {
      */
     public Interfaz() {
         initComponents();
+        button_exit.setVisible(false);
+        button_select_file.setVisible(false);
+        button_select_red.setVisible(false);
+
     }
 
     /**
@@ -26,21 +30,107 @@ public class Interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        text_bienvenida = new javax.swing.JTextField();
+        button_add_red = new javax.swing.JButton();
+        button_exit = new javax.swing.JButton();
+        button_mostrar_red = new javax.swing.JButton();
+        button_select_file = new javax.swing.JButton();
+        button_select_red = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        text_bienvenida.setText("Manejo de Sucursales");
+        text_bienvenida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                text_bienvenidaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(text_bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 6, -1, 71));
+
+        button_add_red.setText("Añadir Red");
+        button_add_red.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_add_redActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_add_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 290, 91));
+
+        button_exit.setText("Salir");
+        button_exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_exitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 506, -1, -1));
+
+        button_mostrar_red.setText("Mostrar Red");
+        button_mostrar_red.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_mostrar_redActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_mostrar_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 91));
+
+        button_select_file.setText("Seleccionar Archivo");
+        button_select_file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_select_fileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_select_file, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 92));
+
+        button_select_red.setText("Seleccionar Red");
+        button_select_red.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_select_redActionPerformed(evt);
+            }
+        });
+        getContentPane().add(button_select_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void text_bienvenidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_text_bienvenidaActionPerformed
+
+    }//GEN-LAST:event_text_bienvenidaActionPerformed
+
+    private void button_add_redActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        button_mostrar_red.setVisible(false); 
+        button_add_red.setVisible(false); 
+        button_exit.setVisible(true);
+        button_select_file.setVisible(true);
+
+    }
+
+    private void button_mostrar_redActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_mostrar_redActionPerformed
+        button_mostrar_red.setVisible(false); 
+        button_add_red.setVisible(false); 
+        button_exit.setVisible(true);
+        button_select_red.setVisible(true);
+    }//GEN-LAST:event_button_mostrar_redActionPerformed
+
+    private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_select_fileActionPerformed
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("Archivo seleccionado: " + selectedFile.getPath());
+        }
+    }//GEN-LAST:event_button_select_fileActionPerformed
+
+    private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_select_redActionPerformed
+        
+    }//GEN-LAST:event_button_select_redActionPerformed
+
+    private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        button_mostrar_red.setVisible(true);
+        button_add_red.setVisible(true);
+        button_select_file.setVisible(false);
+        button_select_red.setVisible(false);
+        button_exit.setVisible(false);
+    }
+
 
     /**
      * @param args the command line arguments
@@ -78,5 +168,11 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_add_red;
+    private javax.swing.JButton button_exit;
+    private javax.swing.JButton button_mostrar_red;
+    private javax.swing.JButton button_select_file;
+    private javax.swing.JButton button_select_red;
+    private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
 }
