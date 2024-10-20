@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyecto1grafos;
 
+import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 
 /**
@@ -21,6 +22,7 @@ public class Interfaz extends javax.swing.JFrame {
         button_exit.setVisible(false);
         button_select_file.setVisible(false);
         button_select_red.setVisible(false);
+        comboBoxCiudades.setVisible(false);
 
     }
 
@@ -39,6 +41,7 @@ public class Interfaz extends javax.swing.JFrame {
         button_mostrar_red = new javax.swing.JButton();
         button_select_file = new javax.swing.JButton();
         button_select_red = new javax.swing.JButton();
+        comboBoxCiudades = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,6 +94,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(button_select_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 90));
 
+        comboBoxCiudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxCiudades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxCiudadesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 210, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,9 +138,22 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_select_fileActionPerformed
 
-    private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_select_redActionPerformed
-        
-    }//GEN-LAST:event_button_select_redActionPerformed
+    private void comboBoxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {
+        String ciudad = (String) comboBoxCiudades.getSelectedItem();
+        System.out.println("Ciudad seleccionada: " + ciudad);
+    }
+
+    private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {
+        comboBoxCiudades.removeAllItems();
+        NodoDeListas current = app.getcFirst();
+        while (current != null) {
+            Ciudad ciudad = (Ciudad) current.getDataCiudad();
+            comboBoxCiudades.addItem(ciudad.getNombre());
+            current = current.getpNext();
+            System.out.println(ciudad.getNombre());
+        }
+        comboBoxCiudades.setVisible(true);
+    }
 
     private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {                                            
         button_mostrar_red.setVisible(true);
@@ -137,6 +161,7 @@ public class Interfaz extends javax.swing.JFrame {
         button_select_file.setVisible(false);
         button_select_red.setVisible(false);
         button_exit.setVisible(false);
+        comboBoxCiudades.setVisible(false);
     }
 
 
@@ -182,6 +207,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton button_mostrar_red;
     private javax.swing.JButton button_select_file;
     private javax.swing.JButton button_select_red;
+    private javax.swing.JComboBox<String> comboBoxCiudades;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
 }
