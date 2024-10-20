@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyecto1grafos;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -12,7 +13,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Clase que se encarga de leer archivos JSON y cargar la información en la aplicación.
+ */
 public class LectorArchivo {
+
+    /**
+     * Lee un archivo JSON y carga la información en la aplicación.
+     *
+     * @param filePath la ruta del archivo JSON a leer.
+     * @param app la instancia de la aplicación donde se cargará la información.
+     * @return la instancia de la aplicación con la información cargada.
+     * @throws IOException si ocurre un error al leer el archivo.
+     */
     public static App leerArchivo(String filePath, App app) throws IOException {
         String content = new String(Files.readAllBytes(Paths.get(filePath)));
         JsonObject jsonObject = JsonParser.parseString(content).getAsJsonObject();

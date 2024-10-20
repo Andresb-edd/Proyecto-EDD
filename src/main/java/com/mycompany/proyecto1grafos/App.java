@@ -5,14 +5,20 @@
 package com.mycompany.proyecto1grafos;
 
 /**
+ * Clase que representa la aplicación principal para la gestión de la red de transporte.
+ * Contiene una lista de ciudades y métodos para manipular dicha lista.
  *
- * @author danielairibarren
  */
 public class App {
     
     private NodoDeListas cFirst;
     private NodoDeListas cLast;
     private int size;
+
+    /**
+     * Constructor de la clase App.
+     * Inicializa la lista de ciudades como vacía.
+     */
 
     public App() {
         this.cFirst = null;
@@ -21,47 +27,64 @@ public class App {
     }
 
     /**
-     * @return the cFirst
+     * Obtiene el primer nodo de la lista de ciudades.
+     *
+     * @return el primer nodo de la lista de ciudades.
      */
     public NodoDeListas getcFirst() {
         return cFirst;
     }
 
     /**
-     * @param cFirst the cFirst to set
+     * Establece el primer nodo de la lista de ciudades.
+     *
+     * @param cFirst el nodo a establecer como primero en la lista.
      */
     public void setcFirst(NodoDeListas cFirst) {
         this.cFirst = cFirst;
     }
 
     /**
-     * @return the cLast
+     * Obtiene el último nodo de la lista de ciudades.
+     *
+     * @return el último nodo de la lista de ciudades.
      */
     public NodoDeListas getcLast() {
         return cLast;
     }
 
     /**
-     * @param cLast the cLast to set
+     * Establece el último nodo de la lista de ciudades.
+     *
+     * @param cLast el nodo a establecer como último en la lista.
      */
     public void setcLast(NodoDeListas cLast) {
         this.cLast = cLast;
     }
 
     /**
-     * @return the size
+     * Obtiene el tamaño de la lista de ciudades.
+     *
+     * @return el tamaño de la lista de ciudades.
      */
     public int getSize() {
         return size;
     }
 
     /**
-     * @param size the size to set
+     * Establece el tamaño de la lista de ciudades.
+     *
+     * @param size el tamaño a establecer para la lista de ciudades.
      */
     public void setSize(int size) {
         this.size = size;
     }
-    
+
+    /**
+     * Verifica si la lista de ciudades está vacía.
+     *
+     * @return true si la lista está vacía, false en caso contrario.
+     */
     public boolean isEmpty(){
         return getcFirst()== null;
     }
@@ -79,6 +102,11 @@ public class App {
         setSize(getSize()+1);
     }*/
 
+    /**
+     * Inserta una nueva ciudad en la lista. Si la ciudad ya existe, se actualiza.
+     *
+     * @param dataCiudad la ciudad a insertar o actualizar en la lista.
+     */
     public void insert_Ciudad(Ciudad dataCiudad) {
         boolean bool = true;
 

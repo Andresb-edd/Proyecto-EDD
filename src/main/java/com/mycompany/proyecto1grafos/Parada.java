@@ -1,58 +1,68 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.proyecto1grafos;
 
 /**
- *
- * @author danielairibarren
+ * Clase que representa una parada en una línea de transporte.
+ * Contiene el nombre de la parada y la línea a la que pertenece.
  */
 public class Parada {
-    
+
     private String nombre;
     private String linea;
 
+    /**
+     * Constructor de la clase Parada.
+     * Inicializa la parada con un nombre y una línea.
+     *
+     * @param nombre el nombre de la parada.
+     * @param linea la línea a la que pertenece la parada.
+     */
     public Parada(String nombre, String linea) {
         this.nombre = nombre;
         this.linea = linea;
     }
-    
+
+    /**
+     * Constructor por defecto de la clase Parada.
+     * Inicializa la parada con valores nulos.
+     */
     public Parada() {
         this.nombre = null;
         this.linea = null;
     }
 
     /**
-     * @return the nombre
+     * Obtiene el nombre de la parada.
+     *
+     * @return el nombre de la parada.
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Establece el nombre de la parada.
+     *
+     * @param nombre el nombre a establecer para la parada.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the linea
+     * Obtiene la línea a la que pertenece la parada.
+     *
+     * @return la línea a la que pertenece la parada.
      */
     public String getLinea() {
         return linea;
     }
 
     /**
-     * @param linea the linea to set
+     * Establece la línea a la que pertenece la parada.
+     *
+     * @param linea la línea a establecer para la parada.
      */
     public void setLinea(String linea) {
         this.linea = linea;
     }
-    
-    
-    
-    
-    
 }

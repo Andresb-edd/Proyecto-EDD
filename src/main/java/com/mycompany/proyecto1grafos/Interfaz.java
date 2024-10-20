@@ -8,14 +8,15 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 
 /**
- *
- * @author danielairibarren
+ * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
+ * Permite cargar redes de transporte, visualizar el grafo y realizar diversas operaciones sobre la red.
  */
 public class Interfaz extends javax.swing.JFrame {
     App app = new App();
 
     /**
-     * Creates new form Interfaz
+     * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
+     * Permite cargar redes de transporte, visualizar el grafo y realizar diversas operaciones sobre la red.
      */
     public Interfaz() {
         initComponents();
