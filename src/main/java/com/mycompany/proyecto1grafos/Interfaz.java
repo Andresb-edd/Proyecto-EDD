@@ -4,11 +4,14 @@
  */
 package com.mycompany.proyecto1grafos;
 
+import javax.swing.text.AbstractDocument;
+
 /**
  *
  * @author danielairibarren
  */
 public class Interfaz extends javax.swing.JFrame {
+    App app = new App();
 
     /**
      * Creates new form Interfaz
@@ -111,11 +114,16 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_select_fileActionPerformed
+        LectorArchivo lectorArchivo = new LectorArchivo();
         javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
         int returnValue = fileChooser.showOpenDialog(null);
         if (returnValue == javax.swing.JFileChooser.APPROVE_OPTION) {
             java.io.File selectedFile = fileChooser.getSelectedFile();
-            System.out.println("Archivo seleccionado: " + selectedFile.getPath());
+            try {
+                app = lectorArchivo.leerArchivo(selectedFile.getAbsolutePath(), app);
+            } catch (java.io.IOException ex) {
+                System.out.println("Error al leer el archivo");
+            }
         }
     }//GEN-LAST:event_button_select_fileActionPerformed
 
@@ -136,6 +144,7 @@ public class Interfaz extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

@@ -15,6 +15,7 @@ public class Ciudad {
     private NodoDeListas lFirst;
     private NodoDeListas lLast;
     private int size;
+    private int t;
 
     public Ciudad(String nombre, int id) {
         this.nombre = nombre;
@@ -22,6 +23,7 @@ public class Ciudad {
         this.lFirst = null;
         this.lLast = null;
         this.size = 0;
+        this.t = 1;
     }
 
     /**
@@ -93,12 +95,17 @@ public class Ciudad {
     public void setSize(int size) {
         this.size = size;
     }
-    
+
+    public void setT(int t) {
+        this.t = t;
+    }
+
+
     public boolean isEmpty(){
         return getlFirst()== null;
     }
     
-        public void insert_Linea(Linea dataLinea){
+    public void insert_Linea(Linea dataLinea){
         NodoDeListas newNodo = new NodoDeListas(dataLinea);
         if(isEmpty()){
             setlFirst(newNodo);

@@ -89,11 +89,4 @@ public class NodoDeListas {
     public void setDataCiudad(Ciudad dataCiudad) {
         this.dataCiudad = dataCiudad;
     }
-    
-
-    
-    
-    
-    
-    
 }

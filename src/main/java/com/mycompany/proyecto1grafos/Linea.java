@@ -17,9 +17,11 @@ public class Linea {
     private NodoDeListas pLast;
     private int size;
 
-    public Linea(NodoDeListas pFirst, NodoDeListas pLast, int size) {
+    public Linea(String nombre, int size) {
         this.pFirst = null;
         this.pLast = null;
+        this.nombre = nombre;
+        this.id = id;
         this.size = 0;
     }
 
@@ -69,7 +71,7 @@ public class Linea {
         return getpFirst()== null;
     }
     
-    public void insert(Parada dataParada){
+    public void insert_Parada(Parada dataParada){
         NodoDeListas newNodo = new NodoDeListas(dataParada);
         if(isEmpty()){
             setpFirst(newNodo);

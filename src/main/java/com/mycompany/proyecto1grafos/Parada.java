@@ -18,7 +18,7 @@ public class Parada {
         this.linea = linea;
     }
     
-        public Parada() {
+    public Parada() {
         this.nombre = null;
         this.linea = null;
     }

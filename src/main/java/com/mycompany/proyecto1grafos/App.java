@@ -66,7 +66,7 @@ public class App {
         return getcFirst()== null;
     }
     
-    public void insert_Ciudad(Ciudad dataCiudad){
+    /*public void insert_Ciudad(Ciudad dataCiudad){
         NodoDeListas newNodo = new NodoDeListas(dataCiudad);
         if(isEmpty()){
             setcFirst(newNodo);
@@ -77,9 +77,54 @@ public class App {
             setcLast(newNodo);
         }
         setSize(getSize()+1);
+    }*/
+
+    public void insert_Ciudad(Ciudad dataCiudad) {
+        boolean bool = true;
+
+        if (isEmpty()) {
+            size++;
+            dataCiudad.setId(size);
+            NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+            cFirst = newNodo;
+            cLast = newNodo;
+            bool = false;
+            return;
+        }
+        NodoDeListas current = cFirst;
+        while (current != null) {
+            Ciudad ciudadExistente = (Ciudad) current.getDataCiudad();
+            if (ciudadExistente.getNombre().equals(dataCiudad.getNombre())) {
+                dataCiudad.setId(ciudadExistente.getId());
+                NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+                bool = false;
+                if (current.getpBefore() != null) {
+                    current.getpBefore().setpNext(newNodo);
+                    newNodo.setpBefore(current.getpBefore());
+                } else {
+                    cFirst = newNodo;
+                    cFirst.setpNext(current.getpNext());
+                }
+                if (current.getpNext() != null) {
+                    current.getpNext().setpBefore(newNodo);
+                } else {
+                    cLast = newNodo;
+                    cLast.setpBefore(current.getpBefore());
+                }
+                break;
+            }
+            current = current.getpNext();
+        }
+        if (bool) {
+            size++;
+            dataCiudad.setId(size);
+            NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+            cLast.setpNext(newNodo);
+            newNodo.setpBefore(cLast);
+            cLast = newNodo;
+        }
+
     }
-    
-    
 
     
 }
