@@ -30,6 +30,12 @@ public class Parada {
         this.linea = null;
     }
 
+    public Parada(String nombre) {
+        this.nombre = nombre;
+        this.linea = null;
+    }
+
+
     /**
      * Obtiene el nombre de la parada.
      *

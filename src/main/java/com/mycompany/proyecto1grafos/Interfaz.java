@@ -140,8 +140,17 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_button_select_fileActionPerformed
 
     private void comboBoxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {
-        String ciudad = (String) comboBoxCiudades.getSelectedItem();
-        System.out.println("Ciudad seleccionada: " + ciudad);
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
+        NodoDeListas current = app.getcFirst();
+        while (current != null) {
+            Ciudad ciudad = (Ciudad) current.getDataCiudad();
+            if (ciudad.getNombre().equals(ciudadSeleccionada)) {
+                ciudad.getGrafo().imprimirGrafo();
+                break;
+            }
+            current = current.getpNext();
+        }
     }
 
     private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {

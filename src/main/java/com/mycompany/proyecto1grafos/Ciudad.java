@@ -12,6 +12,8 @@ public class Ciudad {
     private NodoDeListas lLast;
     private int size;
     private int t;
+    private Grafo grafo;
+
 
     /**
      * Constructor de la clase Ciudad.
@@ -26,7 +28,12 @@ public class Ciudad {
         this.lFirst = null;
         this.lLast = null;
         this.size = 0;
+        this.grafo = new Grafo(100, false);
         this.t = 1;
+    }
+
+    public Grafo getGrafo() {
+        return grafo;
     }
 
     /**
@@ -153,5 +160,28 @@ public class Ciudad {
             setlLast(newNodo);
         }
         setSize(getSize() + 1);
+        updateGrafo(dataLinea);
+    }
+    private void updateGrafo(Linea linea) {
+        for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
+            Parada parada = (Parada) current.getDataParada();
+            ListaAdyacentes listaAdyacentes = new ListaAdyacentes(parada);
+
+            if (current.getpBefore() != null) {
+                listaAdyacentes.insert_Parada((Parada) current.getpBefore().getDataParada());
+            }
+            if (current.getpNext() != null) {
+                listaAdyacentes.insert_Parada((Parada) current.getpNext().getDataParada());
+            }
+            if (parada.getNombre().contains(":")) {
+                String[] parts = parada.getNombre().split(":");
+                String key = parts[0].trim();
+                String value = parts[1].trim();
+                Parada adjParada = new Parada(value);
+                listaAdyacentes.insert_Parada(adjParada);
+
+            }
+            grafo.addListaAdyacentes(listaAdyacentes);
+        }
     }
 }
