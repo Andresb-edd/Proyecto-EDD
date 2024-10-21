@@ -1,4 +1,4 @@
-package com.mycompany.proyecto1grafos;
+package edd.bdi.proj;
 
 /**
  * Clase que representa una parada en una línea de transporte.

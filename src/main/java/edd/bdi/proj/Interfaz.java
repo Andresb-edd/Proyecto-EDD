@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.proyecto1grafos;
+package edd.bdi.proj;
 
 import org.graphstream.graph.*;
 import org.graphstream.graph.implementations.*;
@@ -125,106 +125,14 @@ public class Interfaz extends javax.swing.JFrame {
         button_select_red.setVisible(true);
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
-    private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_select_fileActionPerformed
-        LectorArchivo lectorArchivo = new LectorArchivo();
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        int returnValue = fileChooser.showOpenDialog(null);
-        if (returnValue == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File selectedFile = fileChooser.getSelectedFile();
-            try {
-                app = lectorArchivo.leerArchivo(selectedFile.getAbsolutePath(), app);
-            } catch (java.io.IOException ex) {
-                System.out.println("Error al leer el archivo");
-            }
-        }
+    private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
+        app = LectorArchivo.run(app);
     }//GEN-LAST:event_button_select_fileActionPerformed
 
     private void comboBoxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
-        NodoDeListas current = app.getcFirst();
-        while (current != null) {
-            Ciudad ciudad = (Ciudad) current.getDataCiudad();
-            if (ciudad.getNombre().equals(ciudadSeleccionada)) {
-                ciudad.getGrafo().imprimirGrafo();
-                Graph graph = new SingleGraph(ciudadSeleccionada);
-                System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
-
-                for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
-                    try {
-                        ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
-                        Parada parada = lista.getVertice();
-                        String nombreParada = parada.getNombre();
-                        if (nombreParada.contains(":")) {
-                            String[] parts = nombreParada.split(":");
-                            String nombre1 = parts[0].trim();
-                            String nombre2 = parts[1].trim();
-                            if (graph.getNode(nombre1) == null) {
-                                Node node1 = graph.addNode(nombre1);
-                                node1.setAttribute("ui.label", nombre1);
-                            }
-                            if (graph.getNode(nombre2) == null) {
-                                Node node2 = graph.addNode(nombre2);
-                                node2.setAttribute("ui.label", nombre2);
-                            }
-                        } else {
-                            if (graph.getNode(nombreParada) == null) {
-                                Node node = graph.addNode(nombreParada);
-                                node.setAttribute("ui.label", nombreParada);
-                            }
-                        }
-                    } catch (Exception e) {
-                        System.out.println(e);
-                    }
-
-                }
-                for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
-                    ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
-                    Parada parada = lista.getVertice();
-                    NodoDeListas currentAdyacente = lista.getpFirst();
-                    while (currentAdyacente != null) {
-                        Parada adyacente = (Parada) currentAdyacente.getDataParada();
-                        String nombreParada = parada.getNombre();
-                        String nombreAdyacente = adyacente.getNombre();
-                        if (nombreParada.contains(":")) {
-                            nombreParada = nombreParada.split(":")[0].trim();
-                        }
-                        if (nombreAdyacente.contains(":")) {
-                            nombreAdyacente = nombreAdyacente.split(":")[0].trim();
-                        }
-                        String edgeId = nombreParada + " - " + nombreAdyacente;
-                        try {
-                            if (graph.getEdge(edgeId) == null) {
-                                graph.addEdge(edgeId, nombreParada, nombreAdyacente);
-                            } else {
-                                ListaAdyacentes listaExistente = ciudad.getGrafo().getListaAdyacentes(nombreParada);
-                                if (!listaExistente.equals(lista)) {
-                                    NodoDeListas currentAdyacenteExistente = listaExistente.getpFirst();
-                                    while (currentAdyacenteExistente != null) {
-                                        Parada adyacenteExistente = (Parada) currentAdyacenteExistente.getDataParada();
-                                        String nombreAdyacenteExistente = adyacenteExistente.getNombre();
-                                        if (nombreAdyacenteExistente.contains(":")) {
-                                            nombreAdyacenteExistente = nombreAdyacenteExistente.split(":")[0].trim();
-                                        }
-                                        String edgeIdExistente = nombreParada + " - " + nombreAdyacenteExistente;
-                                        if (graph.getEdge(edgeIdExistente) == null) {
-                                            graph.addEdge(edgeIdExistente, nombreParada, nombreAdyacenteExistente);
-                                        }
-                                        currentAdyacenteExistente = currentAdyacenteExistente.getpNext();
-                                    }
-                                }
-                            }
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        currentAdyacente = currentAdyacente.getpNext();
-                    }
-                }
-                graph.display();
-                break;
-            }
-            current = current.getpNext();
-        }
+        Grafo.renderGrafo(ciudadSeleccionada, app);
     }
 
     private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {

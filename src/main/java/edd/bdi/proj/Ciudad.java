@@ -1,4 +1,4 @@
-package com.mycompany.proyecto1grafos;
+package edd.bdi.proj;
 
 /**
  * Clase que representa una ciudad en la red de transporte.

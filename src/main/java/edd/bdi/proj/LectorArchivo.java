@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyecto1grafos;
+package edd.bdi.proj;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -57,6 +56,26 @@ public class LectorArchivo {
             }
         }
         app.insert_Ciudad(ciudad);
+        return app;
+    }
+
+    /**
+     * Abre un cuadro de diálogo para seleccionar un archivo y carga la información en la aplicación.
+     *
+     * @param app la instancia de la aplicación donde se cargará la información.
+     * @return la instancia de la aplicación con la información cargada.
+     */
+    public static App run(App app) {
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File selectedFile = fileChooser.getSelectedFile();
+            try {
+                app = leerArchivo(selectedFile.getAbsolutePath(), app);
+            } catch (java.io.IOException ex) {
+                System.out.println("Error al leer el archivo");
+            }
+        }
         return app;
     }
 }

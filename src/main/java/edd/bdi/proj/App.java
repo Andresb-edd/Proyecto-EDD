@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyecto1grafos;
+package edd.bdi.proj;
 
 /**
  * Clase que representa la aplicación principal para la gestión de la red de transporte.
@@ -25,6 +25,7 @@ public class App {
         this.cLast = null;
         this.size = 0;
     }
+
 
     /**
      * Obtiene el primer nodo de la lista de ciudades.
@@ -88,19 +89,6 @@ public class App {
     public boolean isEmpty(){
         return getcFirst()== null;
     }
-    
-    /*public void insert_Ciudad(Ciudad dataCiudad){
-        NodoDeListas newNodo = new NodoDeListas(dataCiudad);
-        if(isEmpty()){
-            setcFirst(newNodo);
-            setcLast(newNodo);
-        }else{
-            getcLast().setpNext(newNodo);
-            newNodo.setpBefore(getcLast());
-            setcLast(newNodo);
-        }
-        setSize(getSize()+1);
-    }*/
 
     /**
      * Inserta una nueva ciudad en la lista. Si la ciudad ya existe, se actualiza.
