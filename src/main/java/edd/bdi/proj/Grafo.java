@@ -75,6 +75,7 @@ public class Grafo {
                 System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
+                    String style = "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;";
                     try {
                         ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
                         Parada parada = lista.getVertice();
@@ -86,18 +87,18 @@ public class Grafo {
                             if (graph.getNode(nombre1) == null) {
                                 Node node1 = graph.addNode(nombre1);
                                 node1.setAttribute("ui.label", nombre1);
-                                node1.setAttribute("ui.style", "fill-color: blue; text-color: red; text-size: 20px; text-style: bold;");
+                                node1.setAttribute("ui.style", style);
                             }
                             if (graph.getNode(nombre2) == null) {
                                 Node node2 = graph.addNode(nombre2);
                                 node2.setAttribute("ui.label", nombre2);
-                                node2.setAttribute("ui.style", "fill-color: blue; text-color: red; text-size: 20px; text-style: bold;");
+                                node2.setAttribute("ui.style", style);
                             }
                         } else {
                             if (graph.getNode(nombreParada) == null) {
                                 Node node = graph.addNode(nombreParada);
                                 node.setAttribute("ui.label", nombreParada);
-                                node.setAttribute("ui.style", "fill-color: blue; text-color: red; text-size: 20px; text-style: bold;");
+                                node.setAttribute("ui.style", style);
                             }
                         }
                     } catch (Exception e) {
