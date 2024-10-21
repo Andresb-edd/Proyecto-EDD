@@ -24,10 +24,20 @@ public class Grafo {
             listaAdy[numVertices++] = lista;
         }
     }
+    public ListaAdyacentes getListaAdyacentes(String nombreParada) {
+        for (int i = 0; i < numVertices; i++) {
+            ListaAdyacentes lista = listaAdy[i];
+            Parada parada = lista.getVertice();
+            if (parada.getNombre().equals(nombreParada)) {
+                return lista;
+            }
+        }
+        return null;
+    }
     public void imprimirGrafo() {
         for (int i = 0; i < numVertices; i++) {
             ListaAdyacentes lista = listaAdy[i];
-            Parada parada = lista.getArista();
+            Parada parada = lista.getVertice();
             System.out.print(parada.getNombre() + ": ");
             NodoDeListas current = lista.getpFirst();
             while (current != null) {

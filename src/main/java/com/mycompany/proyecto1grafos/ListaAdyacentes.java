@@ -1,17 +1,17 @@
 package com.mycompany.proyecto1grafos;
 
 public class ListaAdyacentes {
-    private Parada Arista;
+    private Parada Vertice;
     private NodoDeListas pFirst;
     private NodoDeListas pLast;
 
     public ListaAdyacentes(Parada Arista) {
         this.pFirst = null;
         this.pLast = null;
-        this.Arista = Arista;
+        this.Vertice = Arista;
     }
 
-    public Parada getArista() {return Arista;}
+    public Parada getVertice() {return Vertice;}
     /**
      * Obtiene el primer nodo de la lista de paradas.
      *
