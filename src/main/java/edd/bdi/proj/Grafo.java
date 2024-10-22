@@ -7,6 +7,7 @@ package edd.bdi.proj;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.ui.view.Viewer;
 
 /**
  * Clase que representa un grafo con una lista de adyacencia.
@@ -147,7 +148,7 @@ public class Grafo {
                         currentAdyacente = currentAdyacente.getpNext();
                     }
                 }
-                graph.display();
+                graph.display().setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
                 break;
             }
             current = current.getpNext();
