@@ -140,7 +140,12 @@ public class Interfaz extends javax.swing.JFrame {
     private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_tActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
-        aux.setT(Integer.parseInt(Input_t.getText()));
+        try {
+            aux.setT(Integer.parseInt(Input_t.getText()));
+            System.out.println(aux.getT());
+        } catch (NumberFormatException e) {
+            System.err.println("El valor ingresado no es un número entero válido.");
+        }
     }//GEN-LAST:event_Input_tActionPerformed
 
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
