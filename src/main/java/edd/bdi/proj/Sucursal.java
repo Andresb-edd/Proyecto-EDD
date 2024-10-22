@@ -11,30 +11,15 @@ package edd.bdi.proj;
  */
 public class Sucursal {
     
-    private int numeroSucursal;
     private Parada parada;
     private Ciudad ciudad;
 
-    public Sucursal(int numeroSucursal, Parada parada, Ciudad ciudad) {
-        this.numeroSucursal = numeroSucursal;
+    public Sucursal(Parada parada, Ciudad ciudad) {
         this.parada = parada;
         this.ciudad = ciudad;
         
     }
 
-    /**
-     * @return the numeroSucursal
-     */
-    public int getNumeroSucursal() {
-        return numeroSucursal;
-    }
-
-    /**
-     * @param numeroSucursal the numeroSucursal to set
-     */
-    public void setNumeroSucursal(int numeroSucursal) {
-        this.numeroSucursal = numeroSucursal;
-    }
 
     /**
      * @return the parada

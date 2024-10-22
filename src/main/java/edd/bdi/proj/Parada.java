@@ -6,6 +6,8 @@ package edd.bdi.proj;
  */
 public class Parada {
 
+    private boolean sucursal;
+
     private String nombre;
     private String linea;
 
@@ -52,6 +54,13 @@ public class Parada {
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public boolean tieneSucursal() {
+        return sucursal;
+    }
+    public void setSucursal(boolean sucursal) {
+        this.sucursal = sucursal;
     }
 
     /**

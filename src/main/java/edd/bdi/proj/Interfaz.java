@@ -27,6 +27,8 @@ public class Interfaz extends javax.swing.JFrame {
         Input_t.setVisible(false);
         Label_t_value.setVisible(false);
         mostrar_grafo.setVisible(false);
+        comboBoxParadas.setVisible(false);
+        checkBoxSucursal.setVisible(false);
 
     }
 
@@ -49,6 +51,8 @@ public class Interfaz extends javax.swing.JFrame {
         Label_t_value = new javax.swing.JLabel();
         Input_t = new javax.swing.JTextField();
         mostrar_grafo = new javax.swing.JButton();
+        comboBoxParadas = new javax.swing.JComboBox<>();
+        checkBoxSucursal = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -75,7 +79,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_exitActionPerformed(evt);
             }
         });
-        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 506, -1, -1));
+        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, -1, -1));
 
         button_mostrar_red.setText("Mostrar Red");
         button_mostrar_red.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +131,22 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(mostrar_grafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 290, 90));
 
+        comboBoxParadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxParadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxParadasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 210, 40));
+
+        checkBoxSucursal.setText("Sucursal");
+        checkBoxSucursal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkBoxSucursalActionPerformed(evt);
+            }
+        });
+        getContentPane().add(checkBoxSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 100, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -175,6 +195,35 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mostrar_grafoActionPerformed
 
+    private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxParadasActionPerformed
+        String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
+        System.out.println((String) comboBoxParadas.getSelectedItem());
+        Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
+        checkBoxSucursal.setSelected(parada.tieneSucursal());
+    }
+
+    private void checkBoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxSucursalActionPerformed
+        String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
+        if (checkBoxSucursal.isSelected()) {
+            Sucursal nuevaSucursal = new Sucursal(parada, ciudad);
+            ListaDeSucursales aux =  ciudad.getListaSucursal();
+            if (aux == null) {
+                aux = new ListaDeSucursales();
+            }
+            aux.insert_sucursal(nuevaSucursal);
+            ciudad.setListaSucursal(aux);
+            parada.setSucursal(true);
+        } else {
+            ListaDeSucursales aux =  ciudad.getListaSucursal();
+            aux.eliminar_sucursal(parada.getNombre());
+            ciudad.setListaSucursal(aux);
+            parada.setSucursal(false);
+        }
+    }//GEN-LAST:event_checkBoxSucursalActionPerformed
+
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
     }                                                  
@@ -187,10 +236,18 @@ public class Interfaz extends javax.swing.JFrame {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
+        comboBoxParadas.removeAllItems();
+        for (int i = 0; i < aux.getGrafo().numVertices; i++) {
+            Parada parada = aux.getGrafo().listaAdy[i].getVertice();
+            comboBoxParadas.addItem(parada.getNombre());
+        }
         Input_t.setText(String.valueOf(aux.getT()));
         Input_t.setVisible(true);
         Label_t_value.setVisible(true);
         mostrar_grafo.setVisible(true);
+        comboBoxParadas.setVisible(true);
+        checkBoxSucursal.setVisible(true);
+
     }
 
     private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -203,6 +260,9 @@ public class Interfaz extends javax.swing.JFrame {
         Input_t.setVisible((false));
         Label_t_value.setVisible(false);
         mostrar_grafo.setVisible(false);
+        comboBoxParadas.setVisible(false);
+        checkBoxSucursal.setVisible(false);
+
     }
 
 
@@ -250,7 +310,9 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton button_mostrar_red;
     private javax.swing.JButton button_select_file;
     private javax.swing.JButton button_select_red;
+    private javax.swing.JCheckBox checkBoxSucursal;
     private javax.swing.JComboBox<String> comboBoxCiudades;
+    private javax.swing.JComboBox<String> comboBoxParadas;
     private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables

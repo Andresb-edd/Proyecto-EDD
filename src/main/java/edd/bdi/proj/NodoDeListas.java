@@ -49,13 +49,12 @@ public class NodoDeListas {
         this.dataLinea = dataLinea;
     }
     
-        /**
+    /**
      * Constructor que inicializa un nodo con datos de una Sucursal.
      *
      * @param dataSucursal los datos de la línea a almacenar en el nodo.
      */
-    
-        public NodoDeListas(Sucursal dataSucursal) {
+    public NodoDeListas(Sucursal dataSucursal) {
         this.pNext = null;
         this.pBefore = null;
         this.dataSucursal = dataSucursal;
@@ -125,6 +124,11 @@ public class NodoDeListas {
     public Ciudad getDataCiudad() {
         return dataCiudad;
     }
+
+    public Sucursal getDataSucursal() {
+        return dataSucursal;
+    }
+
 
     /**
      * Establece los datos de la ciudad en el nodo.

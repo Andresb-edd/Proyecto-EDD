@@ -78,7 +78,34 @@ public class ListaDeSucursales {
         }
         setSize(getSize() + 1);
     }
-    
+    public void eliminar_sucursal(String nombreSucursal) {
+        if (isEmpty()) {
+            return;
+        }
+        NodoDeListas current = getsFirst();
+
+        while (current != null) {
+            if (((Sucursal) current.getDataSucursal()).getParada().getNombre().equals(nombreSucursal)) {
+                if (current == getsFirst()) {
+                    setsFirst(current.getpNext());
+                    if (getsFirst() != null) {
+                        getsFirst().setpBefore(null);
+                    }
+                } else if (current == getsLast()) {
+                    setsLast(current.getpBefore());
+                    if (getsLast() != null) {
+                        getsLast().setpNext(null);
+                    }
+                } else {
+                    current.getpBefore().setpNext(current.getpNext());
+                    current.getpNext().setpBefore(current.getpBefore());
+                }
+                setSize(getSize() - 1);
+                return;
+            }
+            current = current.getpNext();
+        }
+    }
     
     
     

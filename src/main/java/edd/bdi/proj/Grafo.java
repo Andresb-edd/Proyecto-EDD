@@ -7,7 +7,13 @@ package edd.bdi.proj;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
+import org.graphstream.stream.SinkAdapter;
 import org.graphstream.ui.view.Viewer;
+import org.graphstream.ui.view.ViewerListener;
+import org.graphstream.ui.view.ViewerPipe;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Clase que representa un grafo con una lista de adyacencia.
@@ -148,7 +154,12 @@ public class Grafo {
                         currentAdyacente = currentAdyacente.getpNext();
                     }
                 }
-                graph.display().setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
+                Viewer viewer = graph.display();
+                viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
+                graph.addAttribute("ui.stylesheet", "node { size: 20px; fill-color: red; }");
+                graph.addAttribute("ui.quality");
+                graph.addAttribute("ui.antialias");
+
                 break;
             }
             current = current.getpNext();
