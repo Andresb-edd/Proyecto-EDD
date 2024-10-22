@@ -23,6 +23,7 @@ public class Grafo {
     boolean dirigido;
     int maxNodos;
     int numVertices;
+    private Graph graph;
     ListaAdyacentes listaAdy [];
 
     /**
@@ -49,6 +50,9 @@ public class Grafo {
         }
     }
 
+    public Graph getGraph() {
+        return graph;
+    }
     /**
      * Obtiene la lista de adyacencia para una parada específica.
      *
@@ -72,13 +76,13 @@ public class Grafo {
      * @param ciudadSeleccionada el nombre de la ciudad seleccionada.
      * @param app la instancia de la aplicación.
      */
-    public static void renderGrafo(String ciudadSeleccionada, App app) {
+    public void renderGrafo(String ciudadSeleccionada, App app) {
         NodoDeListas current = app.getcFirst();
         while (current != null) {
             Ciudad ciudad = (Ciudad) current.getDataCiudad();
             if (ciudad.getNombre().equals(ciudadSeleccionada)) {
                 ciudad.getGrafo().imprimirGrafo();
-                Graph graph = new SingleGraph(ciudadSeleccionada);
+                this.graph = new SingleGraph(ciudadSeleccionada);
                 System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
