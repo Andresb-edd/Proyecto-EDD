@@ -24,6 +24,9 @@ public class Interfaz extends javax.swing.JFrame {
         button_select_file.setVisible(false);
         button_select_red.setVisible(false);
         comboBoxCiudades.setVisible(false);
+        Input_t.setVisible(false);
+        Label_t_value.setVisible(false);
+        mostrar_grafo.setVisible(false);
 
     }
 
@@ -45,6 +48,7 @@ public class Interfaz extends javax.swing.JFrame {
         comboBoxCiudades = new javax.swing.JComboBox<>();
         Label_t_value = new javax.swing.JLabel();
         Input_t = new javax.swing.JTextField();
+        mostrar_grafo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,6 +119,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(Input_t, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 170, 40));
 
+        mostrar_grafo.setText("Mostrar Grafo");
+        mostrar_grafo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrar_grafoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(mostrar_grafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 290, 90));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,7 +139,6 @@ public class Interfaz extends javax.swing.JFrame {
         button_add_red.setVisible(false); 
         button_exit.setVisible(true);
         button_select_file.setVisible(true);
-
     }
 
     private void button_mostrar_redActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_mostrar_redActionPerformed
@@ -135,6 +146,16 @@ public class Interfaz extends javax.swing.JFrame {
         button_add_red.setVisible(false); 
         button_exit.setVisible(true);
         button_select_red.setVisible(true);
+        comboBoxCiudades.setVisible(true);
+        comboBoxCiudades.removeAllItems();
+        NodoDeListas current = app.getcFirst();
+        while (current != null) {
+            Ciudad ciudad = (Ciudad) current.getDataCiudad();
+            comboBoxCiudades.addItem(ciudad.getNombre());
+            current = current.getpNext();
+            System.out.println(ciudad.getNombre());
+        }
+        comboBoxCiudades.setVisible(true);
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
     private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_tActionPerformed
@@ -148,6 +169,12 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Input_tActionPerformed
 
+    private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Grafo.renderGrafo(ciudadSeleccionada, app);
+
+    }//GEN-LAST:event_mostrar_grafoActionPerformed
+
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
     }                                                  
@@ -157,23 +184,13 @@ public class Interfaz extends javax.swing.JFrame {
     }
 
     private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {
-        comboBoxCiudades.removeAllItems();
-        NodoDeListas current = app.getcFirst();
-        while (current != null) {
-            Ciudad ciudad = (Ciudad) current.getDataCiudad();
-            comboBoxCiudades.addItem(ciudad.getNombre());
-            current = current.getpNext();
-            System.out.println(ciudad.getNombre());
-            
-
-        }
-        comboBoxCiudades.setVisible(true);
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         Input_t.setText(String.valueOf(aux.getT()));
-        Grafo.renderGrafo(ciudadSeleccionada, app);
-
+        Input_t.setVisible(true);
+        Label_t_value.setVisible(true);
+        mostrar_grafo.setVisible(true);
     }
 
     private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {                                            
@@ -183,6 +200,9 @@ public class Interfaz extends javax.swing.JFrame {
         button_select_red.setVisible(false);
         button_exit.setVisible(false);
         comboBoxCiudades.setVisible(false);
+        Input_t.setVisible((false));
+        Label_t_value.setVisible(false);
+        mostrar_grafo.setVisible(false);
     }
 
 
@@ -231,6 +251,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton button_select_file;
     private javax.swing.JButton button_select_red;
     private javax.swing.JComboBox<String> comboBoxCiudades;
+    private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
 }
