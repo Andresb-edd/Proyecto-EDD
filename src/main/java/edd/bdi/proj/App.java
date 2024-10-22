@@ -5,27 +5,25 @@
 package edd.bdi.proj;
 
 /**
- * Clase que representa la aplicación principal para la gestión de la red de transporte.
- * Contiene una lista de ciudades y métodos para manipular dicha lista.
+ * Clase que representa la aplicación principal para la gestión de la red de
+ * transporte. Contiene una lista de ciudades y métodos para manipular dicha
+ * lista.
  *
  */
 public class App {
-    
+
     private NodoDeListas cFirst;
     private NodoDeListas cLast;
     private int size;
 
     /**
-     * Constructor de la clase App.
-     * Inicializa la lista de ciudades como vacía.
+     * Constructor de la clase App. Inicializa la lista de ciudades como vacía.
      */
-
     public App() {
         this.cFirst = null;
         this.cLast = null;
         this.size = 0;
     }
-
 
     /**
      * Obtiene el primer nodo de la lista de ciudades.
@@ -86,12 +84,13 @@ public class App {
      *
      * @return true si la lista está vacía, false en caso contrario.
      */
-    public boolean isEmpty(){
-        return getcFirst()== null;
+    public boolean isEmpty() {
+        return getcFirst() == null;
     }
 
     /**
-     * Inserta una nueva ciudad en la lista. Si la ciudad ya existe, se actualiza.
+     * Inserta una nueva ciudad en la lista. Si la ciudad ya existe, se
+     * actualiza.
      *
      * @param dataCiudad la ciudad a insertar o actualizar en la lista.
      */
@@ -142,5 +141,18 @@ public class App {
 
     }
 
-    
+    public Ciudad buscar_ciudad(String nombre) {
+        NodoDeListas temp = getcFirst();
+        if (isEmpty()) {
+            System.out.println("Ciudad no encontrada");
+        }
+        while (temp != null) {
+            if (temp.getDataCiudad().getNombre().equals(nombre)) {
+                return temp.getDataCiudad();
+            }
+            temp = temp.getpNext();
+        }
+        return null;
+    }
+
 }

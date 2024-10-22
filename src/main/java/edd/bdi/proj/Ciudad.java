@@ -125,6 +125,14 @@ public class Ciudad {
     public void setSize(int size) {
         this.size = size;
     }
+    
+    
+    /**
+     * @return the t
+     */
+    public int getT() {
+        return t;
+        }
 
     /**
      * Establece el valor de t para la ciudad.
@@ -184,4 +192,5 @@ public class Ciudad {
             grafo.addListaAdyacentes(listaAdyacentes);
         }
     }
+
 }
