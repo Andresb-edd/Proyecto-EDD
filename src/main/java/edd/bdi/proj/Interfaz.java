@@ -196,7 +196,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mostrar_grafoActionPerformed
 
-    private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxParadasActionPerformed
+    private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {                                                
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         System.out.println((String) comboBoxParadas.getSelectedItem());
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
@@ -242,7 +242,7 @@ public class Interfaz extends javax.swing.JFrame {
         System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         comboBoxParadas.removeAllItems();
-        for (int i = 0; i < aux.getGrafo().numVertices; i++) {
+        for (int i = 0; i < aux.getGrafo().getNumVertices(); i++) {
             Parada parada = aux.getGrafo().listaAdy[i].getVertice();
             comboBoxParadas.addItem(parada.getNombre());
         }

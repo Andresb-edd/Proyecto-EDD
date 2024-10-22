@@ -22,7 +22,7 @@ import java.awt.*;
 public class Grafo {
     boolean dirigido;
     int maxNodos;
-    int numVertices;
+    private int numVertices;
     private Graph graph;
     ListaAdyacentes listaAdy [];
 
@@ -45,7 +45,7 @@ public class Grafo {
      * @param lista la lista de adyacencia a añadir.
      */
     public void addListaAdyacentes(ListaAdyacentes lista) {
-        if (numVertices < maxNodos) {
+        if (getNumVertices() < maxNodos) {
             listaAdy[numVertices++] = lista;
         }
     }
@@ -60,7 +60,7 @@ public class Grafo {
      * @return la lista de adyacencia correspondiente a la parada.
      */
     public ListaAdyacentes getListaAdyacentes(String nombreParada) {
-        for (int i = 0; i < numVertices; i++) {
+        for (int i = 0; i < getNumVertices(); i++) {
             ListaAdyacentes lista = listaAdy[i];
             Parada parada = lista.getVertice();
             if (parada.getNombre().equals(nombreParada)) {
@@ -85,7 +85,7 @@ public class Grafo {
                 this.graph = new SingleGraph(ciudadSeleccionada);
                 System.setProperty("org.graphstream.ui.renderer", "org.graphstream.ui.j2dviewer.J2DGraphRenderer");
 
-                for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
+                for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
                     String style = "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;";
                     try {
                         ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
@@ -116,7 +116,7 @@ public class Grafo {
                         System.out.println(e);
                     }
                 }
-                for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
+                for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
                     ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
                     Parada parada = lista.getVertice();
                     NodoDeListas currentAdyacente = lista.getpFirst();
@@ -174,7 +174,7 @@ public class Grafo {
      * Imprime el grafo en la consola.
      */
     public void imprimirGrafo() {
-        for (int i = 0; i < numVertices; i++) {
+        for (int i = 0; i < getNumVertices(); i++) {
             ListaAdyacentes lista = listaAdy[i];
             Parada parada = lista.getVertice();
             System.out.print(parada.getNombre() + ": ");
@@ -187,4 +187,31 @@ public class Grafo {
             System.out.println();
         }
     }
+
+    /**
+     * @return the numVertices
+     */
+    public int getNumVertices() {
+        return numVertices;
+    }
+    
+    public boolean existeArista(int v_i, int v_f){
+        String vertice_1 = listaAdy[v_i].getVertice().getNombre();
+        String vertice_2 = listaAdy[v_f].getVertice().getNombre();
+            ListaAdyacentes lista_Inicial = getListaAdyacentes(vertice_1);
+            if (lista_Inicial == null){
+                return false;
+            }
+            NodoDeListas current = lista_Inicial.getpFirst();
+            while (current != null) {
+                Parada adyacente = (Parada) current.getDataParada();
+                if (adyacente.getNombre().equals(vertice_2)) {
+                    return true;
+                }
+                current = current.getpNext();
+            }
+            return false;            
+                    }
+    
+
 }
