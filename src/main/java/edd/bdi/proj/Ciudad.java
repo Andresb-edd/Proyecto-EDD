@@ -13,6 +13,7 @@ public class Ciudad {
     private int size;
     private int t;
     private Grafo grafo;
+    private ListaDeSucursales listaSucursal;
 
 
     /**
@@ -142,6 +143,16 @@ public class Ciudad {
     public void setT(int t) {
         this.t = t;
     }
+
+    public ListaDeSucursales getListaSucursal() {
+        return listaSucursal;
+    }
+
+    public void setListaSucursal(ListaDeSucursales listaSucursal) {
+        this.listaSucursal = listaSucursal;
+    }
+    
+    
 
     /**
      * Verifica si la lista de líneas de transporte está vacía.

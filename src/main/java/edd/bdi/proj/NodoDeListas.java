@@ -15,6 +15,7 @@ public class NodoDeListas {
     private Parada dataParada;
     private Ciudad dataCiudad;
     private Linea dataLinea;
+    private Sucursal dataSucursal;
 
     /**
      * Constructor que inicializa un nodo con datos de una parada.
@@ -47,6 +48,20 @@ public class NodoDeListas {
         this.pBefore = null;
         this.dataLinea = dataLinea;
     }
+    
+        /**
+     * Constructor que inicializa un nodo con datos de una Sucursal.
+     *
+     * @param dataSucursal los datos de la línea a almacenar en el nodo.
+     */
+    
+        public NodoDeListas(Sucursal dataSucursal) {
+        this.pNext = null;
+        this.pBefore = null;
+        this.dataSucursal = dataSucursal;
+    }
+    
+    
 
     /**
      * Obtiene el siguiente nodo en la lista.
