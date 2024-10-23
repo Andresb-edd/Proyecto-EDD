@@ -29,6 +29,9 @@ public class Interfaz extends javax.swing.JFrame {
         mostrar_grafo.setVisible(false);
         comboBoxParadas.setVisible(false);
         checkBoxSucursal.setVisible(false);
+        busquedaAmplitud.setVisible(false);
+        busquedaProfundidad.setVisible(false);
+        jLabel1.setVisible(false);
 
     }
 
@@ -53,6 +56,9 @@ public class Interfaz extends javax.swing.JFrame {
         mostrar_grafo = new javax.swing.JButton();
         comboBoxParadas = new javax.swing.JComboBox<>();
         checkBoxSucursal = new javax.swing.JCheckBox();
+        busquedaProfundidad = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        busquedaAmplitud = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,6 +153,25 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(checkBoxSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 100, 40));
 
+        busquedaProfundidad.setText("Búsqueda en Profundidad");
+        busquedaProfundidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busquedaProfundidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, -1, -1));
+
+        jLabel1.setText("Ver Cobertura de Sucursal");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 200, -1));
+
+        busquedaAmplitud.setText("Búsqueda en Amplitud");
+        busquedaAmplitud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                busquedaAmplitudActionPerformed(evt);
+            }
+        });
+        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 490, 170, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -208,9 +233,11 @@ public class Interfaz extends javax.swing.JFrame {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
         Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
+        String nombreNodo = paradaSeleccionada.contains(":") ? paradaSeleccionada.split(":")[0].trim() : paradaSeleccionada;
+
         if (checkBoxSucursal.isSelected()) {
             Sucursal nuevaSucursal = new Sucursal(parada, ciudad);
-            ListaDeSucursales aux =  ciudad.getListaSucursal();
+            ListaDeSucursales aux = ciudad.getListaSucursal();
             if (aux == null) {
                 aux = new ListaDeSucursales();
             }
@@ -218,20 +245,47 @@ public class Interfaz extends javax.swing.JFrame {
             ciudad.setListaSucursal(aux);
             parada.setSucursal(true);
             if (ciudad.getGrafo().getGraph() != null) {
-                Node node = ciudad.getGrafo().getGraph().getNode(paradaSeleccionada);
+                Node node = ciudad.getGrafo().getGraph().getNode(nombreNodo);
                 node.setAttribute("ui.style", "fill-color: green;");
             }
         } else {
-            ListaDeSucursales aux =  ciudad.getListaSucursal();
+            ListaDeSucursales aux = ciudad.getListaSucursal();
             aux.eliminar_sucursal(parada.getNombre());
             ciudad.setListaSucursal(aux);
             parada.setSucursal(false);
             if (ciudad.getGrafo().getGraph() != null) {
-                Node node = ciudad.getGrafo().getGraph().getNode(paradaSeleccionada);
+                Node node = ciudad.getGrafo().getGraph().getNode(nombreNodo);
                 node.setAttribute("ui.style", "fill-color: #ff5353;");
             }
         }
     }//GEN-LAST:event_checkBoxSucursalActionPerformed
+
+    private void busquedaAmplitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaAmplitudActionPerformed
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        int t = Integer.parseInt(Input_t.getText());
+
+        for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+            if (parada.tieneSucursal()) {
+                FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t);
+            }
+        }
+    }//GEN-LAST:event_busquedaAmplitudActionPerformed
+
+    private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        int t = Integer.parseInt(Input_t.getText());
+
+        for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+            if (parada.tieneSucursal()) {
+                FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
+                funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t);
+            }
+        }
+    }//GEN-LAST:event_busquedaProfundidadActionPerformed
 
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
@@ -256,6 +310,9 @@ public class Interfaz extends javax.swing.JFrame {
         mostrar_grafo.setVisible(true);
         comboBoxParadas.setVisible(true);
         checkBoxSucursal.setVisible(true);
+        busquedaAmplitud.setVisible(true);
+        busquedaProfundidad.setVisible(true);
+        jLabel1.setVisible(true);
 
     }
 
@@ -271,6 +328,9 @@ public class Interfaz extends javax.swing.JFrame {
         mostrar_grafo.setVisible(false);
         comboBoxParadas.setVisible(false);
         checkBoxSucursal.setVisible(false);
+        busquedaAmplitud.setVisible(false);
+        busquedaProfundidad.setVisible(false);
+        jLabel1.setVisible(false);
 
     }
 
@@ -314,6 +374,8 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Input_t;
     private javax.swing.JLabel Label_t_value;
+    private javax.swing.JButton busquedaAmplitud;
+    private javax.swing.JButton busquedaProfundidad;
     private javax.swing.JButton button_add_red;
     private javax.swing.JButton button_exit;
     private javax.swing.JButton button_mostrar_red;
@@ -322,6 +384,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxSucursal;
     private javax.swing.JComboBox<String> comboBoxCiudades;
     private javax.swing.JComboBox<String> comboBoxParadas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
