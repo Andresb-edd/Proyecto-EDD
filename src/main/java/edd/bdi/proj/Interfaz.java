@@ -221,12 +221,16 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mostrar_grafoActionPerformed
 
-    private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
-        System.out.println((String) comboBoxParadas.getSelectedItem());
+        System.out.println(paradaSeleccionada);
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
-        Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
-        checkBoxSucursal.setSelected(parada.tieneSucursal());
+        ListaAdyacentes listaAdyacentes = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada);
+
+        if (listaAdyacentes != null) {
+            Parada parada = listaAdyacentes.getVertice();
+            checkBoxSucursal.setSelected(parada.tieneSucursal());
+        }
     }
 
     private void checkBoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxSucursalActionPerformed
