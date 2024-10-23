@@ -223,8 +223,8 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
-        System.out.println(paradaSeleccionada);
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Grafo.resetNodeColors(ciudad.getGrafo());
         ListaAdyacentes listaAdyacentes = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada);
 
         if (listaAdyacentes != null) {
@@ -236,6 +236,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void checkBoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxSucursalActionPerformed
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Grafo.resetNodeColors(ciudad.getGrafo());
         Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
         String nombreNodo = paradaSeleccionada.contains(":") ? paradaSeleccionada.split(":")[0].trim() : paradaSeleccionada;
 
@@ -267,6 +268,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaAmplitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaAmplitudActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
@@ -280,6 +282,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {

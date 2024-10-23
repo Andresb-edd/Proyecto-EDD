@@ -17,38 +17,23 @@ public class FuncionesBusqueda {
 
     public void recorrerProfundidad(Grafo g, int v, boolean[] visitados, int[] distancia, int t) {
         visitados[v] = true;
-        System.out.println(v);
         for (int i = 0; i < g.getNumVertices(); i++) {
             if ((v != i) && (!visitados[i]) && (g.existeArista(v, i))) {
                 distancia[i] = distancia[v] + 1;
                 if (distancia[i] <= t && !g.listaAdy[i].getVertice().tieneSucursal()) {
-                    if (g.listaAdy[i].getVertice().getNombre().contains(":")) {
-                        Node node = g.getGraph().getNode(g.listaAdy[i].getVertice().getNombre().split(":")[0].trim());
-                        node.setAttribute("ui.style", "fill-color: yellow;");
-                        String nombreParada = g.listaAdy[i].getVertice().getNombre();
-                        if (nombreParada.contains(":")) {
-                            String nombreSecundario = nombreParada.split(":")[1].trim();
-                            Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
-                            if (nodeSecundario != null) {
-                                nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
-                            }
-                        }
-                    } else {
-                        Node node = g.getGraph().getNode(g.listaAdy[i].getVertice().getNombre());
-
-                        node.setAttribute("ui.style", "fill-color: yellow;");
-                        String nombreParada = g.listaAdy[i].getVertice().getNombre();
-                        if (nombreParada.contains(":")) {
-                            String nombreSecundario = nombreParada.split(":")[1].trim();
+                    Node node = g.getGraph().getNode(g.listaAdy[i].getVertice().getNombre());
+                    node.setAttribute("ui.style", "fill-color: yellow;");
+                    String nombreParada = g.listaAdy[i].getVertice().getNombre();
+                    if (nombreParada.contains(":")) {
+                        String[] partes = nombreParada.split(":");
+                        for (String parte : partes) {
+                            String nombreSecundario = parte.trim();
                             Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
                             if (nodeSecundario != null) {
                                 nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
                             }
                         }
                     }
-
-
-
                 }
                 recorrerProfundidad(g, i, visitados, distancia, t);
             }
@@ -81,29 +66,32 @@ public class FuncionesBusqueda {
         while (!cola.isEmpty()) {
             NodoDeListas nodo = cola.desencolar();
             Parada parada = (Parada) nodo.getDataParada();
+            int currentIndex = -1;
 
             for (int j = 0; j < g.getNumVertices(); j++) {
                 if (g.listaAdy[j].getVertice().getNombre().equals(parada.getNombre())) {
-                    v = j;
+                    currentIndex = j;
                     break;
                 }
             }
 
             for (int j = 0; j < g.getNumVertices(); j++) {
-                if ((v != j) && (g.existeArista(v, j)) && (!visitados[j])) {
+                if ((currentIndex != j) && (g.existeArista(currentIndex, j)) && (!visitados[j])) {
                     cola.encolar(new NodoDeListas(g.listaAdy[j].getVertice()));
                     visitados[j] = true;
-                    distancia[j] = distancia[v] + 1;
+                    distancia[j] = distancia[currentIndex] + 1;
                     if (distancia[j] <= t && !g.listaAdy[j].getVertice().tieneSucursal()) {
                         Node node = g.getGraph().getNode(g.listaAdy[j].getVertice().getNombre());
                         node.setAttribute("ui.style", "fill-color: yellow;");
-                        // Marcar la segunda parte del nombre si existe
                         String nombreParada = g.listaAdy[j].getVertice().getNombre();
                         if (nombreParada.contains(":")) {
-                            String nombreSecundario = nombreParada.split(":")[1].trim();
-                            Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
-                            if (nodeSecundario != null) {
-                                nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
+                            String[] partes = nombreParada.split(":");
+                            for (String parte : partes) {
+                                String nombreSecundario = parte.trim();
+                                Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
+                                if (nodeSecundario != null) {
+                                    nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
+                                }
                             }
                         }
                     }
@@ -111,5 +99,4 @@ public class FuncionesBusqueda {
             }
         }
     }
-
 }

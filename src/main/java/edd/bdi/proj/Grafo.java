@@ -211,4 +211,19 @@ public class Grafo {
             System.out.println();
         }
     }
+    public static void resetNodeColors(Grafo grafo) {
+        if (grafo.getGraph() == null) {
+            return;
+        }
+        for (int i = 0; i < grafo.getNumVertices(); i++) {
+            Node node = grafo.getGraph().getNode(grafo.listaAdy[i].getVertice().getNombre());
+            if (node != null) {
+                System.out.println(node.getAttribute("ui.style", String.class));
+
+            }
+            if (node != null && "fill-color: yellow;".equals(node.getAttribute("ui.style", String.class))) {
+                node.setAttribute("ui.style", "fill-color: #ff5353;");
+            }
+        }
+    }
 }

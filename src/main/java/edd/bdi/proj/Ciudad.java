@@ -29,7 +29,7 @@ public class Ciudad {
         this.lFirst = null;
         this.lLast = null;
         this.size = 0;
-        this.grafo = new Grafo(100, false);
+        this.grafo = new Grafo(1000, false);
         this.t = 1;
     }
 
