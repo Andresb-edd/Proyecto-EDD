@@ -208,7 +208,6 @@ public class Interfaz extends javax.swing.JFrame {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
         Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
-        Node node = ciudad.getGrafo().getGraph().getNode(paradaSeleccionada);
         if (checkBoxSucursal.isSelected()) {
             Sucursal nuevaSucursal = new Sucursal(parada, ciudad);
             ListaDeSucursales aux =  ciudad.getListaSucursal();
@@ -218,14 +217,19 @@ public class Interfaz extends javax.swing.JFrame {
             aux.insert_sucursal(nuevaSucursal);
             ciudad.setListaSucursal(aux);
             parada.setSucursal(true);
-            node.setAttribute("ui.style", "fill-color: green;");
-
+            if (ciudad.getGrafo().getGraph() != null) {
+                Node node = ciudad.getGrafo().getGraph().getNode(paradaSeleccionada);
+                node.setAttribute("ui.style", "fill-color: green;");
+            }
         } else {
             ListaDeSucursales aux =  ciudad.getListaSucursal();
             aux.eliminar_sucursal(parada.getNombre());
             ciudad.setListaSucursal(aux);
             parada.setSucursal(false);
-            node.setAttribute("ui.style", "fill-color: #ff5353;");
+            if (ciudad.getGrafo().getGraph() != null) {
+                Node node = ciudad.getGrafo().getGraph().getNode(paradaSeleccionada);
+                node.setAttribute("ui.style", "fill-color: #ff5353;");
+            }
         }
     }//GEN-LAST:event_checkBoxSucursalActionPerformed
 
