@@ -26,7 +26,13 @@ public class Linea {
         this.id = id;
         this.size = 0;
     }
-    
+
+    /**
+     * Constructor de la clase Linea.
+     * Inicializa la línea con un nombre.
+     *
+     * @param nombre el nombre de la línea.
+     */
      public Linea(String nombre) {
         this.pFirst = null;
         this.pLast = null;

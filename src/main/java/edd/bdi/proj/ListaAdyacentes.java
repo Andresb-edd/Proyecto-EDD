@@ -84,6 +84,11 @@ public class ListaAdyacentes {
             setpLast(newNodo);
         }
     }
+
+    /**
+     * Imprime la lista de adyacentes para el vértice actual.
+     * Muestra el nombre del vértice y los nombres de sus adyacentes.
+     */
     public void imprimirAdyacentes() {
         System.out.println("Vértice: " + Vertice.getNombre());
         System.out.print("Adyacentes: ");

@@ -391,7 +391,6 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_ParadaActionPerformed
 
     private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectar_PararadaActionPerformed
-        // TODO add your handling code here:
         String parada_A_Conectar = input_Conectar_Parada.getText();
         String nombre_Nueva_Parada = input_Nueva_Parada.getText();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();

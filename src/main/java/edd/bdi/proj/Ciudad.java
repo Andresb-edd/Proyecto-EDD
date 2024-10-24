@@ -29,7 +29,7 @@ public class Ciudad {
         this.lFirst = null;
         this.lLast = null;
         this.size = 0;
-        this.grafo = new Grafo(100, false);
+        this.grafo = new Grafo(1000, false);
         this.t = 1;
     }
 
@@ -185,6 +185,13 @@ public class Ciudad {
         setSize(getSize() + 1);
         updateGrafo(dataLinea);
     }
+
+    /**
+     * Actualiza el grafo de la ciudad con las paradas y sus adyacencias
+     * basadas en la línea de transporte proporcionada.
+     *
+     * @param linea la línea de transporte que contiene las paradas a agregar al grafo.
+     */
     public void updateGrafo(Linea linea) {
         for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
             Parada parada = (Parada) current.getDataParada();
@@ -207,7 +214,13 @@ public class Ciudad {
             grafo.addListaAdyacentes(listaAdyacentes);
         }
     }
-    
+
+    /**
+     * Busca una línea de transporte en la lista de líneas de la ciudad por su nombre.
+     *
+     * @param nombre_linea el nombre de la línea de transporte a buscar.
+     * @return la línea de transporte encontrada, o null si no se encuentra ninguna línea con ese nombre.
+     */
     public Linea buscar_Linea(String nombre_linea){
         
         NodoDeListas aux = getlFirst();
@@ -226,28 +239,22 @@ public class Ciudad {
         }
         return null;
     }
-    
-    private void insertar_Linea_interfaz(String nombre_Nueva_Linea, Ciudad ciudad){
-        Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize()+1);
-        this.insert_Linea(linea);
-        
-        
-        
-    }
-    
-     public void insert_Linea_sinGrafo(Linea dataLinea) {
-        NodoDeListas newNodo = new NodoDeListas(dataLinea);
-        if (isEmpty()) {
-            setlFirst(newNodo);
-            setlLast(newNodo);
-        } else {
-            getlLast().setpNext(newNodo);
-            newNodo.setpBefore(getlLast());
-            setlLast(newNodo);
-        }
-        setSize(getSize() + 1);
-        
-        
-    }
 
+    /**
+     * Inserta una nueva línea de transporte en la lista sin actualizar el grafo de la ciudad.
+     *
+     * @param dataLinea la línea de transporte a insertar en la lista.
+     */
+    public void insert_Linea_sinGrafo(Linea dataLinea) {
+       NodoDeListas newNodo = new NodoDeListas(dataLinea);
+       if (isEmpty()) {
+           setlFirst(newNodo);
+           setlLast(newNodo);
+       } else {
+           getlLast().setpNext(newNodo);
+           newNodo.setpBefore(getlLast());
+           setlLast(newNodo);
+       }
+       setSize(getSize() + 1);
+    }
 }

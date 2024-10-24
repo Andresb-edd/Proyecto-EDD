@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edd.bdi.proj;
 
 import org.graphstream.graph.Graph;
@@ -208,6 +204,13 @@ public class Grafo {
         }
     }
 
+    /**
+     * Busca las listas de adyacencia correspondientes a dos paradas y las une.
+     *
+     * @param nombre_parada_1 el nombre de la primera parada.
+     * @param nombre_parada_2 el nombre de la segunda parada.
+     * @param lista el arreglo de listas de adyacencia.
+     */
     public void buscar_lista_Adyacente_Y_Unir(String nombre_parada_1, String nombre_parada_2, ListaAdyacentes lista[]) {
 
         ListaAdyacentes aux1 = null;
@@ -230,12 +233,20 @@ public class Grafo {
     }
 
     /**
-     * @return the listaAdy
+     * Obtiene el arreglo de listas de adyacencia del grafo.
+     *
+     * @return el arreglo de listas de adyacencia.
      */
     public ListaAdyacentes[] getListaAdy() {
         return listaAdy;
     }
 
+    /**
+     * Restablece los colores de los nodos en el grafo.
+     * Si un nodo no tiene una sucursal, se establece su color de relleno a rojo.
+     *
+     * @param grafo el grafo cuyos nodos se van a restablecer.
+     */
     public static void resetNodeColors(Grafo grafo) {
         if (grafo.getGraph() == null) {
             return;
@@ -258,10 +269,6 @@ public class Grafo {
                     node.setAttribute("ui.style", "fill-color: #ff5353;");
                 }
             }
-
-
-
-
         }
     }
 

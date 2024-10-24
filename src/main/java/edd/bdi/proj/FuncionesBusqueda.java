@@ -1,20 +1,24 @@
 package edd.bdi.proj;
 
-import edd.bdi.proj.Grafo;
 import org.graphstream.graph.Node;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
- *
- * @author danielairibarren
+ * Clase que contiene funciones de búsqueda en un grafo.
+ * Permite realizar búsquedas en profundidad y amplitud.
  */
 public class FuncionesBusqueda {
 
 
+    /**
+     * Realiza una búsqueda en profundidad en el grafo desde un vértice dado.
+     *
+     * @param g el grafo en el que se realizará la búsqueda.
+     * @param v el vértice desde el cual se iniciará la búsqueda.
+     * @param visitados un arreglo que indica si un vértice ha sido visitado.
+     * @param distancia un arreglo que almacena la distancia desde el vértice inicial.
+     * @param t el límite de profundidad para la búsqueda.
+     * @param test un indicador para realizar pruebas adicionales.
+     */
     public void recorrerProfundidad(Grafo g, int v, boolean[] visitados, int[] distancia, int t, boolean test) {
         visitados[v] = true;
         for (int i = 0; i < g.getNumVertices(); i++) {
@@ -85,6 +89,15 @@ public class FuncionesBusqueda {
             }
         }
     }
+
+    /**
+     * Inicia una búsqueda en profundidad en el grafo desde un vértice dado.
+     *
+     * @param g el grafo en el que se realizará la búsqueda.
+     * @param v el vértice desde el cual se iniciará la búsqueda.
+     * @param t el límite de profundidad para la búsqueda.
+     * @param test un indicador para realizar pruebas adicionales.
+     */
     public void profundidad(Grafo g, int v, int t, boolean test) {
         boolean visitados[] = new boolean[g.getNumVertices()];
         int distancia[] = new int[g.getNumVertices()];
@@ -95,6 +108,15 @@ public class FuncionesBusqueda {
         distancia[v] = 0;
         recorrerProfundidad(g, v, visitados, distancia, t, test);
     }
+
+    /**
+     * Realiza una búsqueda en amplitud en el grafo desde un vértice dado.
+     *
+     * @param g el grafo en el que se realizará la búsqueda.
+     * @param v el vértice desde el cual se iniciará la búsqueda.
+     * @param t el límite de profundidad para la búsqueda.
+     * @param test un indicador para realizar pruebas adicionales.
+     */
     public static void amplitud(Grafo g, int v, int t, boolean test) {
         Cola cola = new Cola();
         boolean visitados[] = new boolean[g.getNumVertices()];
