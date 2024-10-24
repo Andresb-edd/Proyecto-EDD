@@ -40,6 +40,7 @@ public class Interfaz extends javax.swing.JFrame {
         agregar_Parada.setVisible(false);
         conectar_Pararada.setVisible(false);
         jScrollPane1.setVisible(false);
+        button_mostrar_red.setVisible(false);
 
     }
 
