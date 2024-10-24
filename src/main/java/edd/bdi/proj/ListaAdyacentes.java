@@ -1,10 +1,20 @@
 package edd.bdi.proj;
 
+/**
+ * Clase que representa una lista de adyacencia para una parada específica.
+ * Contiene métodos para manipular la lista de adyacencia.
+ */
 public class ListaAdyacentes {
     private Parada Vertice;
     private NodoDeListas pFirst;
     private NodoDeListas pLast;
 
+    /**
+     * Constructor de la clase ListaAdyacentes.
+     * Inicializa la lista de adyacencia con una parada específica.
+     *
+     * @param Arista la parada específica para la lista de adyacencia.
+     */
     public ListaAdyacentes(Parada Arista) {
         this.pFirst = null;
         this.pLast = null;
@@ -74,23 +84,14 @@ public class ListaAdyacentes {
             setpLast(newNodo);
         }
     }
-    
-        public Parada buscar_ParadaEn_lista_Adyacente(String nombre_linea){
-        
-        NodoDeListas aux = getpFirst();
-        
-        if(isEmpty()){
-            return null;
+    public void imprimirAdyacentes() {
+        System.out.println("Vértice: " + Vertice.getNombre());
+        System.out.print("Adyacentes: ");
+        NodoDeListas current = pFirst;
+        while (current != null) {
+            System.out.print(current.getDataParada().getNombre() + " ");
+            current = current.getpNext();
         }
-        
-        
-        while(aux != null){
-      
-            if(aux.getDataLinea().getNombre().equals(nombre_linea)){
-                return aux.getDataParada();
-            }
-            aux = aux.getpNext();
-        }
-        return null;
+        System.out.println();
     }
 }
