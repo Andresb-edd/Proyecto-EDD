@@ -1,59 +1,59 @@
 package edd.bdi.proj;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
- *
- * @author danielairibarren
+ * Clase que representa una sucursal.
+ * Contiene una parada y una ciudad asociadas a la sucursal.
  */
 public class Sucursal {
-    
+
     private Parada parada;
     private Ciudad ciudad;
 
+    /**
+     * Constructor de la clase Sucursal.
+     * Inicializa la sucursal con una parada y una ciudad.
+     *
+     * @param parada la parada asociada a la sucursal.
+     * @param ciudad la ciudad asociada a la sucursal.
+     */
     public Sucursal(Parada parada, Ciudad ciudad) {
         this.parada = parada;
         this.ciudad = ciudad;
-        
     }
 
-
     /**
-     * @return the parada
+     * Obtiene la parada asociada a la sucursal.
+     *
+     * @return la parada asociada a la sucursal.
      */
     public Parada getParada() {
         return parada;
     }
 
     /**
-     * @param parada the parada to set
+     * Establece la parada asociada a la sucursal.
+     *
+     * @param parada la parada a establecer.
      */
     public void setParada(Parada parada) {
         this.parada = parada;
     }
 
     /**
-     * @return the ciudad
+     * Obtiene la ciudad asociada a la sucursal.
+     *
+     * @return la ciudad asociada a la sucursal.
      */
     public Ciudad getCiudad() {
         return ciudad;
     }
 
     /**
-     * @param ciudad the ciudad to set
+     * Establece la ciudad asociada a la sucursal.
+     *
+     * @param ciudad la ciudad a establecer.
      */
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
-    
-    
-
-    
-
-    
-    
-    
 }

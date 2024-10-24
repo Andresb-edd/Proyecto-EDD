@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edd.bdi.proj;
 
 import org.graphstream.graph.Graph;
@@ -8,13 +12,13 @@ import org.graphstream.ui.view.Viewer;
 /**
  * Clase que representa un grafo con una lista de adyacencia.
  */
-
 public class Grafo {
+
     boolean dirigido;
     int maxNodos;
     int numVertices;
     private Graph graph;
-    ListaAdyacentes listaAdy [];
+    public ListaAdyacentes listaAdy[];
 
     /**
      * Constructor para crear un grafo.
@@ -22,7 +26,7 @@ public class Grafo {
      * @param n el número máximo de nodos.
      * @param d indica si el grafo es dirigido.
      */
-    public Grafo (int n, boolean d) {
+    public Grafo(int n, boolean d) {
         dirigido = d;
         maxNodos = n;
         numVertices = 0;
@@ -39,6 +43,7 @@ public class Grafo {
             listaAdy[numVertices++] = lista;
         }
     }
+
     /**
      * @return the numVertices
      */
@@ -46,18 +51,11 @@ public class Grafo {
         return numVertices;
     }
 
-    /**
-     * Verifica si existe una arista entre dos vértices.
-     *
-     * @param v_i el índice del vértice inicial.
-     * @param v_f el índice del vértice final.
-     * @return true si existe una arista entre los vértices, false en caso contrario.
-     */
-    public boolean existeArista(int v_i, int v_f){
-        String vertice_1 = listaAdy[v_i].getVertice().getNombre();
-        String vertice_2 = listaAdy[v_f].getVertice().getNombre();
+    public boolean existeArista(int v_i, int v_f) {
+        String vertice_1 = getListaAdy()[v_i].getVertice().getNombre();
+        String vertice_2 = getListaAdy()[v_f].getVertice().getNombre();
         ListaAdyacentes lista_Inicial = getListaAdyacentes(vertice_1);
-        if (lista_Inicial == null){
+        if (lista_Inicial == null) {
             return false;
         }
         NodoDeListas current = lista_Inicial.getpFirst();
@@ -71,14 +69,10 @@ public class Grafo {
         return false;
     }
 
-    /**
-     * Obtiene el grafo de GraphStream.
-     *
-     * @return el grafo de GraphStream.
-     */
     public Graph getGraph() {
         return graph;
     }
+
     /**
      * Obtiene la lista de adyacencia para una parada específica.
      *
@@ -87,7 +81,7 @@ public class Grafo {
      */
     public ListaAdyacentes getListaAdyacentes(String nombreParada) {
         for (int i = 0; i < numVertices; i++) {
-            ListaAdyacentes lista = listaAdy[i];
+            ListaAdyacentes lista = getListaAdy()[i];
             Parada parada = lista.getVertice();
             if (parada.getNombre().equals(nombreParada)) {
                 return lista;
@@ -113,7 +107,7 @@ public class Grafo {
 
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
                     try {
-                        ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
+                        ListaAdyacentes lista = ciudad.getGrafo().getListaAdy()[i];
                         Parada parada = lista.getVertice();
                         String nombreParada = parada.getNombre();
                         String style = parada.tieneSucursal() ? "fill-color: green; text-color: #000000; text-size: 10px; text-style: bold;" : "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;";
@@ -129,7 +123,7 @@ public class Grafo {
                             if (graph.getNode(nombre2) == null) {
                                 Node node2 = graph.addNode(nombre2);
                                 node2.setAttribute("ui.label", nombre2);
-                                node2.setAttribute("ui.style", "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;");
+                                node2.setAttribute("ui.style", style);
                             }
                         } else {
                             if (graph.getNode(nombreParada) == null) {
@@ -143,7 +137,7 @@ public class Grafo {
                     }
                 }
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
-                    ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
+                    ListaAdyacentes lista = ciudad.getGrafo().getListaAdy()[i];
                     Parada parada = lista.getVertice();
                     NodoDeListas currentAdyacente = lista.getpFirst();
                     while (currentAdyacente != null) {
@@ -201,7 +195,7 @@ public class Grafo {
      */
     public void imprimirGrafo() {
         for (int i = 0; i < numVertices; i++) {
-            ListaAdyacentes lista = listaAdy[i];
+            ListaAdyacentes lista = getListaAdy()[i];
             Parada parada = lista.getVertice();
             System.out.print(parada.getNombre() + ": ");
             NodoDeListas current = lista.getpFirst();
@@ -214,11 +208,34 @@ public class Grafo {
         }
     }
 
+    public void buscar_lista_Adyacente_Y_Unir(String nombre_parada_1, String nombre_parada_2, ListaAdyacentes lista[]) {
+
+        ListaAdyacentes aux1 = null;
+        ListaAdyacentes aux2 = null;
+
+        for (int i = 0; i < lista.length - 1; i++) {
+            if (lista[i] != null) {
+                if (getListaAdy()[i].getVertice().getNombre().equals(nombre_parada_1)) {
+                    aux1 = getListaAdy()[i];
+                } else if (getListaAdy()[i].getVertice().getNombre().equals(nombre_parada_2)) {
+                    aux2 = getListaAdy()[i];
+                }
+                System.out.println(lista[i]);
+            }
+
+        }
+        aux1.insert_Parada(aux2.getVertice());
+        aux2.insert_Parada(aux1.getVertice());
+
+    }
+
     /**
-     * Restaura los colores de los nodos del grafo a su color original.
-     *
-     * @param grafo el grafo cuyos nodos se van a restaurar.
+     * @return the listaAdy
      */
+    public ListaAdyacentes[] getListaAdy() {
+        return listaAdy;
+    }
+
     public static void resetNodeColors(Grafo grafo) {
         if (grafo.getGraph() == null) {
             return;
@@ -247,4 +264,5 @@ public class Grafo {
 
         }
     }
+
 }

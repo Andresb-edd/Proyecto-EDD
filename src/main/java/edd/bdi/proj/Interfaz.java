@@ -5,7 +5,6 @@
 package edd.bdi.proj;
 
 import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
 
 /**
  * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
@@ -245,8 +244,6 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             System.err.println("El valor ingresado no es un número entero válido.");
         }
-
-
     }//GEN-LAST:event_Input_tActionPerformed
 
     private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
@@ -302,10 +299,11 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaAmplitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaAmplitudActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-            Parada parada = ciudad.getGrafo().getListaAdy()[i].getVertice();
+            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
                 FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t, true);
                 if (parada.getNombre().contains(":")) {
@@ -337,10 +335,11 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-            Parada parada = ciudad.getGrafo().getListaAdy()[i].getVertice();
+            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
                 FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
                 funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t, true);

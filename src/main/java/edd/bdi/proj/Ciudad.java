@@ -204,35 +204,7 @@ public class Ciudad {
                 listaAdyacentes.insert_Parada(adjParada);
 
             }
-            boolean exists = false;
-
-            for (int i = 0; i < grafo.listaAdy.length; i++) {
-                if (grafo.listaAdy[i] != null) {
-                    if (grafo.listaAdy[i].getVertice().getNombre().equals(listaAdyacentes.getVertice().getNombre())) {
-                        exists = true;
-                        NodoDeListas currentAdy = listaAdyacentes.getpFirst();
-                        while (currentAdy != null) {
-                            boolean paradaExiste = false;
-                            NodoDeListas nodoExistente = grafo.listaAdy[i].getpFirst();
-                            while (nodoExistente != null) {
-                                if (nodoExistente.getDataParada().getNombre().equals(currentAdy.getDataParada().getNombre())) {
-                                    paradaExiste = true;
-                                    break;
-                                }
-                                nodoExistente = nodoExistente.getpNext();
-                            }
-                            if (!paradaExiste) {
-                                grafo.listaAdy[i].insert_Parada(currentAdy.getDataParada());
-                            }
-                            currentAdy = currentAdy.getpNext();
-                        }
-                        break;
-                    }
-                }
-            }
-            if (!exists) {
-                grafo.addListaAdyacentes(listaAdyacentes);
-            }
+            grafo.addListaAdyacentes(listaAdyacentes);
         }
     }
     

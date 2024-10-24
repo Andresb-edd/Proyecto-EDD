@@ -7,6 +7,7 @@ package edd.bdi.proj;
 public class Parada {
 
     private boolean sucursal;
+
     private String nombre;
     private String linea;
 
@@ -79,6 +80,4 @@ public class Parada {
     public void setLinea(String linea) {
         this.linea = linea;
     }
-    
-    
 }
