@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edd.bdi.proj;
 
 /**
@@ -137,12 +141,6 @@ public class App {
 
     }
 
-    /**
-     * Busca una ciudad en la lista de ciudades por su nombre.
-     *
-     * @param nombre el nombre de la ciudad a buscar.
-     * @return la ciudad encontrada, o null si no se encuentra ninguna ciudad con ese nombre.
-     */
     public Ciudad buscar_ciudad(String nombre) {
         NodoDeListas temp = getcFirst();
         if (isEmpty()) {

@@ -29,7 +29,7 @@ public class Ciudad {
         this.lFirst = null;
         this.lLast = null;
         this.size = 0;
-        this.grafo = new Grafo(1000, false);
+        this.grafo = new Grafo(100, false);
         this.t = 1;
     }
 
@@ -140,32 +140,19 @@ public class Ciudad {
      *
      * @param t el valor de t a establecer.
      */
-    /**
-     * Establece el valor de t para la ciudad.
-     *
-     * @param t el valor de t a establecer.
-     */
     public void setT(int t) {
         this.t = t;
     }
 
-    /**
-     * Obtiene la lista de sucursales de la ciudad.
-     *
-     * @return la lista de sucursales.
-     */
     public ListaDeSucursales getListaSucursal() {
         return listaSucursal;
     }
 
-    /**
-     * Establece la lista de sucursales para la ciudad.
-     *
-     * @param listaSucursal la lista de sucursales a establecer.
-     */
     public void setListaSucursal(ListaDeSucursales listaSucursal) {
         this.listaSucursal = listaSucursal;
     }
+    
+    
 
     /**
      * Verifica si la lista de líneas de transporte está vacía.
@@ -174,6 +161,10 @@ public class Ciudad {
      */
     public boolean isEmpty() {
         return getlFirst() == null;
+    }
+    
+        public boolean isLast_Empty() {
+        return getlLast() == null;
     }
 
     /**
@@ -194,14 +185,7 @@ public class Ciudad {
         setSize(getSize() + 1);
         updateGrafo(dataLinea);
     }
-
-    /**
-     * Actualiza el grafo de la ciudad con las paradas y sus adyacencias
-     * basadas en la línea de transporte proporcionada.
-     *
-     * @param linea la línea de transporte que contiene las paradas a agregar al grafo.
-     */
-    private void updateGrafo(Linea linea) {
+    public void updateGrafo(Linea linea) {
         for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
             Parada parada = (Parada) current.getDataParada();
             ListaAdyacentes listaAdyacentes = new ListaAdyacentes(parada);
@@ -222,6 +206,48 @@ public class Ciudad {
             }
             grafo.addListaAdyacentes(listaAdyacentes);
         }
+    }
+    
+    public Linea buscar_Linea(String nombre_linea){
+        
+        NodoDeListas aux = getlFirst();
+        
+        if(isEmpty()){
+            return null;
+        }
+        
+        
+        while(aux != null){
+      
+            if(aux.getDataLinea().getNombre().equals(nombre_linea)){
+                return aux.getDataLinea();
+            }
+            aux = aux.getpNext();
+        }
+        return null;
+    }
+    
+    private void insertar_Linea_interfaz(String nombre_Nueva_Linea, Ciudad ciudad){
+        Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize()+1);
+        this.insert_Linea(linea);
+        
+        
+        
+    }
+    
+     public void insert_Linea_sinGrafo(Linea dataLinea) {
+        NodoDeListas newNodo = new NodoDeListas(dataLinea);
+        if (isEmpty()) {
+            setlFirst(newNodo);
+            setlLast(newNodo);
+        } else {
+            getlLast().setpNext(newNodo);
+            newNodo.setpBefore(getlLast());
+            setlLast(newNodo);
+        }
+        setSize(getSize() + 1);
+        
+        
     }
 
 }

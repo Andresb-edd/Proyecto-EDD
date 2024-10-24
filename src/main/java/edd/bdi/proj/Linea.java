@@ -26,6 +26,14 @@ public class Linea {
         this.id = id;
         this.size = 0;
     }
+    
+     public Linea(String nombre) {
+        this.pFirst = null;
+        this.pLast = null;
+        this.nombre = nombre;
+        this.id = id;
+        this.size = 0;
+    }
 
     /**
      * Obtiene el primer nodo de la lista de paradas.
@@ -107,4 +115,16 @@ public class Linea {
         }
         setSize(getSize() + 1);
     }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
+    }
+    
+    
+    
+    
+    
 }

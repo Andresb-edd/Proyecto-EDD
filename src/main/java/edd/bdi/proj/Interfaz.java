@@ -1,8 +1,11 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package edd.bdi.proj;
 
 import org.graphstream.graph.*;
-
-import javax.swing.*;
+import org.graphstream.graph.implementations.*;
 
 /**
  * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
@@ -56,6 +59,12 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaProfundidad = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         busquedaAmplitud = new javax.swing.JButton();
+        agregar_Linea = new javax.swing.JButton();
+        input_Nueva_Parada = new javax.swing.JTextField();
+        input_Nueva_Linea = new javax.swing.JTextField();
+        agregar_Parada = new javax.swing.JButton();
+        input_Conectar_Parada = new javax.swing.JTextField();
+        conectar_Pararada = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -169,6 +178,33 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 490, 170, -1));
 
+        agregar_Linea.setText("Agregar Linea");
+        agregar_Linea.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_LineaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, -1));
+        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 100, 30));
+        getContentPane().add(input_Nueva_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 100, 30));
+
+        agregar_Parada.setText("Agregar Parada");
+        agregar_Parada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_ParadaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 130, -1));
+        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 100, 30));
+
+        conectar_Pararada.setText("Conectar Parada");
+        conectar_Pararada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                conectar_PararadaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 130, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,14 +236,14 @@ public class Interfaz extends javax.swing.JFrame {
         comboBoxCiudades.setVisible(true);
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
-    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {
+    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_tActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         try {
             aux.setT(Integer.parseInt(Input_t.getText()));
             System.out.println(aux.getT());
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El valor ingresado no es un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            System.err.println("El valor ingresado no es un número entero válido.");
         }
     }//GEN-LAST:event_Input_tActionPerformed
 
@@ -220,8 +256,8 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
+        System.out.println(paradaSeleccionada);
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
-        Grafo.resetNodeColors(ciudad.getGrafo());
         ListaAdyacentes listaAdyacentes = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada);
 
         if (listaAdyacentes != null) {
@@ -233,7 +269,6 @@ public class Interfaz extends javax.swing.JFrame {
     private void checkBoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxSucursalActionPerformed
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
-        Grafo.resetNodeColors(ciudad.getGrafo());
         Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
         String nombreNodo = paradaSeleccionada.contains(":") ? paradaSeleccionada.split(":")[0].trim() : paradaSeleccionada;
 
@@ -265,11 +300,10 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaAmplitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaAmplitudActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+            Parada parada = ciudad.getGrafo().getListaAdy()[i].getVertice();
             if (parada.tieneSucursal()) {
                 FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t);
             }
@@ -279,17 +313,50 @@ public class Interfaz extends javax.swing.JFrame {
     private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-        Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
 
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+            Parada parada = ciudad.getGrafo().getListaAdy()[i].getVertice();
             if (parada.tieneSucursal()) {
                 FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
                 funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t);
             }
         }
     }//GEN-LAST:event_busquedaProfundidadActionPerformed
+
+    private void agregar_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_LineaActionPerformed
+        String nombre_Nueva_Linea = input_Nueva_Linea.getText();
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize()+1);
+        ciudad.insert_Linea_sinGrafo(linea);
+    }//GEN-LAST:event_agregar_LineaActionPerformed
+
+    private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
+        String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        String nombre_Nueva_Linea = input_Nueva_Linea.getText();
+        Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
+        Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
+        linea_aux.insert_Parada(newParada);
+        ciudad.updateGrafo(linea_aux);
+        
+        
+
+        
+    }//GEN-LAST:event_agregar_ParadaActionPerformed
+
+    private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectar_PararadaActionPerformed
+        // TODO add your handling code here:
+        String parada_A_Conectar = input_Conectar_Parada.getText();
+        String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        ciudad.getGrafo().buscar_lista_Adyacente_Y_Unir(parada_A_Conectar, nombre_Nueva_Parada, ciudad.getGrafo().getListaAdy());
+        
+        
+    }//GEN-LAST:event_conectar_PararadaActionPerformed
 
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
@@ -305,7 +372,7 @@ public class Interfaz extends javax.swing.JFrame {
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         comboBoxParadas.removeAllItems();
         for (int i = 0; i < aux.getGrafo().getNumVertices(); i++) {
-            Parada parada = aux.getGrafo().listaAdy[i].getVertice();
+            Parada parada = aux.getGrafo().getListaAdy()[i].getVertice();
             comboBoxParadas.addItem(parada.getNombre());
         }
         Input_t.setText(String.valueOf(aux.getT()));
@@ -378,6 +445,8 @@ public class Interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Input_t;
     private javax.swing.JLabel Label_t_value;
+    private javax.swing.JButton agregar_Linea;
+    private javax.swing.JButton agregar_Parada;
     private javax.swing.JButton busquedaAmplitud;
     private javax.swing.JButton busquedaProfundidad;
     private javax.swing.JButton button_add_red;
@@ -388,6 +457,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxSucursal;
     private javax.swing.JComboBox<String> comboBoxCiudades;
     private javax.swing.JComboBox<String> comboBoxParadas;
+    private javax.swing.JButton conectar_Pararada;
+    private javax.swing.JTextField input_Conectar_Parada;
+    private javax.swing.JTextField input_Nueva_Linea;
+    private javax.swing.JTextField input_Nueva_Parada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextField text_bienvenida;
