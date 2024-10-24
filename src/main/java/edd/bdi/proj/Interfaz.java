@@ -62,6 +62,11 @@ public class Interfaz extends javax.swing.JFrame {
         agregar_Parada = new javax.swing.JButton();
         input_Conectar_Parada = new javax.swing.JTextField();
         conectar_Pararada = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        output_Messages = new javax.swing.JTextArea();
+        label_Ingrese_Linea = new javax.swing.JLabel();
+        label_Ingrese_Parada = new javax.swing.JLabel();
+        label_Parada_A_Conectar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -181,8 +186,8 @@ public class Interfaz extends javax.swing.JFrame {
                 agregar_LineaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, -1));
-        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 100, 30));
+        getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 30));
+        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 100, 30));
         getContentPane().add(input_Nueva_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 100, 30));
 
         agregar_Parada.setText("Agregar Parada");
@@ -191,8 +196,8 @@ public class Interfaz extends javax.swing.JFrame {
                 agregar_ParadaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 100, 130, -1));
-        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 150, 100, 30));
+        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 130, 30));
+        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 100, 30));
 
         conectar_Pararada.setText("Conectar Parada");
         conectar_Pararada.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +205,22 @@ public class Interfaz extends javax.swing.JFrame {
                 conectar_PararadaActionPerformed(evt);
             }
         });
-        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 150, 130, -1));
+        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 130, 30));
+
+        output_Messages.setColumns(20);
+        output_Messages.setRows(5);
+        jScrollPane1.setViewportView(output_Messages);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 260, 140));
+
+        label_Ingrese_Linea.setText("Ingrese la linea");
+        getContentPane().add(label_Ingrese_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
+
+        label_Ingrese_Parada.setText("Ingrese la parada");
+        getContentPane().add(label_Ingrese_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
+
+        label_Parada_A_Conectar.setText("Ingrese la parada a conectar");
+        getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 180, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -244,7 +264,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_Input_tActionPerformed
+    }                                       
 
     private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
@@ -377,14 +397,19 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_LineaActionPerformed
 
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
-        String nombre_Nueva_Parada = input_Nueva_Parada.getText();
-        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
-        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-        String nombre_Nueva_Linea = input_Nueva_Linea.getText();
-        Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
-        Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
-        linea_aux.insert_Parada(newParada);
-        ciudad.updateGrafo(linea_aux);
+        if (!input_Nueva_Linea.getText().equals("")) {
+            String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+            String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+            Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+            String nombre_Nueva_Linea = input_Nueva_Linea.getText();
+            Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
+            Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
+            linea_aux.insert_Parada(newParada);
+            ciudad.updateGrafo(linea_aux);
+        }else{
+            output_Messages.setText("Ingrese la linea a la que le "
+                    + "quiera agregar una parada");
+        }
         
         
 
@@ -505,7 +530,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField input_Nueva_Linea;
     private javax.swing.JTextField input_Nueva_Parada;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel label_Ingrese_Linea;
+    private javax.swing.JLabel label_Ingrese_Parada;
+    private javax.swing.JLabel label_Parada_A_Conectar;
     private javax.swing.JButton mostrar_grafo;
+    private javax.swing.JTextArea output_Messages;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
 }
