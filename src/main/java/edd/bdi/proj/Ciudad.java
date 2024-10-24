@@ -186,6 +186,7 @@ public class Ciudad {
         updateGrafo(dataLinea);
     }
 
+
     /**
      * Actualiza el grafo de la ciudad con las paradas y sus adyacencias
      * basadas en la línea de transporte proporcionada.
@@ -211,7 +212,35 @@ public class Ciudad {
                 listaAdyacentes.insert_Parada(adjParada);
 
             }
-            grafo.addListaAdyacentes(listaAdyacentes);
+            boolean exists = false;
+
+            for (int i = 0; i < grafo.listaAdy.length; i++) {
+                if (grafo.listaAdy[i] != null) {
+                    if (grafo.listaAdy[i].getVertice().getNombre().equals(listaAdyacentes.getVertice().getNombre())) {
+                        exists = true;
+                        NodoDeListas currentAdy = listaAdyacentes.getpFirst();
+                        while (currentAdy != null) {
+                            boolean paradaExiste = false;
+                            NodoDeListas nodoExistente = grafo.listaAdy[i].getpFirst();
+                            while (nodoExistente != null) {
+                                if (nodoExistente.getDataParada().getNombre().equals(currentAdy.getDataParada().getNombre())) {
+                                    paradaExiste = true;
+                                    break;
+                                }
+                                nodoExistente = nodoExistente.getpNext();
+                            }
+                            if (!paradaExiste) {
+                                grafo.listaAdy[i].insert_Parada(currentAdy.getDataParada());
+                            }
+                            currentAdy = currentAdy.getpNext();
+                        }
+                        break;
+                    }
+                }
+            }
+            if (!exists) {
+                grafo.addListaAdyacentes(listaAdyacentes);
+            }
         }
     }
 
@@ -222,16 +251,16 @@ public class Ciudad {
      * @return la línea de transporte encontrada, o null si no se encuentra ninguna línea con ese nombre.
      */
     public Linea buscar_Linea(String nombre_linea){
-        
+
         NodoDeListas aux = getlFirst();
-        
+
         if(isEmpty()){
             return null;
         }
-        
-        
+
+
         while(aux != null){
-      
+
             if(aux.getDataLinea().getNombre().equals(nombre_linea)){
                 return aux.getDataLinea();
             }
@@ -239,6 +268,7 @@ public class Ciudad {
         }
         return null;
     }
+
 
     /**
      * Inserta una nueva línea de transporte en la lista sin actualizar el grafo de la ciudad.

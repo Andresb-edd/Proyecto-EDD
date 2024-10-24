@@ -47,11 +47,18 @@ public class Grafo {
         return numVertices;
     }
 
-    public boolean existeArista(int v_i, int v_f) {
-        String vertice_1 = getListaAdy()[v_i].getVertice().getNombre();
-        String vertice_2 = getListaAdy()[v_f].getVertice().getNombre();
+    /**
+     * Verifica si existe una arista entre dos vértices.
+     *
+     * @param v_i el índice del vértice inicial.
+     * @param v_f el índice del vértice final.
+     * @return true si existe una arista entre los vértices, false en caso contrario.
+     */
+    public boolean existeArista(int v_i, int v_f){
+        String vertice_1 = listaAdy[v_i].getVertice().getNombre();
+        String vertice_2 = listaAdy[v_f].getVertice().getNombre();
         ListaAdyacentes lista_Inicial = getListaAdyacentes(vertice_1);
-        if (lista_Inicial == null) {
+        if (lista_Inicial == null){
             return false;
         }
         NodoDeListas current = lista_Inicial.getpFirst();
@@ -65,10 +72,14 @@ public class Grafo {
         return false;
     }
 
+    /**
+     * Obtiene el grafo de GraphStream.
+     *
+     * @return el grafo de GraphStream.
+     */
     public Graph getGraph() {
         return graph;
     }
-
     /**
      * Obtiene la lista de adyacencia para una parada específica.
      *
@@ -76,7 +87,8 @@ public class Grafo {
      * @return la lista de adyacencia correspondiente a la parada.
      */
     public ListaAdyacentes getListaAdyacentes(String nombreParada) {
-        for (int i = 0; i < numVertices; i++) {ListaAdyacentes lista = listaAdy[i];
+        for (int i = 0; i < numVertices; i++) {
+            ListaAdyacentes lista = listaAdy[i];
             Parada parada = lista.getVertice();
             if (parada.getNombre().equals(nombreParada)) {
                 return lista;
