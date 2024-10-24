@@ -127,7 +127,7 @@ public class Grafo {
                             if (graph.getNode(nombre2) == null) {
                                 Node node2 = graph.addNode(nombre2);
                                 node2.setAttribute("ui.label", nombre2);
-                                node2.setAttribute("ui.style", style);
+                                node2.setAttribute("ui.style", "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;");
                             }
                         } else {
                             if (graph.getNode(nombreParada) == null) {
@@ -216,14 +216,27 @@ public class Grafo {
             return;
         }
         for (int i = 0; i < grafo.getNumVertices(); i++) {
-            Node node = grafo.getGraph().getNode(grafo.listaAdy[i].getVertice().getNombre());
-            if (node != null) {
-                System.out.println(node.getAttribute("ui.style", String.class));
+            if (grafo.listaAdy[i].getVertice().getNombre().contains(":")) {
+                String[] parts = grafo.listaAdy[i].getVertice().getNombre().split(":");
+                for (String part : parts) {
+                    Node node_1 = grafo.getGraph().getNode(part.trim());
+                    if (node_1 != null && !grafo.listaAdy[i].getVertice().tieneSucursal()) {
+                        System.out.println(node_1.getAttribute("ui.style", String.class));
+                        node_1.setAttribute("ui.style", "fill-color: #ff5353;");
+                    }
 
+                }
+            } else {
+                Node node = grafo.getGraph().getNode(grafo.listaAdy[i].getVertice().getNombre());
+                if (node != null && !grafo.listaAdy[i].getVertice().tieneSucursal()) {
+                    System.out.println(node.getAttribute("ui.style", String.class));
+                    node.setAttribute("ui.style", "fill-color: #ff5353;");
+                }
             }
-            if (node != null && "fill-color: yellow;".equals(node.getAttribute("ui.style", String.class))) {
-                node.setAttribute("ui.style", "fill-color: #ff5353;");
-            }
+
+
+
+
         }
     }
 }

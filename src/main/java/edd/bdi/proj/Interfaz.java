@@ -212,6 +212,8 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (NumberFormatException e) {
             System.err.println("El valor ingresado no es un número entero válido.");
         }
+
+
     }//GEN-LAST:event_Input_tActionPerformed
 
     private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
@@ -274,7 +276,29 @@ public class Interfaz extends javax.swing.JFrame {
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
             Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
-                FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t);
+                FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t, true);
+                if (parada.getNombre().contains(":")) {
+                    String[] parts = parada.getNombre().split(":");
+                    for (String part : parts) {
+                        Node node_1 =ciudad.getGrafo().getGraph().getNode(part);
+                        if (node_1 != null) {
+                            System.out.println(node_1.getAttribute("ui.style", String.class));
+                        }
+                        else {
+                            node_1.setAttribute("ui.style", "fill-color: green;");
+                        }
+                    }
+                } else {
+                    Node node = ciudad.getGrafo().getGraph().getNode(parada.getNombre());
+                    if (node != null) {
+                        System.out.println(node.getAttribute("ui.style", String.class));
+                    }
+                    else {
+                        node.setAttribute("ui.style", "fill-color: green;");
+                    }
+
+                }
+
             }
         }
     }//GEN-LAST:event_busquedaAmplitudActionPerformed
@@ -289,7 +313,27 @@ public class Interfaz extends javax.swing.JFrame {
             Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
                 FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
-                funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t);
+                funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t, true);
+                if (parada.tieneSucursal()) {
+                    FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t, true);
+                    if (parada.getNombre().contains(":")) {
+                        String[] parts = parada.getNombre().split(":");
+                        for (String part : parts) {
+                            Node node_1 =ciudad.getGrafo().getGraph().getNode(part);
+                            if (node_1 != null) {
+                                System.out.println(node_1.getAttribute("ui.style", String.class));
+                                node_1.setAttribute("ui.style", "fill-color: green;");
+                            }
+
+                        }
+                    } else {
+                        Node node = ciudad.getGrafo().getGraph().getNode(parada.getNombre());
+                        if (node != null) {
+                            System.out.println(node.getAttribute("ui.style", String.class));
+                            node.setAttribute("ui.style", "fill-color: green;");
+                        }
+                    }
+                }
             }
         }
     }//GEN-LAST:event_busquedaProfundidadActionPerformed

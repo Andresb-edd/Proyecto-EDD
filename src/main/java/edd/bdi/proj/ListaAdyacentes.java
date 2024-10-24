@@ -74,4 +74,14 @@ public class ListaAdyacentes {
             setpLast(newNodo);
         }
     }
+    public void imprimirAdyacentes() {
+        System.out.println("Vértice: " + Vertice.getNombre());
+        System.out.print("Adyacentes: ");
+        NodoDeListas current = pFirst;
+        while (current != null) {
+            System.out.print(current.getDataParada().getNombre() + " ");
+            current = current.getpNext();
+        }
+        System.out.println();
+    }
 }
