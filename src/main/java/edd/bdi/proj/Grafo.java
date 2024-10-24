@@ -123,17 +123,20 @@ public class Grafo {
                                 Node node1 = graph.addNode(nombre1);
                                 node1.setAttribute("ui.label", nombre1);
                                 node1.setAttribute("ui.style", style);
+                                node1.setAttribute("xyz", i, 0, 0); 
                             }
                             if (graph.getNode(nombre2) == null) {
                                 Node node2 = graph.addNode(nombre2);
                                 node2.setAttribute("ui.label", nombre2);
                                 node2.setAttribute("ui.style", style);
+                                node2.setAttribute("xyz", i + 1, 0, 0); 
                             }
                         } else {
                             if (graph.getNode(nombreParada) == null) {
                                 Node node = graph.addNode(nombreParada);
                                 node.setAttribute("ui.label", nombreParada);
                                 node.setAttribute("ui.style", style);
+                                node.setAttribute("xyz", i, 0, 0); 
                             }
                         }
                     } catch (Exception e) {
@@ -183,6 +186,7 @@ public class Grafo {
                     }
                 }
                 Viewer viewer = graph.display();
+                viewer.disableAutoLayout();
                 viewer.setCloseFramePolicy(Viewer.CloseFramePolicy.CLOSE_VIEWER);
                 graph.addAttribute("ui.stylesheet", "node { size: 20px; fill-color: red; }");
                 graph.addAttribute("ui.quality");
