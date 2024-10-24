@@ -29,6 +29,17 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaAmplitud.setVisible(false);
         busquedaProfundidad.setVisible(false);
         jLabel1.setVisible(false);
+        input_Nueva_Linea.setVisible(false);
+        input_Conectar_Parada.setVisible(false);
+        input_Nueva_Parada.setVisible(false);
+        label_Ingrese_Linea.setVisible(false);
+        label_Ingrese_Parada.setVisible(false);
+        label_Parada_A_Conectar.setVisible(false);
+        output_Messages.setVisible(false);
+        agregar_Linea.setVisible(false);
+        agregar_Parada.setVisible(false);
+        conectar_Pararada.setVisible(false);
+        jScrollPane1.setVisible(false);
 
     }
 
@@ -397,23 +408,24 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_LineaActionPerformed
 
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
-        if (!input_Nueva_Linea.getText().equals("")) {
-            String nombre_Nueva_Parada = input_Nueva_Parada.getText();
-            String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
-            Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-            String nombre_Nueva_Linea = input_Nueva_Linea.getText();
-            Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
-            Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
-            linea_aux.insert_Parada(newParada);
-            ciudad.updateGrafo(linea_aux);
-        }else{
-            output_Messages.setText("Ingrese la linea a la que le "
-                    + "quiera agregar una parada");
-        }
-        
-        
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
 
-        
+            Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+            if (!input_Nueva_Linea.getText().equals("")) {
+                String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+                String nombre_Nueva_Linea = input_Nueva_Linea.getText();
+                Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
+
+                if(linea_aux != null) {
+                    Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
+                    linea_aux.insert_Parada(newParada);
+                    ciudad.updateGrafo(linea_aux);
+                    output_Messages.setText("");
+                }
+            }else{
+                output_Messages.setText("Ingrese la linea a la que le \n quiera agregar una parada");
+            }
+
     }//GEN-LAST:event_agregar_ParadaActionPerformed
 
     private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectar_PararadaActionPerformed
@@ -452,6 +464,17 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaAmplitud.setVisible(true);
         busquedaProfundidad.setVisible(true);
         jLabel1.setVisible(true);
+        input_Nueva_Linea.setVisible(true);
+        input_Conectar_Parada.setVisible(true);
+        input_Nueva_Parada.setVisible(true);
+        label_Ingrese_Linea.setVisible(true);
+        label_Ingrese_Parada.setVisible(true);
+        label_Parada_A_Conectar.setVisible(true);
+        output_Messages.setVisible(true);
+        agregar_Linea.setVisible(true);
+        agregar_Parada.setVisible(true);
+        conectar_Pararada.setVisible(true);
+        jScrollPane1.setVisible(true);
 
     }
 
