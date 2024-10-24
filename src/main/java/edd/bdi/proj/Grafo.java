@@ -1,19 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edd.bdi.proj;
 
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.implementations.SingleGraph;
-import org.graphstream.stream.SinkAdapter;
 import org.graphstream.ui.view.Viewer;
-import org.graphstream.ui.view.ViewerListener;
-import org.graphstream.ui.view.ViewerPipe;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Clase que representa un grafo con una lista de adyacencia.
@@ -56,6 +46,13 @@ public class Grafo {
         return numVertices;
     }
 
+    /**
+     * Verifica si existe una arista entre dos vértices.
+     *
+     * @param v_i el índice del vértice inicial.
+     * @param v_f el índice del vértice final.
+     * @return true si existe una arista entre los vértices, false en caso contrario.
+     */
     public boolean existeArista(int v_i, int v_f){
         String vertice_1 = listaAdy[v_i].getVertice().getNombre();
         String vertice_2 = listaAdy[v_f].getVertice().getNombre();
@@ -74,6 +71,11 @@ public class Grafo {
         return false;
     }
 
+    /**
+     * Obtiene el grafo de GraphStream.
+     *
+     * @return el grafo de GraphStream.
+     */
     public Graph getGraph() {
         return graph;
     }
@@ -211,6 +213,12 @@ public class Grafo {
             System.out.println();
         }
     }
+
+    /**
+     * Restaura los colores de los nodos del grafo a su color original.
+     *
+     * @param grafo el grafo cuyos nodos se van a restaurar.
+     */
     public static void resetNodeColors(Grafo grafo) {
         if (grafo.getGraph() == null) {
             return;

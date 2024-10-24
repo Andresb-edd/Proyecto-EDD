@@ -1,10 +1,20 @@
 package edd.bdi.proj;
 
+/**
+ * Clase que representa una lista de adyacencia para una parada específica.
+ * Contiene métodos para manipular la lista de adyacencia.
+ */
 public class ListaAdyacentes {
     private Parada Vertice;
     private NodoDeListas pFirst;
     private NodoDeListas pLast;
 
+    /**
+     * Constructor de la clase ListaAdyacentes.
+     * Inicializa la lista de adyacencia con una parada específica.
+     *
+     * @param Arista la parada específica para la lista de adyacencia.
+     */
     public ListaAdyacentes(Parada Arista) {
         this.pFirst = null;
         this.pLast = null;

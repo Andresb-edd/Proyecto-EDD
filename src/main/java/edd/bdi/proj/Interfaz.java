@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package edd.bdi.proj;
 
 import org.graphstream.graph.*;
-import org.graphstream.graph.implementations.*;
+
+import javax.swing.*;
 
 /**
  * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
@@ -203,14 +200,14 @@ public class Interfaz extends javax.swing.JFrame {
         comboBoxCiudades.setVisible(true);
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
-    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_tActionPerformed
+    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         try {
             aux.setT(Integer.parseInt(Input_t.getText()));
             System.out.println(aux.getT());
         } catch (NumberFormatException e) {
-            System.err.println("El valor ingresado no es un número entero válido.");
+            JOptionPane.showMessageDialog(this, "El valor ingresado no es un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
 

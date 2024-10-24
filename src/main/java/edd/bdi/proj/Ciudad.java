@@ -140,19 +140,32 @@ public class Ciudad {
      *
      * @param t el valor de t a establecer.
      */
+    /**
+     * Establece el valor de t para la ciudad.
+     *
+     * @param t el valor de t a establecer.
+     */
     public void setT(int t) {
         this.t = t;
     }
 
+    /**
+     * Obtiene la lista de sucursales de la ciudad.
+     *
+     * @return la lista de sucursales.
+     */
     public ListaDeSucursales getListaSucursal() {
         return listaSucursal;
     }
 
+    /**
+     * Establece la lista de sucursales para la ciudad.
+     *
+     * @param listaSucursal la lista de sucursales a establecer.
+     */
     public void setListaSucursal(ListaDeSucursales listaSucursal) {
         this.listaSucursal = listaSucursal;
     }
-    
-    
 
     /**
      * Verifica si la lista de líneas de transporte está vacía.
@@ -181,6 +194,13 @@ public class Ciudad {
         setSize(getSize() + 1);
         updateGrafo(dataLinea);
     }
+
+    /**
+     * Actualiza el grafo de la ciudad con las paradas y sus adyacencias
+     * basadas en la línea de transporte proporcionada.
+     *
+     * @param linea la línea de transporte que contiene las paradas a agregar al grafo.
+     */
     private void updateGrafo(Linea linea) {
         for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
             Parada parada = (Parada) current.getDataParada();
