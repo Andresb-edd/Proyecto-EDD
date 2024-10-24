@@ -76,8 +76,7 @@ public class Grafo {
      * @return la lista de adyacencia correspondiente a la parada.
      */
     public ListaAdyacentes getListaAdyacentes(String nombreParada) {
-        for (int i = 0; i < numVertices; i++) {
-            ListaAdyacentes lista = getListaAdy()[i];
+        for (int i = 0; i < numVertices; i++) {ListaAdyacentes lista = listaAdy[i];
             Parada parada = lista.getVertice();
             if (parada.getNombre().equals(nombreParada)) {
                 return lista;
@@ -103,7 +102,7 @@ public class Grafo {
 
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
                     try {
-                        ListaAdyacentes lista = ciudad.getGrafo().getListaAdy()[i];
+                        ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
                         Parada parada = lista.getVertice();
                         String nombreParada = parada.getNombre();
                         String style = parada.tieneSucursal() ? "fill-color: green; text-color: #000000; text-size: 10px; text-style: bold;" : "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;";
@@ -119,7 +118,7 @@ public class Grafo {
                             if (graph.getNode(nombre2) == null) {
                                 Node node2 = graph.addNode(nombre2);
                                 node2.setAttribute("ui.label", nombre2);
-                                node2.setAttribute("ui.style", style);
+                                node2.setAttribute("ui.style", "fill-color: #ff5353; text-color: #000000; text-size: 10px; text-style: bold;");
                             }
                         } else {
                             if (graph.getNode(nombreParada) == null) {
@@ -133,7 +132,7 @@ public class Grafo {
                     }
                 }
                 for (int i = 0; i < ciudad.getGrafo().numVertices; i++) {
-                    ListaAdyacentes lista = ciudad.getGrafo().getListaAdy()[i];
+                    ListaAdyacentes lista = ciudad.getGrafo().listaAdy[i];
                     Parada parada = lista.getVertice();
                     NodoDeListas currentAdyacente = lista.getpFirst();
                     while (currentAdyacente != null) {
@@ -191,7 +190,7 @@ public class Grafo {
      */
     public void imprimirGrafo() {
         for (int i = 0; i < numVertices; i++) {
-            ListaAdyacentes lista = getListaAdy()[i];
+            ListaAdyacentes lista = listaAdy[i];
             Parada parada = lista.getVertice();
             System.out.print(parada.getNombre() + ": ");
             NodoDeListas current = lista.getpFirst();

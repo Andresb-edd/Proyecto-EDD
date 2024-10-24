@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package edd.bdi.proj;
 
 import org.graphstream.graph.*;
+
+import javax.swing.*;
 
 /**
  * Clase que representa la interfaz gráfica de usuario para la aplicación de gestión de la red de transporte.
@@ -235,15 +233,17 @@ public class Interfaz extends javax.swing.JFrame {
         comboBoxCiudades.setVisible(true);
     }//GEN-LAST:event_button_mostrar_redActionPerformed
 
-    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Input_tActionPerformed
+    private void Input_tActionPerformed(java.awt.event.ActionEvent evt) {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         try {
             aux.setT(Integer.parseInt(Input_t.getText()));
             System.out.println(aux.getT());
         } catch (NumberFormatException e) {
-            System.err.println("El valor ingresado no es un número entero válido.");
+            JOptionPane.showMessageDialog(this, "El valor ingresado no es un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
+
     }//GEN-LAST:event_Input_tActionPerformed
 
     private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
@@ -255,8 +255,8 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void comboBoxParadasActionPerformed(java.awt.event.ActionEvent evt) {
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
-        System.out.println(paradaSeleccionada);
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Grafo.resetNodeColors(ciudad.getGrafo());
         ListaAdyacentes listaAdyacentes = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada);
 
         if (listaAdyacentes != null) {
@@ -268,6 +268,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void checkBoxSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkBoxSucursalActionPerformed
         String paradaSeleccionada = (String) comboBoxParadas.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad((String) comboBoxCiudades.getSelectedItem());
+        Grafo.resetNodeColors(ciudad.getGrafo());
         Parada parada = ciudad.getGrafo().getListaAdyacentes(paradaSeleccionada).getVertice();
         String nombreNodo = paradaSeleccionada.contains(":") ? paradaSeleccionada.split(":")[0].trim() : paradaSeleccionada;
 
@@ -414,7 +415,7 @@ public class Interfaz extends javax.swing.JFrame {
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
         comboBoxParadas.removeAllItems();
         for (int i = 0; i < aux.getGrafo().getNumVertices(); i++) {
-            Parada parada = aux.getGrafo().getListaAdy()[i].getVertice();
+            Parada parada = aux.getGrafo().listaAdy[i].getVertice();
             comboBoxParadas.addItem(parada.getNombre());
         }
         Input_t.setText(String.valueOf(aux.getT()));
