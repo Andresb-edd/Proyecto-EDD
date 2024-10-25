@@ -422,6 +422,10 @@ public class Interfaz extends javax.swing.JFrame {
                     linea_aux.insert_Parada(newParada);
                     ciudad.updateGrafo(linea_aux);
                     output_Messages.setText("");
+                    for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+                        Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+                        comboBoxParadas.addItem(parada.getNombre());
+                    }
                 }
             }else{
                 output_Messages.setText("Ingrese la linea a la que le \n quiera agregar una parada");
