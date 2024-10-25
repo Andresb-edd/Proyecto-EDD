@@ -147,6 +147,20 @@ public class Linea {
         this.linea_agregada = linea_agregada;
     }
 
+    public boolean buscar_parada(String nombre) {
+        NodoDeListas temp = getpFirst();
+        if (isEmpty()) {
+            System.out.println("Ciudad no encontrada");
+        }
+        while (temp != null) {
+            if (temp.getDataParada().getNombre().equals(nombre)) {
+                return true;
+            }
+            temp = temp.getpNext();
+        }
+        return false;
+    }
+
     
     
     

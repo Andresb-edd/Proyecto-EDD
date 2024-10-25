@@ -54,11 +54,11 @@ public class Grafo {
      * @param v_f el índice del vértice final.
      * @return true si existe una arista entre los vértices, false en caso contrario.
      */
-    public boolean existeArista(int v_i, int v_f){
+    public boolean existeArista(int v_i, int v_f) {
         String vertice_1 = listaAdy[v_i].getVertice().getNombre();
         String vertice_2 = listaAdy[v_f].getVertice().getNombre();
         ListaAdyacentes lista_Inicial = getListaAdyacentes(vertice_1);
-        if (lista_Inicial == null){
+        if (lista_Inicial == null) {
             return false;
         }
         NodoDeListas current = lista_Inicial.getpFirst();
@@ -80,6 +80,7 @@ public class Grafo {
     public Graph getGraph() {
         return graph;
     }
+
     /**
      * Obtiene la lista de adyacencia para una parada específica.
      *
@@ -101,7 +102,7 @@ public class Grafo {
      * Renderiza el grafo para una ciudad seleccionada.
      *
      * @param ciudadSeleccionada el nombre de la ciudad seleccionada.
-     * @param app la instancia de la aplicación.
+     * @param app                la instancia de la aplicación.
      */
     public void renderGrafo(String ciudadSeleccionada, App app) {
         NodoDeListas current = app.getcFirst();
@@ -220,7 +221,7 @@ public class Grafo {
      *
      * @param nombre_parada_1 el nombre de la primera parada.
      * @param nombre_parada_2 el nombre de la segunda parada.
-     * @param lista el arreglo de listas de adyacencia.
+     * @param lista           el arreglo de listas de adyacencia.
      */
     public void buscar_lista_Adyacente_Y_Unir(String nombre_parada_1, String nombre_parada_2, ListaAdyacentes lista[]) {
 
@@ -292,4 +293,16 @@ public class Grafo {
         return -1;
     }
 
+    public boolean buscar_parada(String nombre, ListaAdyacentes lista[]) {
+
+        for (int i = 0; i < lista.length - 1; i++) {
+            if (lista[i] != null) {
+                if (getListaAdy()[i].getVertice().getNombre().equals(nombre)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
 }

@@ -288,4 +288,18 @@ public class Ciudad {
        setSize(getSize() + 1);
     }
 
+    public boolean buscar_lineas(String nombre) {
+        NodoDeListas temp = getlFirst();
+        if (isEmpty()) {
+            System.out.println("Ciudad no encontrada");
+        }
+        while (temp != null) {
+            if (temp.getDataLinea().getNombre().equals(nombre)) {
+                return true;
+            }
+            temp = temp.getpNext();
+        }
+        return false;
+    }
+
 }
