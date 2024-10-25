@@ -44,6 +44,7 @@ public class Interfaz extends javax.swing.JFrame {
         comboboxlineas_creadas.removeAllItems();
         comboboxlineas_creadas.setVisible(false);
         label_Seleccionar_Linea.setVisible(false);
+        limpiarSucursales.setVisible(false);
     }
 
     /**
@@ -83,6 +84,7 @@ public class Interfaz extends javax.swing.JFrame {
         label_Parada_A_Conectar = new javax.swing.JLabel();
         comboboxlineas_creadas = new javax.swing.JComboBox<>();
         label_Seleccionar_Linea = new javax.swing.JLabel();
+        limpiarSucursales = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -244,10 +246,18 @@ public class Interfaz extends javax.swing.JFrame {
                 comboboxlineas_creadasActionPerformed(evt);
             }
         });
-        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 210, 40));
+        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 210, 40));
 
         label_Seleccionar_Linea.setText("Seleccionar linea");
-        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, -1, -1));
+        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 570, -1, -1));
+
+        limpiarSucursales.setText("Limpiar Sucursales");
+        limpiarSucursales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpiarSucursalesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(limpiarSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -484,6 +494,33 @@ public class Interfaz extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboboxlineas_creadasActionPerformed
 
+    private void limpiarSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarSucursalesActionPerformed
+        // TODO add your handling code here:
+        String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+            parada.setSucursal(false);
+            String nombre = parada.getNombre();
+            if (nombre.contains(":")) {
+                String[] parts = nombre.split(":");
+                for (String part : parts) {
+                    String nombresec = part.trim();
+                    Node nodoSec = ciudad.getGrafo().getGraph().getNode(nombresec);
+                    if (nodoSec != null) {
+                        nodoSec.setAttribute("ui.style", "fill-color: #ff5353;");
+                    }
+                }
+            } else {
+                Node nodo = ciudad.getGrafo().getGraph().getNode(nombre);
+                if (nodo != null) {
+                    nodo.setAttribute("ui.style", "fill-color: #ff5353;");
+                }
+            }
+        }
+
+    }//GEN-LAST:event_limpiarSucursalesActionPerformed
+
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
     }                                                  
@@ -523,6 +560,7 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPane1.setVisible(true);
         comboboxlineas_creadas.setVisible(true);
         label_Seleccionar_Linea.setVisible(true);
+        limpiarSucursales.setVisible(true);
 
     }
 
@@ -607,6 +645,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel label_Ingrese_Parada;
     private javax.swing.JLabel label_Parada_A_Conectar;
     private javax.swing.JLabel label_Seleccionar_Linea;
+    private javax.swing.JButton limpiarSucursales;
     private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextArea output_Messages;
     private javax.swing.JTextField text_bienvenida;
