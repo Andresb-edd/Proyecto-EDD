@@ -443,6 +443,7 @@ public class Interfaz extends javax.swing.JFrame {
         ciudad.insert_Linea_sinGrafo(linea);
         linea.setLinea_agregada(true);
         comboboxlineas_creadas.addItem(linea.getNombre());
+        input_Nueva_Linea.setText("");
     }//GEN-LAST:event_agregar_LineaActionPerformed
 
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
@@ -466,6 +467,7 @@ public class Interfaz extends javax.swing.JFrame {
             }else{
                 output_Messages.setText("Por favor, \nseleccione la linea a la que \nle quiere agregar paradas.");
             }
+            input_Nueva_Parada.setText("");
 
     }//GEN-LAST:event_agregar_ParadaActionPerformed
 
@@ -475,6 +477,7 @@ public class Interfaz extends javax.swing.JFrame {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         ciudad.getGrafo().buscar_lista_Adyacente_Y_Unir(parada_A_Conectar, nombre_Nueva_Parada, ciudad.getGrafo().getListaAdy());
+        input_Conectar_Parada.setText("");
         
         
     }//GEN-LAST:event_conectar_PararadaActionPerformed
