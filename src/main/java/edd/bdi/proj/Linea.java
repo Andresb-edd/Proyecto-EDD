@@ -6,11 +6,14 @@ package edd.bdi.proj;
  */
 public class Linea {
 
+
+
     private String nombre;
     private int id;
     private NodoDeListas pFirst;
     private NodoDeListas pLast;
     private int size;
+    private boolean linea_agregada;
 
     /**
      * Constructor de la clase Linea.
@@ -25,6 +28,7 @@ public class Linea {
         this.nombre = nombre;
         this.id = id;
         this.size = 0;
+        this.linea_agregada = false;
     }
 
     /**
@@ -128,6 +132,22 @@ public class Linea {
     public String getNombre() {
         return nombre;
     }
+    
+        /**
+     * @return the linea_agregada
+     */
+    public boolean isLinea_agregada() {
+        return linea_agregada;
+    }
+
+    /**
+     * @param linea_agregada the linea_agregada to set
+     */
+    public void setLinea_agregada(boolean linea_agregada) {
+        this.linea_agregada = linea_agregada;
+    }
+
+    
     
     
     

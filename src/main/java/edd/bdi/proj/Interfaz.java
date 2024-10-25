@@ -41,7 +41,9 @@ public class Interfaz extends javax.swing.JFrame {
         conectar_Pararada.setVisible(false);
         jScrollPane1.setVisible(false);
         button_mostrar_red.setVisible(false);
-
+        comboboxlineas_creadas.removeAllItems();
+        comboboxlineas_creadas.setVisible(false);
+        label_Seleccionar_Linea.setVisible(false);
     }
 
     /**
@@ -79,6 +81,8 @@ public class Interfaz extends javax.swing.JFrame {
         label_Ingrese_Linea = new javax.swing.JLabel();
         label_Ingrese_Parada = new javax.swing.JLabel();
         label_Parada_A_Conectar = new javax.swing.JLabel();
+        comboboxlineas_creadas = new javax.swing.JComboBox<>();
+        label_Seleccionar_Linea = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -179,10 +183,10 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaProfundidadActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 460, -1, -1));
+        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, -1, -1));
 
         jLabel1.setText("Ver Cobertura de Sucursal");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 430, 200, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 200, -1));
 
         busquedaAmplitud.setText("Búsqueda en Amplitud");
         busquedaAmplitud.addActionListener(new java.awt.event.ActionListener() {
@@ -190,7 +194,7 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaAmplitudActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 490, 170, -1));
+        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 530, 170, -1));
 
         agregar_Linea.setText("Agregar Linea");
         agregar_Linea.addActionListener(new java.awt.event.ActionListener() {
@@ -233,6 +237,17 @@ public class Interfaz extends javax.swing.JFrame {
 
         label_Parada_A_Conectar.setText("Ingrese la parada a conectar");
         getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 180, -1));
+
+        comboboxlineas_creadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboboxlineas_creadas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboboxlineas_creadasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 530, 210, 40));
+
+        label_Seleccionar_Linea.setText("Seleccionar linea");
+        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -426,15 +441,16 @@ public class Interfaz extends javax.swing.JFrame {
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize()+1);
         ciudad.insert_Linea_sinGrafo(linea);
+        linea.setLinea_agregada(true);
+        comboboxlineas_creadas.addItem(linea.getNombre());
     }//GEN-LAST:event_agregar_LineaActionPerformed
 
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
-
-            Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-            if (!input_Nueva_Linea.getText().equals("")) {
+        Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+            if (comboboxlineas_creadas.getItemCount() != 0) {
                 String nombre_Nueva_Parada = input_Nueva_Parada.getText();
-                String nombre_Nueva_Linea = input_Nueva_Linea.getText();
+                String nombre_Nueva_Linea = (String) comboboxlineas_creadas.getSelectedItem();
                 Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
 
                 if(linea_aux != null) {
@@ -448,7 +464,7 @@ public class Interfaz extends javax.swing.JFrame {
                     }
                 }
             }else{
-                output_Messages.setText("Ingrese la linea a la que le \n quiera agregar una parada");
+                output_Messages.setText("Por favor, \nseleccione la linea a la que \nle quiere agregar paradas.");
             }
 
     }//GEN-LAST:event_agregar_ParadaActionPerformed
@@ -462,6 +478,10 @@ public class Interfaz extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_conectar_PararadaActionPerformed
+
+    private void comboboxlineas_creadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxlineas_creadasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboboxlineas_creadasActionPerformed
 
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
@@ -500,6 +520,8 @@ public class Interfaz extends javax.swing.JFrame {
         agregar_Parada.setVisible(true);
         conectar_Pararada.setVisible(true);
         jScrollPane1.setVisible(true);
+        comboboxlineas_creadas.setVisible(true);
+        label_Seleccionar_Linea.setVisible(true);
 
     }
 
@@ -573,6 +595,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxSucursal;
     private javax.swing.JComboBox<String> comboBoxCiudades;
     private javax.swing.JComboBox<String> comboBoxParadas;
+    private javax.swing.JComboBox<String> comboboxlineas_creadas;
     private javax.swing.JButton conectar_Pararada;
     private javax.swing.JTextField input_Conectar_Parada;
     private javax.swing.JTextField input_Nueva_Linea;
@@ -582,6 +605,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel label_Ingrese_Linea;
     private javax.swing.JLabel label_Ingrese_Parada;
     private javax.swing.JLabel label_Parada_A_Conectar;
+    private javax.swing.JLabel label_Seleccionar_Linea;
     private javax.swing.JButton mostrar_grafo;
     private javax.swing.JTextArea output_Messages;
     private javax.swing.JTextField text_bienvenida;
