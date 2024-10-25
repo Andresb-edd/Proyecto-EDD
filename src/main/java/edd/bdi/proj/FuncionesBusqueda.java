@@ -14,6 +14,8 @@ import org.graphstream.graph.Node;
  * @author danielairibarren
  */
 public class FuncionesBusqueda {
+
+
     public void recorrerProfundidad(Grafo g, int v, boolean[] visitados, int[] distancia, int t, boolean test) {
         visitados[v] = true;
         for (int i = 0; i < g.getNumVertices(); i++) {
@@ -263,6 +265,7 @@ public class FuncionesBusqueda {
             Set cobertura = obtenerCobertura(g, parada, t);
             coberturas[i] = cobertura.size();
         }
+
         int maxCobertura = getMaxCobertura(coberturas);
         while (cubiertas.size() < g.getNumVertices()) {
             for (int i = 0; i < g.getNumVertices(); i++) {
@@ -271,16 +274,9 @@ public class FuncionesBusqueda {
                     sugeridas.add(parada);
                     cubiertas.addAll(obtenerCobertura(g, parada, t));
                     cubiertas.add(parada);
-                    coberturas[i] = -1;
-                    maxCobertura = getMaxCobertura(coberturas);
-
                 }
-                if (coberturas.length == (i+1)) {
-                    maxCobertura -=1;
-                }
-
             }
-
+            maxCobertura--;
         }
 
         return sugeridas;
@@ -329,4 +325,5 @@ public class FuncionesBusqueda {
 
         return cobertura;
     }
+
 }
