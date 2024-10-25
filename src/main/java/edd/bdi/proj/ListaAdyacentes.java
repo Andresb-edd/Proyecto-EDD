@@ -99,4 +99,15 @@ public class ListaAdyacentes {
         }
         System.out.println();
     }
+
+    /**
+     * Imprime todos los elementos de la lista de adyacentes en la consola.
+     */
+    public void imprimirTodosLosElementos() {
+        NodoDeListas current = pFirst;
+        while (current != null) {
+            System.out.println(current.getDataParada().getNombre());
+            current = current.getpNext();
+        }
+    }
 }

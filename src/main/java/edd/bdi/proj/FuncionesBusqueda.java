@@ -218,4 +218,110 @@ public class FuncionesBusqueda {
             }
         }
     }
+
+    public ListaAdyacentes obtenerParadasSinSucursal(Grafo g) {
+        ListaAdyacentes paradasSinSucursal = new ListaAdyacentes(new Parada("dummy")); // Pass a dummy Parada object
+        for (int i = 0; i < g.getNumVertices(); i++) {
+            Parada parada = g.listaAdy[i].getVertice();
+            if (!parada.tieneSucursal()) {
+                paradasSinSucursal.insert_Parada(g.listaAdy[i].getVertice());
+            }
+        }
+        paradasSinSucursal.imprimirTodosLosElementos(); // Print all elements in the console
+        return paradasSinSucursal;
+    }
+
+    public void imprimirSucursalesSugeridas(Grafo g, int t) {
+        Set sugeridas = sugerirSucursales(g, t);
+        System.out.println("Paradas sugeridas para sucursales:");
+        for (int i = 0; i < sugeridas.size(); i++) {
+            Parada parada = sugeridas.getElement(i);
+            System.out.println(parada.getNombre());
+            // Mark the stop as a branch in the graph
+            parada.setSucursal(true);
+            Node node = g.getGraph().getNode(parada.getNombre());
+            if (node != null) {
+                node.setAttribute("ui.style", "fill-color: green;");
+            }
+        }
+    }
+
+    public Set sugerirSucursales(Grafo g, int t) {
+        Set sugeridas = new Set(g.getNumVertices());
+        Set cubiertas = new Set(g.getNumVertices());
+
+        while (cubiertas.size() < g.getNumVertices()) {
+            Parada mejorParada = null;
+            int maxCobertura = 0;
+
+            for (int i = 0; i < g.getNumVertices(); i++) {
+                Parada parada = g.listaAdy[i].getVertice();
+                if (!sugeridas.contains(parada)) {
+                    Set cobertura = obtenerCobertura(g, parada, t);
+                    int coberturaSize = 0;
+                    for (int j = 0; j < cobertura.size(); j++) {
+                        if (!cubiertas.contains(cobertura.getElement(j))) {
+                            coberturaSize++;
+                        }
+                    }
+
+                    if (coberturaSize > maxCobertura) {
+                        maxCobertura = coberturaSize;
+                        mejorParada = parada;
+                    }
+                }
+            }
+
+            if (mejorParada != null) {
+                sugeridas.add(mejorParada);
+                cubiertas.addAll(obtenerCobertura(g, mejorParada, t));
+                // Ensure no adjacent branches
+                cubiertas.add(mejorParada);
+                for (int i = 0; i < g.getNumVertices(); i++) {
+                    if (g.existeArista(g.getIndice(mejorParada), i)) {
+                        cubiertas.add(g.listaAdy[i].getVertice());
+                    }
+                }
+            } else {
+                break;
+            }
+        }
+
+        return sugeridas;
+    }
+
+    private Set obtenerCobertura(Grafo g, Parada parada, int t) {
+        Set cobertura = new Set(g.getNumVertices());
+        boolean[] visitados = new boolean[g.getNumVertices()];
+        int[] distancia = new int[g.getNumVertices()];
+
+        for (int i = 0; i < g.getNumVertices(); i++) {
+            visitados[i] = false;
+            distancia[i] = Integer.MAX_VALUE;
+        }
+
+        Cola cola = new Cola();
+        cola.encolar(new NodoDeListas(parada));
+        visitados[g.getIndice(parada)] = true;
+        distancia[g.getIndice(parada)] = 0;
+
+        while (!cola.isEmpty()) {
+            NodoDeListas nodo = cola.desencolar();
+            Parada actual = nodo.getDataParada();
+            int indiceActual = g.getIndice(actual);
+
+            for (int i = 0; i < g.getNumVertices(); i++) {
+                if (g.existeArista(indiceActual, i) && !visitados[i] && distancia[indiceActual] + 1 <= t) {
+                    Parada vecino = g.listaAdy[i].getVertice();
+                    cola.encolar(new NodoDeListas(vecino));
+                    visitados[i] = true;
+                    distancia[i] = distancia[indiceActual] + 1;
+                    cobertura.add(vecino);
+                }
+            }
+        }
+
+        return cobertura;
+    }
+
 }

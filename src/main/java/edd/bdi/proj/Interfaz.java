@@ -405,12 +405,19 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         }
+        /*System.out.println("sdhjgdas");
+        funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);*/
+        int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+        }
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
 
             JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
         }
 
     }//GEN-LAST:event_busquedaProfundidadActionPerformed
+
 
 
     private void agregar_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_LineaActionPerformed

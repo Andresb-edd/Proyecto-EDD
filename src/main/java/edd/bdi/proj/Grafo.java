@@ -283,4 +283,13 @@ public class Grafo {
         }
     }
 
+    public int getIndice(Parada parada) {
+        for (int i = 0; i < this.getNumVertices(); i++) {
+            if (this.listaAdy[i].getVertice().equals(parada)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
