@@ -1,6 +1,7 @@
 package edd.bdi.proj;
 
 import edd.bdi.proj.Grafo;
+import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 
 /*
@@ -85,6 +86,31 @@ public class FuncionesBusqueda {
             }
         }
     }
+
+
+    public boolean checkContador(Grafo g) {
+        Graph graph = g.getGraph();
+        int contador = 0;
+        boolean todosNoRojos = true;
+
+        for (Node node : graph) {
+            String color = node.getAttribute("ui.style");
+            if (color != null && !color.contains("fill-color: #ff5353;")) {
+                contador++;
+            } else {
+                todosNoRojos = false;
+            }
+        }
+
+        if (todosNoRojos) {
+            System.out.println("Todos los nodos están de un color diferente a rojo.");
+        }
+
+        return todosNoRojos;
+    }
+
+
+
     public void profundidad(Grafo g, int v, int t, boolean test) {
         boolean visitados[] = new boolean[g.getNumVertices()];
         int distancia[] = new int[g.getNumVertices()];

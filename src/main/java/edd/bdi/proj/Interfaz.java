@@ -331,6 +331,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void busquedaAmplitudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaAmplitudActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
@@ -363,18 +364,24 @@ public class Interfaz extends javax.swing.JFrame {
 
             }
         }
+
+        if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
+
+            JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
+
+        }
     }//GEN-LAST:event_busquedaAmplitudActionPerformed
+
 
     private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
+        FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
-
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
             Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
-                FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
                 funcionesBusqueda.profundidad(ciudad.getGrafo(), i, t, true);
                 if (parada.tieneSucursal()) {
                     FuncionesBusqueda.amplitud(ciudad.getGrafo(), i, t, true);
@@ -398,7 +405,13 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         }
+        if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
+
+            JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
+        }
+
     }//GEN-LAST:event_busquedaProfundidadActionPerformed
+
 
     private void agregar_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_LineaActionPerformed
         String nombre_Nueva_Linea = input_Nueva_Linea.getText();
