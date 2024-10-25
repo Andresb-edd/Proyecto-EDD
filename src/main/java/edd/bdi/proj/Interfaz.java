@@ -361,19 +361,17 @@ public class Interfaz extends javax.swing.JFrame {
                         Node node_1 =ciudad.getGrafo().getGraph().getNode(part);
                         if (node_1 != null) {
                             System.out.println(node_1.getAttribute("ui.style", String.class));
-                        }
-                        else {
                             node_1.setAttribute("ui.style", "fill-color: green;");
                         }
+
                     }
                 } else {
                     Node node = ciudad.getGrafo().getGraph().getNode(parada.getNombre());
                     if (node != null) {
                         System.out.println(node.getAttribute("ui.style", String.class));
-                    }
-                    else {
                         node.setAttribute("ui.style", "fill-color: green;");
                     }
+
 
                 }
 
@@ -436,23 +434,17 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     private void agregar_LineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_LineaActionPerformed
-        output_Messages.setText("");
         String nombre_Nueva_Linea = input_Nueva_Linea.getText();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-        if(!ciudad.buscar_lineas(nombre_Nueva_Linea)) {
-            Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize() + 1);
-            ciudad.insert_Linea_sinGrafo(linea);
-            linea.setLinea_agregada(true);
-            comboboxlineas_creadas.addItem(linea.getNombre());
-            input_Nueva_Linea.setText("");
-        }else{
-            output_Messages.setText("Esta Linea ya existe.");
-        }
+        Linea linea = new Linea(nombre_Nueva_Linea, ciudad.getSize()+1);
+        ciudad.insert_Linea_sinGrafo(linea);
+        linea.setLinea_agregada(true);
+        comboboxlineas_creadas.addItem(linea.getNombre());
+        input_Nueva_Linea.setText("");
     }//GEN-LAST:event_agregar_LineaActionPerformed
 
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
-        output_Messages.setText("");
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
             if (comboboxlineas_creadas.getItemCount() != 0) {
@@ -461,18 +453,13 @@ public class Interfaz extends javax.swing.JFrame {
                 Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
 
                 if(linea_aux != null) {
-                    if(!ciudad.getGrafo().buscar_parada(nombre_Nueva_Parada, ciudad.getGrafo().getListaAdy())){
-                        Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
-                        linea_aux.insert_Parada(newParada);
-                        ciudad.updateGrafo(linea_aux);
-                        output_Messages.setText("");
-                        for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-                            Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
-                            comboBoxParadas.addItem(parada.getNombre());
-                    }
-
-                    }else{
-                        output_Messages.setText("La parada ya existe");
+                    Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
+                    linea_aux.insert_Parada(newParada);
+                    ciudad.updateGrafo(linea_aux);
+                    output_Messages.setText("");
+                    for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+                        Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+                        comboBoxParadas.addItem(parada.getNombre());
                     }
                 }
             }else{

@@ -220,14 +220,14 @@ public class FuncionesBusqueda {
     }
 
     public ListaAdyacentes obtenerParadasSinSucursal(Grafo g) {
-        ListaAdyacentes paradasSinSucursal = new ListaAdyacentes(new Parada("dummy")); // Pass a dummy Parada object
+        ListaAdyacentes paradasSinSucursal = new ListaAdyacentes(new Parada("dummy"));
         for (int i = 0; i < g.getNumVertices(); i++) {
             Parada parada = g.listaAdy[i].getVertice();
             if (!parada.tieneSucursal()) {
                 paradasSinSucursal.insert_Parada(g.listaAdy[i].getVertice());
             }
         }
-        paradasSinSucursal.imprimirTodosLosElementos(); // Print all elements in the console
+        paradasSinSucursal.imprimirTodosLosElementos();
         return paradasSinSucursal;
     }
 
@@ -235,59 +235,61 @@ public class FuncionesBusqueda {
         Set sugeridas = sugerirSucursales(g, t);
         System.out.println("Paradas sugeridas para sucursales:");
         for (int i = 0; i < sugeridas.size(); i++) {
+
             Parada parada = sugeridas.getElement(i);
             System.out.println(parada.getNombre());
             // Mark the stop as a branch in the graph
             parada.setSucursal(true);
-            Node node = g.getGraph().getNode(parada.getNombre());
-            if (node != null) {
-                node.setAttribute("ui.style", "fill-color: green;");
+            if (parada.getNombre().contains(":")) {
+                Node node = g.getGraph().getNode(parada.getNombre().split(":")[0].trim());
+                if (node != null) {
+                    node.setAttribute("ui.style", "fill-color: green;");
+                }
+            } else {
+                Node node = g.getGraph().getNode(parada.getNombre());
+                if (node != null) {
+                    node.setAttribute("ui.style", "fill-color: green;");
+                }
             }
+
         }
     }
 
     public Set sugerirSucursales(Grafo g, int t) {
         Set sugeridas = new Set(g.getNumVertices());
         Set cubiertas = new Set(g.getNumVertices());
+        int[] coberturas = new int[g.getNumVertices()];
 
+        for (int i = 0; i < g.getNumVertices(); i++) {
+            Parada parada = g.listaAdy[i].getVertice();
+            Set cobertura = obtenerCobertura(g, parada, t);
+            coberturas[i] = cobertura.size();
+        }
+
+        int maxCobertura = getMaxCobertura(coberturas);
         while (cubiertas.size() < g.getNumVertices()) {
-            Parada mejorParada = null;
-            int maxCobertura = 0;
-
             for (int i = 0; i < g.getNumVertices(); i++) {
-                Parada parada = g.listaAdy[i].getVertice();
-                if (!sugeridas.contains(parada)) {
-                    Set cobertura = obtenerCobertura(g, parada, t);
-                    int coberturaSize = 0;
-                    for (int j = 0; j < cobertura.size(); j++) {
-                        if (!cubiertas.contains(cobertura.getElement(j))) {
-                            coberturaSize++;
-                        }
-                    }
-
-                    if (coberturaSize > maxCobertura) {
-                        maxCobertura = coberturaSize;
-                        mejorParada = parada;
-                    }
+                if (coberturas[i] == maxCobertura && !cubiertas.contains(g.listaAdy[i].getVertice())) {
+                    Parada parada = g.listaAdy[i].getVertice();
+                    sugeridas.add(parada);
+                    cubiertas.addAll(obtenerCobertura(g, parada, t));
+                    cubiertas.add(parada);
                 }
             }
-
-            if (mejorParada != null) {
-                sugeridas.add(mejorParada);
-                cubiertas.addAll(obtenerCobertura(g, mejorParada, t));
-                // Ensure no adjacent branches
-                cubiertas.add(mejorParada);
-                for (int i = 0; i < g.getNumVertices(); i++) {
-                    if (g.existeArista(g.getIndice(mejorParada), i)) {
-                        cubiertas.add(g.listaAdy[i].getVertice());
-                    }
-                }
-            } else {
-                break;
-            }
+            maxCobertura--;
         }
 
         return sugeridas;
+    }
+
+    private int getMaxCobertura(int[] coberturas) {
+        int max = 0;
+        for (int cobertura : coberturas) {
+            if (cobertura > max) {
+                max = cobertura;
+            }
+        }
+        return max;
     }
 
     private Set obtenerCobertura(Grafo g, Parada parada, int t) {
