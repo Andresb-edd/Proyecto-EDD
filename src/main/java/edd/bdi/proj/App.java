@@ -91,50 +91,53 @@ public class App {
      * @param dataCiudad la ciudad a insertar o actualizar en la lista.
      */
     public void insert_Ciudad(Ciudad dataCiudad) {
-        boolean bool = true;
+        try {
+            boolean bool = true;
 
-        if (isEmpty()) {
-            size++;
-            dataCiudad.setId(size);
-            NodoDeListas newNodo = new NodoDeListas(dataCiudad);
-            cFirst = newNodo;
-            cLast = newNodo;
-            bool = false;
-            return;
-        }
-        NodoDeListas current = cFirst;
-        while (current != null) {
-            Ciudad ciudadExistente = (Ciudad) current.getDataCiudad();
-            if (ciudadExistente.getNombre().equals(dataCiudad.getNombre())) {
-                dataCiudad.setId(ciudadExistente.getId());
+            if (isEmpty()) {
+                size++;
+                dataCiudad.setId(size);
                 NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+                cFirst = newNodo;
+                cLast = newNodo;
                 bool = false;
-                if (current.getpBefore() != null) {
-                    current.getpBefore().setpNext(newNodo);
-                    newNodo.setpBefore(current.getpBefore());
-                } else {
-                    cFirst = newNodo;
-                    cFirst.setpNext(current.getpNext());
-                }
-                if (current.getpNext() != null) {
-                    current.getpNext().setpBefore(newNodo);
-                } else {
-                    cLast = newNodo;
-                    cLast.setpBefore(current.getpBefore());
-                }
-                break;
+                return;
             }
-            current = current.getpNext();
+            NodoDeListas current = cFirst;
+            while (current != null) {
+                Ciudad ciudadExistente = (Ciudad) current.getDataCiudad();
+                if (ciudadExistente.getNombre().equals(dataCiudad.getNombre())) {
+                    dataCiudad.setId(ciudadExistente.getId());
+                    NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+                    bool = false;
+                    if (current.getpBefore() != null) {
+                        current.getpBefore().setpNext(newNodo);
+                        newNodo.setpBefore(current.getpBefore());
+                    } else {
+                        cFirst = newNodo;
+                        cFirst.setpNext(current.getpNext());
+                    }
+                    if (current.getpNext() != null) {
+                        current.getpNext().setpBefore(newNodo);
+                    } else {
+                        cLast = newNodo;
+                        cLast.setpBefore(current.getpBefore());
+                    }
+                    break;
+                }
+                current = current.getpNext();
+            }
+            if (bool) {
+                size++;
+                dataCiudad.setId(size);
+                NodoDeListas newNodo = new NodoDeListas(dataCiudad);
+                cLast.setpNext(newNodo);
+                newNodo.setpBefore(cLast);
+                cLast = newNodo;
+            }
+        } catch (Exception e) {
+            System.err.println("Error al insertar la ciudad: " + e.getMessage());
         }
-        if (bool) {
-            size++;
-            dataCiudad.setId(size);
-            NodoDeListas newNodo = new NodoDeListas(dataCiudad);
-            cLast.setpNext(newNodo);
-            newNodo.setpBefore(cLast);
-            cLast = newNodo;
-        }
-
     }
 
     /**
@@ -144,17 +147,20 @@ public class App {
      * @return la ciudad encontrada, o null si no se encuentra ninguna ciudad con ese nombre.
      */
     public Ciudad buscar_ciudad(String nombre) {
-        NodoDeListas temp = getcFirst();
-        if (isEmpty()) {
-            System.out.println("Ciudad no encontrada");
-        }
-        while (temp != null) {
-            if (temp.getDataCiudad().getNombre().equals(nombre)) {
-                return temp.getDataCiudad();
+        try {
+            NodoDeListas temp = getcFirst();
+            if (isEmpty()) {
+                System.out.println("Ciudad no encontrada");
             }
-            temp = temp.getpNext();
+            while (temp != null) {
+                if (temp.getDataCiudad().getNombre().equals(nombre)) {
+                    return temp.getDataCiudad();
+                }
+                temp = temp.getpNext();
+            }
+        } catch (Exception e) {
+            System.err.println("Error al buscar la ciudad: " + e.getMessage());
         }
         return null;
     }
-
 }

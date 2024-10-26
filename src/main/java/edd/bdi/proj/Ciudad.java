@@ -178,17 +178,21 @@ public class Ciudad {
      * @param dataLinea la línea de transporte a insertar en la lista.
      */
     public void insert_Linea(Linea dataLinea) {
-        NodoDeListas newNodo = new NodoDeListas(dataLinea);
-        if (isEmpty()) {
-            setlFirst(newNodo);
-            setlLast(newNodo);
-        } else {
-            getlLast().setpNext(newNodo);
-            newNodo.setpBefore(getlLast());
-            setlLast(newNodo);
+        try {
+            NodoDeListas newNodo = new NodoDeListas(dataLinea);
+            if (isEmpty()) {
+                setlFirst(newNodo);
+                setlLast(newNodo);
+            } else {
+                getlLast().setpNext(newNodo);
+                newNodo.setpBefore(getlLast());
+                setlLast(newNodo);
+            }
+            setSize(getSize() + 1);
+            updateGrafo(dataLinea);
+        } catch (Exception e) {
+            System.err.println("Error al insertar la línea: " + e.getMessage());
         }
-        setSize(getSize() + 1);
-        updateGrafo(dataLinea);
     }
 
 
@@ -199,53 +203,58 @@ public class Ciudad {
      * @param linea la línea de transporte que contiene las paradas a agregar al grafo.
      */
     public void updateGrafo(Linea linea) {
-        for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
-            Parada parada = (Parada) current.getDataParada();
-            ListaAdyacentes listaAdyacentes = new ListaAdyacentes(parada);
+        try {
+            for (NodoDeListas current = linea.getpFirst(); current != null; current = current.getpNext()) {
+                Parada parada = (Parada) current.getDataParada();
+                ListaAdyacentes listaAdyacentes = new ListaAdyacentes(parada);
 
-            if (current.getpBefore() != null) {
-                listaAdyacentes.insert_Parada((Parada) current.getpBefore().getDataParada());
-            }
-            if (current.getpNext() != null) {
-                listaAdyacentes.insert_Parada((Parada) current.getpNext().getDataParada());
-            }
-            if (parada.getNombre().contains(":")) {
-                String[] parts = parada.getNombre().split(":");
-                String key = parts[0].trim();
-                String value = parts[1].trim();
-                Parada adjParada = new Parada(value);
-                listaAdyacentes.insert_Parada(adjParada);
+                if (current.getpBefore() != null) {
+                    listaAdyacentes.insert_Parada((Parada) current.getpBefore().getDataParada());
+                }
+                if (current.getpNext() != null) {
+                    listaAdyacentes.insert_Parada((Parada) current.getpNext().getDataParada());
+                }
+                if (parada.getNombre().contains(":")) {
+                    String[] parts = parada.getNombre().split(":");
+                    String key = parts[0].trim();
+                    String value = parts[1].trim();
+                    Parada adjParada = new Parada(value);
+                    listaAdyacentes.insert_Parada(adjParada);
 
-            }
-            boolean exists = false;
+                }
+                boolean exists = false;
 
-            for (int i = 0; i < grafo.listaAdy.length; i++) {
-                if (grafo.listaAdy[i] != null) {
-                    if (grafo.listaAdy[i].getVertice().getNombre().equals(listaAdyacentes.getVertice().getNombre())) {
-                        exists = true;
-                        NodoDeListas currentAdy = listaAdyacentes.getpFirst();
-                        while (currentAdy != null) {
-                            boolean paradaExiste = false;
-                            NodoDeListas nodoExistente = grafo.listaAdy[i].getpFirst();
-                            while (nodoExistente != null) {
-                                if (nodoExistente.getDataParada().getNombre().equals(currentAdy.getDataParada().getNombre())) {
-                                    paradaExiste = true;
-                                    break;
+                for (int i = 0; i < grafo.listaAdy.length; i++) {
+                    if (grafo.listaAdy[i] != null) {
+                        if (grafo.listaAdy[i].getVertice().getNombre().equals(listaAdyacentes.getVertice().getNombre())) {
+                            exists = true;
+                            NodoDeListas currentAdy = listaAdyacentes.getpFirst();
+                            while (currentAdy != null) {
+                                boolean paradaExiste = false;
+                                NodoDeListas nodoExistente = grafo.listaAdy[i].getpFirst();
+                                while (nodoExistente != null) {
+                                    if (nodoExistente.getDataParada().getNombre().equals(currentAdy.getDataParada().getNombre())) {
+                                        paradaExiste = true;
+                                        break;
+                                    }
+                                    nodoExistente = nodoExistente.getpNext();
                                 }
-                                nodoExistente = nodoExistente.getpNext();
+                                if (!paradaExiste) {
+                                    grafo.listaAdy[i].insert_Parada(currentAdy.getDataParada());
+                                }
+                                currentAdy = currentAdy.getpNext();
                             }
-                            if (!paradaExiste) {
-                                grafo.listaAdy[i].insert_Parada(currentAdy.getDataParada());
-                            }
-                            currentAdy = currentAdy.getpNext();
+                            break;
                         }
-                        break;
                     }
                 }
+                if (!exists) {
+                    grafo.addListaAdyacentes(listaAdyacentes);
+                }
             }
-            if (!exists) {
-                grafo.addListaAdyacentes(listaAdyacentes);
-            }
+        }
+        catch (Exception e) {
+            System.err.println("Error al actualizar el grafo: " + e.getMessage());
         }
     }
 
