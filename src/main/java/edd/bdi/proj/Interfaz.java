@@ -35,11 +35,9 @@ public class Interfaz extends javax.swing.JFrame {
         label_Ingrese_Linea.setVisible(false);
         label_Ingrese_Parada.setVisible(false);
         label_Parada_A_Conectar.setVisible(false);
-        output_Messages.setVisible(false);
         agregar_Linea.setVisible(false);
         agregar_Parada.setVisible(false);
         conectar_Pararada.setVisible(false);
-        jScrollPane1.setVisible(false);
         button_mostrar_red.setVisible(false);
         comboboxlineas_creadas.removeAllItems();
         comboboxlineas_creadas.setVisible(false);
@@ -77,8 +75,6 @@ public class Interfaz extends javax.swing.JFrame {
         agregar_Parada = new javax.swing.JButton();
         input_Conectar_Parada = new javax.swing.JTextField();
         conectar_Pararada = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        output_Messages = new javax.swing.JTextArea();
         label_Ingrese_Linea = new javax.swing.JLabel();
         label_Ingrese_Parada = new javax.swing.JLabel();
         label_Parada_A_Conectar = new javax.swing.JLabel();
@@ -89,13 +85,14 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        text_bienvenida.setEditable(false);
         text_bienvenida.setText("Manejo de Sucursales");
         text_bienvenida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 text_bienvenidaActionPerformed(evt);
             }
         });
-        getContentPane().add(text_bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 6, -1, 71));
+        getContentPane().add(text_bienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 71));
 
         button_add_red.setText("Añadir Red");
         button_add_red.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +100,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_add_redActionPerformed(evt);
             }
         });
-        getContentPane().add(button_add_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 290, 91));
+        getContentPane().add(button_add_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 290, 91));
 
         button_exit.setText("Salir");
         button_exit.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +108,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_exitActionPerformed(evt);
             }
         });
-        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 700, -1, -1));
+        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, -1, -1));
 
         button_mostrar_red.setText("Mostrar Red");
         button_mostrar_red.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +116,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_mostrar_redActionPerformed(evt);
             }
         });
-        getContentPane().add(button_mostrar_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 91));
+        getContentPane().add(button_mostrar_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 290, 91));
 
         button_select_file.setText("Seleccionar Archivo");
         button_select_file.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +124,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_select_fileActionPerformed(evt);
             }
         });
-        getContentPane().add(button_select_file, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 92));
+        getContentPane().add(button_select_file, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 290, 92));
 
         button_select_red.setText("Seleccionar Red");
         button_select_red.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +132,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_select_redActionPerformed(evt);
             }
         });
-        getContentPane().add(button_select_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 290, 90));
+        getContentPane().add(button_select_red, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 290, 90));
 
         comboBoxCiudades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxCiudades.addActionListener(new java.awt.event.ActionListener() {
@@ -143,17 +140,17 @@ public class Interfaz extends javax.swing.JFrame {
                 comboBoxCiudadesActionPerformed(evt);
             }
         });
-        getContentPane().add(comboBoxCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 210, 40));
+        getContentPane().add(comboBoxCiudades, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 210, 40));
 
         Label_t_value.setText("Modificar valor de t");
-        getContentPane().add(Label_t_value, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, -1, -1));
+        getContentPane().add(Label_t_value, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, -1, -1));
 
         Input_t.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Input_tActionPerformed(evt);
             }
         });
-        getContentPane().add(Input_t, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 390, 170, 40));
+        getContentPane().add(Input_t, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 170, 40));
 
         mostrar_grafo.setText("Mostrar Grafo");
         mostrar_grafo.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +158,7 @@ public class Interfaz extends javax.swing.JFrame {
                 mostrar_grafoActionPerformed(evt);
             }
         });
-        getContentPane().add(mostrar_grafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 290, 90));
+        getContentPane().add(mostrar_grafo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 290, 90));
 
         comboBoxParadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboBoxParadas.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +166,7 @@ public class Interfaz extends javax.swing.JFrame {
                 comboBoxParadasActionPerformed(evt);
             }
         });
-        getContentPane().add(comboBoxParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 210, 40));
+        getContentPane().add(comboBoxParadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 450, 210, 40));
 
         checkBoxSucursal.setText("Sucursal");
         checkBoxSucursal.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +174,7 @@ public class Interfaz extends javax.swing.JFrame {
                 checkBoxSucursalActionPerformed(evt);
             }
         });
-        getContentPane().add(checkBoxSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 450, 100, 40));
+        getContentPane().add(checkBoxSucursal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, 100, 40));
 
         busquedaProfundidad.setText("Búsqueda en Profundidad");
         busquedaProfundidad.addActionListener(new java.awt.event.ActionListener() {
@@ -185,10 +182,10 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaProfundidadActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, -1, -1));
+        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
 
         jLabel1.setText("Ver Cobertura de Sucursal");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 470, 200, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 200, -1));
 
         busquedaAmplitud.setText("Búsqueda en Amplitud");
         busquedaAmplitud.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +193,7 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaAmplitudActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 530, 170, -1));
+        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 170, -1));
 
         agregar_Linea.setText("Agregar Linea");
         agregar_Linea.addActionListener(new java.awt.event.ActionListener() {
@@ -204,9 +201,9 @@ public class Interfaz extends javax.swing.JFrame {
                 agregar_LineaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 50, 130, 30));
-        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, 100, 30));
-        getContentPane().add(input_Nueva_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, 100, 30));
+        getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 130, 30));
+        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 100, 30));
+        getContentPane().add(input_Nueva_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 100, 30));
 
         agregar_Parada.setText("Agregar Parada");
         agregar_Parada.addActionListener(new java.awt.event.ActionListener() {
@@ -214,8 +211,8 @@ public class Interfaz extends javax.swing.JFrame {
                 agregar_ParadaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, 130, 30));
-        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 190, 100, 30));
+        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 130, 30));
+        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 100, 30));
 
         conectar_Pararada.setText("Conectar Parada");
         conectar_Pararada.addActionListener(new java.awt.event.ActionListener() {
@@ -223,22 +220,16 @@ public class Interfaz extends javax.swing.JFrame {
                 conectar_PararadaActionPerformed(evt);
             }
         });
-        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, 130, 30));
-
-        output_Messages.setColumns(20);
-        output_Messages.setRows(5);
-        jScrollPane1.setViewportView(output_Messages);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 260, 140));
+        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 130, 30));
 
         label_Ingrese_Linea.setText("Ingrese la linea");
-        getContentPane().add(label_Ingrese_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, -1));
+        getContentPane().add(label_Ingrese_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
 
         label_Ingrese_Parada.setText("Ingrese la parada");
-        getContentPane().add(label_Ingrese_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
+        getContentPane().add(label_Ingrese_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
 
         label_Parada_A_Conectar.setText("Ingrese la parada a conectar");
-        getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, 180, -1));
+        getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 180, -1));
 
         comboboxlineas_creadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboboxlineas_creadas.addActionListener(new java.awt.event.ActionListener() {
@@ -246,10 +237,10 @@ public class Interfaz extends javax.swing.JFrame {
                 comboboxlineas_creadasActionPerformed(evt);
             }
         });
-        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 210, 40));
+        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 590, 210, 40));
 
         label_Seleccionar_Linea.setText("Seleccionar linea");
-        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 570, -1, -1));
+        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 570, -1, -1));
 
         limpiarSucursales.setText("Limpiar Sucursales");
         limpiarSucursales.addActionListener(new java.awt.event.ActionListener() {
@@ -257,7 +248,7 @@ public class Interfaz extends javax.swing.JFrame {
                 limpiarSucursalesActionPerformed(evt);
             }
         });
-        getContentPane().add(limpiarSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 510, -1, -1));
+        getContentPane().add(limpiarSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -388,20 +379,31 @@ public class Interfaz extends javax.swing.JFrame {
             }
         }
 
+        int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (response == JOptionPane.YES_OPTION) {
+            funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+        }
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
 
             JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
-
         }
     }//GEN-LAST:event_busquedaAmplitudActionPerformed
 
 
-    private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaProfundidadActionPerformed
+    private void busquedaProfundidadActionPerformed(java.awt.event.ActionEvent evt) {
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         FuncionesBusqueda funcionesBusqueda = new FuncionesBusqueda();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         Grafo.resetNodeColors(ciudad.getGrafo());
-        int t = Integer.parseInt(Input_t.getText());
+
+        int t;
+        try {
+            t = Integer.parseInt(Input_t.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El valor ingresado no es un número entero válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
             Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
@@ -411,12 +413,11 @@ public class Interfaz extends javax.swing.JFrame {
                     if (parada.getNombre().contains(":")) {
                         String[] parts = parada.getNombre().split(":");
                         for (String part : parts) {
-                            Node node_1 =ciudad.getGrafo().getGraph().getNode(part);
+                            Node node_1 = ciudad.getGrafo().getGraph().getNode(part);
                             if (node_1 != null) {
                                 System.out.println(node_1.getAttribute("ui.style", String.class));
                                 node_1.setAttribute("ui.style", "fill-color: green;");
                             }
-
                         }
                     } else {
                         Node node = ciudad.getGrafo().getGraph().getNode(parada.getNombre());
@@ -428,17 +429,14 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         }
-        /*System.out.println("sdhjgdas");
-        funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);*/
+
         int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
             funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
         }
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
-
             JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
         }
-
     }//GEN-LAST:event_busquedaProfundidadActionPerformed
 
 
@@ -466,36 +464,45 @@ public class Interfaz extends javax.swing.JFrame {
                     Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
                     linea_aux.insert_Parada(newParada);
                     ciudad.updateGrafo(linea_aux);
-                    output_Messages.setText("");
                     for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
                         Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
                         comboBoxParadas.addItem(parada.getNombre());
                     }
                 }
             }else{
-                output_Messages.setText("Por favor, \nseleccione la linea a la que \nle quiere agregar paradas.");
+                JOptionPane.showMessageDialog(this, "Por favor, seleccione la linea a la que le quiere agregar paradas.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             input_Nueva_Parada.setText("");
 
     }//GEN-LAST:event_agregar_ParadaActionPerformed
 
-    private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_conectar_PararadaActionPerformed
+    private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {
         String parada_A_Conectar = input_Conectar_Parada.getText();
         String nombre_Nueva_Parada = input_Nueva_Parada.getText();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+
+        if (parada_A_Conectar.isEmpty() || nombre_Nueva_Parada.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese los nombres de las paradas.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ListaAdyacentes listaAdyacente1 = ciudad.getGrafo().getListaAdyacentes(parada_A_Conectar);
+        ListaAdyacentes listaAdyacente2 = ciudad.getGrafo().getListaAdyacentes(nombre_Nueva_Parada);
+
+        if (listaAdyacente1 == null || listaAdyacente2 == null) {
+            JOptionPane.showMessageDialog(this, "Una o ambas paradas no existen en el grafo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         ciudad.getGrafo().buscar_lista_Adyacente_Y_Unir(parada_A_Conectar, nombre_Nueva_Parada, ciudad.getGrafo().getListaAdy());
         input_Conectar_Parada.setText("");
-        
-        
     }//GEN-LAST:event_conectar_PararadaActionPerformed
 
     private void comboboxlineas_creadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxlineas_creadasActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_comboboxlineas_creadasActionPerformed
 
     private void limpiarSucursalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarSucursalesActionPerformed
-        // TODO add your handling code here:
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
@@ -553,11 +560,9 @@ public class Interfaz extends javax.swing.JFrame {
         label_Ingrese_Linea.setVisible(true);
         label_Ingrese_Parada.setVisible(true);
         label_Parada_A_Conectar.setVisible(true);
-        output_Messages.setVisible(true);
         agregar_Linea.setVisible(true);
         agregar_Parada.setVisible(true);
         conectar_Pararada.setVisible(true);
-        jScrollPane1.setVisible(true);
         comboboxlineas_creadas.setVisible(true);
         label_Seleccionar_Linea.setVisible(true);
         limpiarSucursales.setVisible(true);
@@ -640,14 +645,12 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JTextField input_Nueva_Linea;
     private javax.swing.JTextField input_Nueva_Parada;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel label_Ingrese_Linea;
     private javax.swing.JLabel label_Ingrese_Parada;
     private javax.swing.JLabel label_Parada_A_Conectar;
     private javax.swing.JLabel label_Seleccionar_Linea;
     private javax.swing.JButton limpiarSucursales;
     private javax.swing.JButton mostrar_grafo;
-    private javax.swing.JTextArea output_Messages;
     private javax.swing.JTextField text_bienvenida;
     // End of variables declaration//GEN-END:variables
 }
