@@ -270,18 +270,56 @@ public class FuncionesBusqueda {
         while (cubiertas.size() < g.getNumVertices()) {
             for (int i = 0; i < g.getNumVertices(); i++) {
                 if (coberturas[i] == maxCobertura && !cubiertas.contains(g.listaAdy[i].getVertice())) {
-                    Parada parada = g.listaAdy[i].getVertice();
-                    sugeridas.add(parada);
-                    cubiertas.addAll(obtenerCobertura(g, parada, t));
-                    cubiertas.add(parada);
+                    boolean b = true;
+                    for (var k = 0; k <= t; k++) {
+                        try {
+                            if (cubiertas.contains(g.listaAdy[i - k].getVertice()) && !esParadaAlBorde(g, g.listaAdy[i].getVertice())) {
+                                b = false;
+                            }
+                        } catch (Exception e) {
+                            continue;
+                        }
+
+                    }
+                    if (b) {
+                        Parada parada = g.listaAdy[i].getVertice();
+                        sugeridas.add(parada);
+                        cubiertas.addAll(obtenerCobertura(g, parada, t));
+                        cubiertas.add(parada);
+                    }
+
                 }
             }
             maxCobertura--;
+            if (maxCobertura < 0) {
+                maxCobertura = getMaxCobertura(coberturas);
+                while (cubiertas.size() < g.getNumVertices()) {
+                    for (int i = 0; i < g.getNumVertices(); i++) {
+                        if (coberturas[i] == maxCobertura && !cubiertas.contains(g.listaAdy[i].getVertice())) {
+                            Parada parada = g.listaAdy[i].getVertice();
+                            sugeridas.add(parada);
+                            cubiertas.addAll(obtenerCobertura(g, parada, t));
+                            cubiertas.add(parada);
+                        }
+                    }
+                    maxCobertura--;
+                }
+
+            }
         }
 
         return sugeridas;
     }
-
+    private boolean esParadaAlBorde(Grafo g, Parada parada) {
+        int indice = g.getIndice(parada);
+        int adyacentes = 0;
+        for (int i = 0; i < g.getNumVertices(); i++) {
+            if (g.existeArista(indice, i)) {
+                adyacentes++;
+            }
+        }
+        return adyacentes == 1;
+    }
     private int getMaxCobertura(int[] coberturas) {
         int max = 0;
         for (int cobertura : coberturas) {
