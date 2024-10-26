@@ -1,21 +1,24 @@
 package edd.bdi.proj;
 
-import edd.bdi.proj.Grafo;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+/**
+ * Clase que contiene funciones para realizar búsquedas en profundidad y amplitud en un grafo.
  */
 
-/**
- *
- * @author danielairibarren
- */
 public class FuncionesBusqueda {
 
-
+    /**
+     * Realiza un recorrido en profundidad en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param v el vértice inicial.
+     * @param visitados arreglo que indica si un vértice ha sido visitado.
+     * @param distancia arreglo que almacena la distancia desde el vértice inicial.
+     * @param t el límite de profundidad.
+     * @param test indica si se debe realizar una prueba adicional.
+     */
     public void recorrerProfundidad(Grafo g, int v, boolean[] visitados, int[] distancia, int t, boolean test) {
         visitados[v] = true;
         for (int i = 0; i < g.getNumVertices(); i++) {
@@ -87,7 +90,12 @@ public class FuncionesBusqueda {
         }
     }
 
-
+    /**
+     * Verifica si todos los nodos del grafo no son de color rojo.
+     *
+     * @param g el grafo a verificar.
+     * @return true si todos los nodos no son de color rojo, false en caso contrario.
+     */
     public boolean checkContador(Grafo g) {
         Graph graph = g.getGraph();
         int contador = 0;
@@ -109,8 +117,14 @@ public class FuncionesBusqueda {
         return todosNoRojos;
     }
 
-
-
+    /**
+     * Realiza un recorrido en profundidad en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param v el vértice inicial.
+     * @param t el límite de profundidad.
+     * @param test indica si se debe realizar una prueba adicional.
+     */
     public void profundidad(Grafo g, int v, int t, boolean test) {
         boolean visitados[] = new boolean[g.getNumVertices()];
         int distancia[] = new int[g.getNumVertices()];
@@ -121,6 +135,15 @@ public class FuncionesBusqueda {
         distancia[v] = 0;
         recorrerProfundidad(g, v, visitados, distancia, t, test);
     }
+
+    /**
+     * Realiza un recorrido en amplitud en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param v el vértice inicial.
+     * @param t el límite de amplitud.
+     * @param test indica si se debe realizar una prueba adicional.
+     */
     public static void amplitud(Grafo g, int v, int t, boolean test) {
         Cola cola = new Cola();
         boolean visitados[] = new boolean[g.getNumVertices()];
@@ -219,18 +242,12 @@ public class FuncionesBusqueda {
         }
     }
 
-    public ListaAdyacentes obtenerParadasSinSucursal(Grafo g) {
-        ListaAdyacentes paradasSinSucursal = new ListaAdyacentes(new Parada("dummy"));
-        for (int i = 0; i < g.getNumVertices(); i++) {
-            Parada parada = g.listaAdy[i].getVertice();
-            if (!parada.tieneSucursal()) {
-                paradasSinSucursal.insert_Parada(g.listaAdy[i].getVertice());
-            }
-        }
-        paradasSinSucursal.imprimirTodosLosElementos();
-        return paradasSinSucursal;
-    }
-
+    /**
+     * Imprime las sucursales sugeridas en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param t el límite de profundidad.
+     */
     public void imprimirSucursalesSugeridas(Grafo g, int t) {
         Set sugeridas = sugerirSucursales(g, t);
         System.out.println("Paradas sugeridas para sucursales:");
@@ -255,6 +272,13 @@ public class FuncionesBusqueda {
         }
     }
 
+    /**
+     * Sugiere sucursales en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param t el límite de profundidad.
+     * @return un conjunto con las paradas sugeridas para sucursales.
+     */
     public Set sugerirSucursales(Grafo g, int t) {
         Set sugeridas = new Set(g.getNumVertices());
         Set cubiertas = new Set(g.getNumVertices());
@@ -310,6 +334,14 @@ public class FuncionesBusqueda {
 
         return sugeridas;
     }
+
+    /**
+     * Verifica si una parada está en el borde del grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param parada la parada a verificar.
+     * @return true si la parada está en el borde, false en caso contrario.
+     */
     private boolean esParadaAlBorde(Grafo g, Parada parada) {
         int indice = g.getIndice(parada);
         int adyacentes = 0;
@@ -320,6 +352,13 @@ public class FuncionesBusqueda {
         }
         return adyacentes == 1;
     }
+
+    /**
+     * Obtiene la cobertura máxima en el grafo.
+     *
+     * @param coberturas arreglo con las coberturas de cada vértice.
+     * @return el valor máximo de cobertura.
+     */
     private int getMaxCobertura(int[] coberturas) {
         int max = 0;
         for (int cobertura : coberturas) {
@@ -330,6 +369,14 @@ public class FuncionesBusqueda {
         return max;
     }
 
+    /**
+     * Obtiene la cobertura de una parada en el grafo.
+     *
+     * @param g el grafo a recorrer.
+     * @param parada la parada a verificar.
+     * @param t el límite de profundidad.
+     * @return un conjunto con las paradas cubiertas.
+     */
     private Set obtenerCobertura(Grafo g, Parada parada, int t) {
         Set cobertura = new Set(g.getNumVertices());
         boolean[] visitados = new boolean[g.getNumVertices()];

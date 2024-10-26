@@ -121,18 +121,13 @@ public class NodoDeListas {
         return dataCiudad;
     }
 
+    /**
+     * Obtiene los datos de la sucursal almacenados en el nodo.
+     *
+     * @return los datos de la sucursal.
+     */
     public Sucursal getDataSucursal() {
         return dataSucursal;
-    }
-
-
-    /**
-     * Establece los datos de la ciudad en el nodo.
-     *
-     * @param dataCiudad los datos de la ciudad a establecer.
-     */
-    public void setDataCiudad(Ciudad dataCiudad) {
-        this.dataCiudad = dataCiudad;
     }
 
     /**

@@ -33,6 +33,11 @@ public class Ciudad {
         this.t = 1;
     }
 
+    /**
+     * Obtiene el grafo de la ciudad.
+     *
+     * @return el grafo de la ciudad.
+     */
     public Grafo getGrafo() {
         return grafo;
     }
@@ -287,19 +292,4 @@ public class Ciudad {
        }
        setSize(getSize() + 1);
     }
-
-    public boolean buscar_lineas(String nombre) {
-        NodoDeListas temp = getlFirst();
-        if (isEmpty()) {
-            System.out.println("Ciudad no encontrada");
-        }
-        while (temp != null) {
-            if (temp.getDataLinea().getNombre().equals(nombre)) {
-                return true;
-            }
-            temp = temp.getpNext();
-        }
-        return false;
-    }
-
 }

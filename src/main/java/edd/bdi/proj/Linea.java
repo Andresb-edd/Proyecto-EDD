@@ -132,13 +132,6 @@ public class Linea {
     public String getNombre() {
         return nombre;
     }
-    
-        /**
-     * @return the linea_agregada
-     */
-    public boolean isLinea_agregada() {
-        return linea_agregada;
-    }
 
     /**
      * @param linea_agregada the linea_agregada to set
@@ -146,25 +139,4 @@ public class Linea {
     public void setLinea_agregada(boolean linea_agregada) {
         this.linea_agregada = linea_agregada;
     }
-
-    public boolean buscar_parada(String nombre) {
-        NodoDeListas temp = getpFirst();
-        if (isEmpty()) {
-            System.out.println("Ciudad no encontrada");
-        }
-        while (temp != null) {
-            if (temp.getDataParada().getNombre().equals(nombre)) {
-                return true;
-            }
-            temp = temp.getpNext();
-        }
-        return false;
-    }
-
-    
-    
-    
-    
-    
-    
 }

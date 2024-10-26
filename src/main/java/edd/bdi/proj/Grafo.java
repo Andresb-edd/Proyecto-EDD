@@ -41,7 +41,9 @@ public class Grafo {
     }
 
     /**
-     * @return the numVertices
+     * Obtiene el numero de vértices del grafo.
+     *
+     * @return el numero de vértices del grafo.
      */
     public int getNumVertices() {
         return numVertices;
@@ -284,6 +286,12 @@ public class Grafo {
         }
     }
 
+    /**
+     * Obtiene el índice de una parada en el arreglo de listas de adyacencia.
+     *
+     * @param parada la parada de la cual se desea obtener el índice.
+     * @return el índice de la parada en el arreglo de listas de adyacencia, o -1 si no se encuentra.
+     */
     public int getIndice(Parada parada) {
         for (int i = 0; i < this.getNumVertices(); i++) {
             if (this.listaAdy[i].getVertice().equals(parada)) {
@@ -291,18 +299,5 @@ public class Grafo {
             }
         }
         return -1;
-    }
-
-    public boolean buscar_parada(String nombre, ListaAdyacentes lista[]) {
-
-        for (int i = 0; i < lista.length - 1; i++) {
-            if (lista[i] != null) {
-                if (getListaAdy()[i].getVertice().getNombre().equals(nombre)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-
     }
 }
