@@ -484,6 +484,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         if (parada_A_Conectar.isEmpty() || nombre_Nueva_Parada.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese los nombres de las paradas.", "Error", JOptionPane.ERROR_MESSAGE);
+            input_Conectar_Parada.setText("");
             return;
         }
 
