@@ -30,7 +30,6 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaProfundidad.setVisible(false);
         jLabel1.setVisible(false);
         input_Nueva_Linea.setVisible(false);
-        input_Conectar_Parada.setVisible(false);
         input_Nueva_Parada.setVisible(false);
         label_Ingrese_Linea.setVisible(false);
         label_Ingrese_Parada.setVisible(false);
@@ -42,6 +41,8 @@ public class Interfaz extends javax.swing.JFrame {
         comboboxlineas_creadas.removeAllItems();
         comboboxlineas_creadas.setVisible(false);
         label_Seleccionar_Linea.setVisible(false);
+        comboBoxParadasConectar1.setVisible(false);
+        comboBoxParadasConectar2.setVisible(false);
         limpiarSucursales.setVisible(false);
     }
 
@@ -73,7 +74,6 @@ public class Interfaz extends javax.swing.JFrame {
         input_Nueva_Parada = new javax.swing.JTextField();
         input_Nueva_Linea = new javax.swing.JTextField();
         agregar_Parada = new javax.swing.JButton();
-        input_Conectar_Parada = new javax.swing.JTextField();
         conectar_Pararada = new javax.swing.JButton();
         label_Ingrese_Linea = new javax.swing.JLabel();
         label_Ingrese_Parada = new javax.swing.JLabel();
@@ -81,6 +81,8 @@ public class Interfaz extends javax.swing.JFrame {
         comboboxlineas_creadas = new javax.swing.JComboBox<>();
         label_Seleccionar_Linea = new javax.swing.JLabel();
         limpiarSucursales = new javax.swing.JButton();
+        comboBoxParadasConectar1 = new javax.swing.JComboBox<>();
+        comboBoxParadasConectar2 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -108,7 +110,7 @@ public class Interfaz extends javax.swing.JFrame {
                 button_exitActionPerformed(evt);
             }
         });
-        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 610, -1, -1));
+        getContentPane().add(button_exit, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 600, 120, 40));
 
         button_mostrar_red.setText("Mostrar Red");
         button_mostrar_red.addActionListener(new java.awt.event.ActionListener() {
@@ -182,10 +184,10 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaProfundidadActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
+        getContentPane().add(busquedaProfundidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, -1, -1));
 
-        jLabel1.setText("Ver Cobertura de Sucursal");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 200, -1));
+        jLabel1.setText("Ver Cobertura de Sucursales");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, 160, -1));
 
         busquedaAmplitud.setText("Búsqueda en Amplitud");
         busquedaAmplitud.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +195,7 @@ public class Interfaz extends javax.swing.JFrame {
                 busquedaAmplitudActionPerformed(evt);
             }
         });
-        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 170, -1));
+        getContentPane().add(busquedaAmplitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 470, 170, -1));
 
         agregar_Linea.setText("Agregar Linea");
         agregar_Linea.addActionListener(new java.awt.event.ActionListener() {
@@ -202,7 +204,7 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 50, 130, 30));
-        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, 100, 30));
+        getContentPane().add(input_Nueva_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 100, 30));
         getContentPane().add(input_Nueva_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 100, 30));
 
         agregar_Parada.setText("Agregar Parada");
@@ -211,25 +213,24 @@ public class Interfaz extends javax.swing.JFrame {
                 agregar_ParadaActionPerformed(evt);
             }
         });
-        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 130, 30));
-        getContentPane().add(input_Conectar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, 100, 30));
+        getContentPane().add(agregar_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 200, 130, 30));
 
-        conectar_Pararada.setText("Conectar Parada");
+        conectar_Pararada.setText("Conectar Paradas");
         conectar_Pararada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 conectar_PararadaActionPerformed(evt);
             }
         });
-        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 130, 30));
+        getContentPane().add(conectar_Pararada, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 340, 130, 30));
 
         label_Ingrese_Linea.setText("Ingrese la linea");
         getContentPane().add(label_Ingrese_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, -1));
 
         label_Ingrese_Parada.setText("Ingrese la parada");
-        getContentPane().add(label_Ingrese_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        getContentPane().add(label_Ingrese_Parada, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
 
-        label_Parada_A_Conectar.setText("Ingrese la parada a conectar");
-        getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 170, 180, -1));
+        label_Parada_A_Conectar.setText("Conectar Paradas");
+        getContentPane().add(label_Parada_A_Conectar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 110, 10));
 
         comboboxlineas_creadas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboboxlineas_creadas.addActionListener(new java.awt.event.ActionListener() {
@@ -237,10 +238,10 @@ public class Interfaz extends javax.swing.JFrame {
                 comboboxlineas_creadasActionPerformed(evt);
             }
         });
-        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 590, 210, 40));
+        getContentPane().add(comboboxlineas_creadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 210, 40));
 
         label_Seleccionar_Linea.setText("Seleccionar linea");
-        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 570, -1, -1));
+        getContentPane().add(label_Seleccionar_Linea, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 100, -1, -1));
 
         limpiarSucursales.setText("Limpiar Sucursales");
         limpiarSucursales.addActionListener(new java.awt.event.ActionListener() {
@@ -250,6 +251,22 @@ public class Interfaz extends javax.swing.JFrame {
         });
         getContentPane().add(limpiarSucursales, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, -1, -1));
 
+        comboBoxParadasConectar1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxParadasConectar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxParadasConectar1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxParadasConectar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 150, 40));
+
+        comboBoxParadasConectar2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxParadasConectar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxParadasConectar2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboBoxParadasConectar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 280, 160, 40));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -257,16 +274,16 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_text_bienvenidaActionPerformed
 
-    private void button_add_redActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        button_mostrar_red.setVisible(false); 
-        button_add_red.setVisible(false); 
+    private void button_add_redActionPerformed(java.awt.event.ActionEvent evt) {
+        button_mostrar_red.setVisible(false);
+        button_add_red.setVisible(false);
         button_exit.setVisible(true);
         button_select_file.setVisible(true);
     }
 
     private void button_mostrar_redActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_mostrar_redActionPerformed
-        button_mostrar_red.setVisible(false); 
-        button_add_red.setVisible(false); 
+        button_mostrar_red.setVisible(false);
+        button_add_red.setVisible(false);
         button_exit.setVisible(true);
         button_select_red.setVisible(true);
         comboBoxCiudades.setVisible(true);
@@ -292,7 +309,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
 
-    }                                       
+    }
 
     private void mostrar_grafoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrar_grafoActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
@@ -437,7 +454,7 @@ public class Interfaz extends javax.swing.JFrame {
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
             JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
         }
-    }//GEN-LAST:event_busquedaProfundidadActionPerformed
+    }
 
 
 
@@ -455,36 +472,38 @@ public class Interfaz extends javax.swing.JFrame {
     private void agregar_ParadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_ParadaActionPerformed
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
-            if (comboboxlineas_creadas.getItemCount() != 0) {
-                String nombre_Nueva_Parada = input_Nueva_Parada.getText();
-                String nombre_Nueva_Linea = (String) comboboxlineas_creadas.getSelectedItem();
-                Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
+        if (comboboxlineas_creadas.getItemCount() != 0) {
+            String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+            String nombre_Nueva_Linea = (String) comboboxlineas_creadas.getSelectedItem();
+            Linea linea_aux = ciudad.buscar_Linea(nombre_Nueva_Linea);
 
-                if(linea_aux != null) {
-                    Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
-                    linea_aux.insert_Parada(newParada);
-                    ciudad.updateGrafo(linea_aux);
-                    for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
-                        Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
-                        comboBoxParadas.addItem(parada.getNombre());
-                    }
+            if(linea_aux != null) {
+                Parada newParada = new Parada(nombre_Nueva_Parada, linea_aux.getNombre());
+                linea_aux.insert_Parada(newParada);
+                ciudad.updateGrafo(linea_aux);
+                for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
+                    Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
+                    comboBoxParadas.addItem(parada.getNombre());
+                    comboBoxParadasConectar1.addItem(parada.getNombre());
+                    comboBoxParadasConectar2.addItem(parada.getNombre());
                 }
-            }else{
-                JOptionPane.showMessageDialog(this, "Por favor, seleccione la linea a la que le quiere agregar paradas.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            input_Nueva_Parada.setText("");
+        }else{
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione la linea a la que le quiere agregar paradas.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        input_Nueva_Parada.setText("");
 
     }//GEN-LAST:event_agregar_ParadaActionPerformed
 
     private void conectar_PararadaActionPerformed(java.awt.event.ActionEvent evt) {
-        String parada_A_Conectar = input_Conectar_Parada.getText();
-        String nombre_Nueva_Parada = input_Nueva_Parada.getText();
+        String parada_A_Conectar = (String) comboBoxParadasConectar1.getSelectedItem();
+        String nombre_Nueva_Parada = (String) comboBoxParadasConectar2.getSelectedItem();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
 
         if (parada_A_Conectar.isEmpty() || nombre_Nueva_Parada.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese los nombres de las paradas.", "Error", JOptionPane.ERROR_MESSAGE);
-            input_Conectar_Parada.setText("");
+            //input_Conectar_Parada.setText("");
             return;
         }
 
@@ -497,8 +516,8 @@ public class Interfaz extends javax.swing.JFrame {
         }
 
         ciudad.getGrafo().buscar_lista_Adyacente_Y_Unir(parada_A_Conectar, nombre_Nueva_Parada, ciudad.getGrafo().getListaAdy());
-        input_Conectar_Parada.setText("");
-    }//GEN-LAST:event_conectar_PararadaActionPerformed
+        //input_Conectar_Parada.setText("");
+    }
 
     private void comboboxlineas_creadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboboxlineas_creadasActionPerformed
     }//GEN-LAST:event_comboboxlineas_creadasActionPerformed
@@ -529,15 +548,26 @@ public class Interfaz extends javax.swing.JFrame {
 
     }//GEN-LAST:event_limpiarSucursalesActionPerformed
 
+    private void comboBoxParadasConectar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxParadasConectar2ActionPerformed
+
+    }//GEN-LAST:event_comboBoxParadasConectar2ActionPerformed
+
+    private void comboBoxParadasConectar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxParadasConectar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxParadasConectar1ActionPerformed
+
     private void button_select_fileActionPerformed(java.awt.event.ActionEvent evt) {
         app = LectorArchivo.run(app);
-    }                                                  
+    }
 
     private void comboBoxCiudadesActionPerformed(java.awt.event.ActionEvent evt) {
 
     }
 
     private void button_select_redActionPerformed(java.awt.event.ActionEvent evt) {
+        comboBoxParadasConectar1.removeAllItems();
+        comboBoxParadasConectar2.removeAllItems();
+        comboboxlineas_creadas.removeAllItems();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         System.out.println("Ciudad seleccionada: " + ciudadSeleccionada);
         Ciudad aux = app.buscar_ciudad(ciudadSeleccionada);
@@ -545,6 +575,13 @@ public class Interfaz extends javax.swing.JFrame {
         for (int i = 0; i < aux.getGrafo().getNumVertices(); i++) {
             Parada parada = aux.getGrafo().listaAdy[i].getVertice();
             comboBoxParadas.addItem(parada.getNombre());
+            comboBoxParadasConectar1.addItem(parada.getNombre());
+            comboBoxParadasConectar2.addItem(parada.getNombre());
+        }
+        NodoDeListas current = aux.getlFirst();
+        while (current != null) {
+            comboboxlineas_creadas.addItem(current.getDataLinea().getNombre());
+            current = current.getpNext();
         }
         Input_t.setText(String.valueOf(aux.getT()));
         Input_t.setVisible(true);
@@ -556,7 +593,7 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaProfundidad.setVisible(true);
         jLabel1.setVisible(true);
         input_Nueva_Linea.setVisible(true);
-        input_Conectar_Parada.setVisible(true);
+        //input_Conectar_Parada.setVisible(true);
         input_Nueva_Parada.setVisible(true);
         label_Ingrese_Linea.setVisible(true);
         label_Ingrese_Parada.setVisible(true);
@@ -567,10 +604,12 @@ public class Interfaz extends javax.swing.JFrame {
         comboboxlineas_creadas.setVisible(true);
         label_Seleccionar_Linea.setVisible(true);
         limpiarSucursales.setVisible(true);
+        comboBoxParadasConectar1.setVisible(true);
+        comboBoxParadasConectar2.setVisible(true);
 
     }
 
-    private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void button_exitActionPerformed(java.awt.event.ActionEvent evt) {
         button_mostrar_red.setVisible(true);
         button_add_red.setVisible(true);
         button_select_file.setVisible(false);
@@ -585,6 +624,20 @@ public class Interfaz extends javax.swing.JFrame {
         busquedaAmplitud.setVisible(false);
         busquedaProfundidad.setVisible(false);
         jLabel1.setVisible(false);
+        comboboxlineas_creadas.setVisible(false);
+        label_Seleccionar_Linea.setVisible(false);
+        limpiarSucursales.setVisible(false);
+        input_Nueva_Linea.setVisible(false);
+        // input_Conectar_Parada.setVisible(false);
+        input_Nueva_Parada.setVisible(false);
+        label_Ingrese_Linea.setVisible(false);
+        label_Ingrese_Parada.setVisible(false);
+        label_Parada_A_Conectar.setVisible(false);
+        agregar_Linea.setVisible(false);
+        agregar_Parada.setVisible(false);
+        conectar_Pararada.setVisible(false);
+        comboBoxParadasConectar1.setVisible(false);
+        comboBoxParadasConectar2.setVisible(false);
 
     }
 
@@ -597,7 +650,7 @@ public class Interfaz extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -640,9 +693,10 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkBoxSucursal;
     private javax.swing.JComboBox<String> comboBoxCiudades;
     private javax.swing.JComboBox<String> comboBoxParadas;
+    private javax.swing.JComboBox<String> comboBoxParadasConectar1;
+    private javax.swing.JComboBox<String> comboBoxParadasConectar2;
     private javax.swing.JComboBox<String> comboboxlineas_creadas;
     private javax.swing.JButton conectar_Pararada;
-    private javax.swing.JTextField input_Conectar_Parada;
     private javax.swing.JTextField input_Nueva_Linea;
     private javax.swing.JTextField input_Nueva_Parada;
     private javax.swing.JLabel jLabel1;
