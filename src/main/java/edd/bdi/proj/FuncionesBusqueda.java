@@ -21,71 +21,34 @@ public class FuncionesBusqueda {
      */
     public void recorrerProfundidad(Grafo g, int v, boolean[] visitados, int[] distancia, int t, boolean test) {
         visitados[v] = true;
-        for (int i = 0; i < g.getNumVertices(); i++) {
-            if (v == i && g.listaAdy[i].getVertice().getNombre().contains(":") && test && g.listaAdy[i].getVertice().tieneSucursal()) {
-                String nombreParada = g.listaAdy[i].getVertice().getNombre();
-                String[] partes = nombreParada.split(":");
-                for (String parte : partes) {
-                    String nombreSecundario = parte.trim();
-                    Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
-                    if (nodeSecundario != null) {
-                        if (parte == partes[1]) {
-                            nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
-                            int indexSecundario = -1;
-                            for (int k = 0; k < g.getNumVertices(); k++) {
-                                if (g.listaAdy[k].getVertice().getNombre().split(":").length > 1) {
-                                    if (g.listaAdy[k].getVertice().getNombre().split(":")[0].trim().equals(nombreSecundario)) {
-                                        System.out.println(k);
-                                        indexSecundario = k;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (indexSecundario != -1) {
-                                profundidad(g, indexSecundario, t - distancia[i] - 1, false);
-                            }
-                        }
+
+        Node node = g.getGraph().getNode(g.listaAdy[v].getVertice().getNombre());
+        String nombreParada = g.listaAdy[v].getVertice().getNombre();
+        if (nombreParada.contains(":")) {
+            String[] partes = nombreParada.split(":");
+            for (String parte : partes) {
+                String nombreSecundario = parte.trim();
+                Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
+                if (nodeSecundario != null) {
+                    String color = nodeSecundario.getAttribute("ui.style");
+                    if (!color.contains("green")) {
+                        nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
                     }
                 }
             }
-            if ((v != i) && (!visitados[i]) && (g.existeArista(v, i))) {
+        } else {
+            String color = node.getAttribute("ui.style");
+            if (!color.contains("green")) {
+                node.setAttribute("ui.style", "fill-color: yellow;");
+            }
+        }
+
+        for (int i = 0; i < g.getNumVertices(); i++) {
+            if (g.existeArista(v, i) && !visitados[i]) {
                 distancia[i] = distancia[v] + 1;
-                if (distancia[i] <= t && !g.listaAdy[i].getVertice().tieneSucursal()) {
-                    g.listaAdy[i].imprimirAdyacentes();
-                    Node node = g.getGraph().getNode(g.listaAdy[i].getVertice().getNombre());
-                    String nombreParada = g.listaAdy[i].getVertice().getNombre();
-
-                    if (nombreParada.contains(":")) {
-                        String[] partes = nombreParada.split(":");
-                        for (String parte : partes) {
-                            String nombreSecundario = parte.trim();
-                            Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
-                            if (nodeSecundario != null) {
-                                nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
-                                if (parte == partes[1]) {
-                                    int indexSecundario = -1;
-                                    for (int k = 0; k < g.getNumVertices(); k++) {
-
-                                        if (g.listaAdy[k].getVertice().getNombre().split(":").length > 1) {
-                                            if (g.listaAdy[k].getVertice().getNombre().split(":")[0].trim().equals(nombreSecundario)) {
-                                                System.out.println(k);
-                                                indexSecundario = k;
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    if (indexSecundario != -1) {
-                                        profundidad(g, indexSecundario, t - distancia[i], true);
-                                    }
-                                }
-
-                            }
-                        }
-                    } else {
-                        node.setAttribute("ui.style", "fill-color: yellow;");
-                    }
+                if (distancia[i] <= t) {
+                    recorrerProfundidad(g, i, visitados, distancia, t, test);
                 }
-                recorrerProfundidad(g, i, visitados, distancia, t, true);
             }
         }
     }
@@ -146,8 +109,8 @@ public class FuncionesBusqueda {
      */
     public static void amplitud(Grafo g, int v, int t, boolean test) {
         Cola cola = new Cola();
-        boolean visitados[] = new boolean[g.getNumVertices()];
-        int distancia[] = new int[g.getNumVertices()];
+        boolean[] visitados = new boolean[g.getNumVertices()];
+        int[] distancia = new int[g.getNumVertices()];
 
         for (int i = 0; i < g.getNumVertices(); i++) {
             visitados[i] = false;
@@ -155,7 +118,6 @@ public class FuncionesBusqueda {
         }
 
         cola.encolar(new NodoDeListas(g.listaAdy[v].getVertice()));
-        System.out.println(g.listaAdy[v].getVertice().getNombre());
         visitados[v] = true;
         distancia[v] = 0;
 
@@ -172,8 +134,6 @@ public class FuncionesBusqueda {
             }
 
             for (int j = 0; j < g.getNumVertices(); j++) {
-                System.out.println(g.listaAdy[j].getVertice().getNombre());
-                g.listaAdy[j].imprimirAdyacentes();
                 if (currentIndex == j && g.listaAdy[j].getVertice().getNombre().contains(":") && test && g.listaAdy[j].getVertice().tieneSucursal()) {
                     String nombreParada = g.listaAdy[j].getVertice().getNombre();
                     String[] partes = nombreParada.split(":");
@@ -182,7 +142,10 @@ public class FuncionesBusqueda {
                         Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
                         if (nodeSecundario != null) {
                             if (parte == partes[1]) {
-                                nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
+                                String color = nodeSecundario.getAttribute("ui.style");
+                                if (!color.contains("green")) {
+                                    nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
+                                }
                                 int indexSecundario = -1;
                                 for (int k = 0; k < g.getNumVertices(); k++) {
                                     if (g.listaAdy[k].getVertice().getNombre().split(":").length > 1) {
@@ -200,11 +163,12 @@ public class FuncionesBusqueda {
                         }
                     }
                 }
-                if ((currentIndex != j) && (g.existeArista(currentIndex, j)) && (!visitados[j])) {
-                    cola.encolar(new NodoDeListas(g.listaAdy[j].getVertice()));
-                    visitados[j] = true;
+                if (g.existeArista(currentIndex, j) && !visitados[j] && (currentIndex != j)) {
                     distancia[j] = distancia[currentIndex] + 1;
-                    if (distancia[j] <= t && !g.listaAdy[j].getVertice().tieneSucursal()) {
+                    System.out.println(g.listaAdy[j].getVertice().getNombre());
+                    if (distancia[j] <= t) {
+                        cola.encolar(new NodoDeListas(g.listaAdy[j].getVertice()));
+                        visitados[j] = true;
                         Node node = g.getGraph().getNode(g.listaAdy[j].getVertice().getNombre());
                         String nombreParada = g.listaAdy[j].getVertice().getNombre();
                         if (nombreParada.contains(":")) {
@@ -213,14 +177,16 @@ public class FuncionesBusqueda {
                                 String nombreSecundario = parte.trim();
                                 Node nodeSecundario = g.getGraph().getNode(nombreSecundario);
                                 if (nodeSecundario != null) {
-                                    nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
-                                    if (parte == partes[1]) {
+                                    String color = nodeSecundario.getAttribute("ui.style");
+
+                                    if (!color.contains("green")) {
+                                        nodeSecundario.setAttribute("ui.style", "fill-color: yellow;");
+                                    }
+                                    if (parte.equals(partes[1])) {
                                         int indexSecundario = -1;
                                         for (int k = 0; k < g.getNumVertices(); k++) {
-
                                             if (g.listaAdy[k].getVertice().getNombre().split(":").length > 1) {
                                                 if (g.listaAdy[k].getVertice().getNombre().split(":")[0].trim().equals(nombreSecundario)) {
-                                                    System.out.println(k);
                                                     indexSecundario = k;
                                                     break;
                                                 }
@@ -230,11 +196,13 @@ public class FuncionesBusqueda {
                                             amplitud(g, indexSecundario, t - distancia[j], true);
                                         }
                                     }
-
                                 }
                             }
                         } else {
-                            node.setAttribute("ui.style", "fill-color: yellow;");
+                            String color = node.getAttribute("ui.style");
+                            if (!color.contains("green")) {
+                                node.setAttribute("ui.style", "fill-color: yellow;");
+                            }
                         }
                     }
                 }
@@ -255,7 +223,6 @@ public class FuncionesBusqueda {
 
             Parada parada = sugeridas.getElement(i);
             System.out.println(parada.getNombre());
-            // Mark the stop as a branch in the graph
             parada.setSucursal(true);
             if (parada.getNombre().contains(":")) {
                 Node node = g.getGraph().getNode(parada.getNombre().split(":")[0].trim());

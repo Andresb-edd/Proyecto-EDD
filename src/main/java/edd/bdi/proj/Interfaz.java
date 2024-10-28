@@ -368,7 +368,9 @@ public class Interfaz extends javax.swing.JFrame {
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
         Grafo.resetNodeColors(ciudad.getGrafo());
         int t = Integer.parseInt(Input_t.getText());
+        if (!funcionesBusqueda.checkContador(ciudad.getGrafo())) {
 
+        }
         for (int i = 0; i < ciudad.getGrafo().getNumVertices(); i++) {
             Parada parada = ciudad.getGrafo().listaAdy[i].getVertice();
             if (parada.tieneSucursal()) {
@@ -395,10 +397,11 @@ public class Interfaz extends javax.swing.JFrame {
 
             }
         }
-
-        int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+        if (!funcionesBusqueda.checkContador(ciudad.getGrafo())) {
+            int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+            }
         }
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
 
@@ -446,10 +449,11 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         }
-
-        int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (response == JOptionPane.YES_OPTION) {
-            funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+        if (!funcionesBusqueda.checkContador(ciudad.getGrafo())) {
+            int response = JOptionPane.showConfirmDialog(this, "¿Desea marcar las paradas sugeridas como sucursales?", "Confirmar", JOptionPane.YES_NO_OPTION);
+            if (response == JOptionPane.YES_OPTION) {
+                funcionesBusqueda.imprimirSucursalesSugeridas(ciudad.getGrafo(), t);
+            }
         }
         if (funcionesBusqueda.checkContador(ciudad.getGrafo())) {
             JOptionPane.showMessageDialog(this, "Toda la ciudad está cubierta");
@@ -500,6 +504,11 @@ public class Interfaz extends javax.swing.JFrame {
         String nombre_Nueva_Parada = (String) comboBoxParadasConectar2.getSelectedItem();
         String ciudadSeleccionada = (String) comboBoxCiudades.getSelectedItem();
         Ciudad ciudad = app.buscar_ciudad(ciudadSeleccionada);
+        if (parada_A_Conectar.equals(nombre_Nueva_Parada)) {
+            JOptionPane.showMessageDialog(this, "Paradas inválidas. Por favor, ingrese paradas distintas.", "Error", JOptionPane.ERROR_MESSAGE);
+            //input_Conectar_Parada.setText("");
+            return;
+        }
 
         if (parada_A_Conectar.isEmpty() || nombre_Nueva_Parada.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Por favor, ingrese los nombres de las paradas.", "Error", JOptionPane.ERROR_MESSAGE);
