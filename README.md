@@ -1,5 +1,5 @@
 @wawddd - Ruben dos Santos
 
-@Andresb-edd - Andrés Baldoni
+@Andresb-edd y @awafityireal - Andrés Baldoni
 
 @DanielIribarren - Daniel Iribarren
